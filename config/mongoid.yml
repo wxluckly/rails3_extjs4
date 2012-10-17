@@ -1,0 +1,16 @@
+defaults: &defaults
+  allow_dynamic_fields: true
+  max_retries_on_connection_failure: 10
+  persist_in_safe_mode: true
+  raise_not_found_error: true
+  identity_map_enabled: true
+
+development:
+  <<: *defaults
+  host: localhost
+  database: rails3_extjs
+
+test:
+  <<: *defaults
+  host: localhost
+  database: test

@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <script type="text/javascript">
+
+      Ext.onReady(function(){
+
+        common.typeslistDS = new Ext.data.Store({
+          paramNames: {
+            start: "start",
+            limit: "limit",
+            authenticity_token: "authenticity_token"
+          },
+          baseParams: {
+            start: 0,
+            limit: common.list_num,
+            authenticity_token: '<%= form_authenticity_token.to_s %>'
+          },
+          proxy: new Ext.data.HttpProxy({
+            url: 'types/index_data'
+          }),
+          reader: new Ext.data.JsonReader({
+            totalProperty: 'totalProperty',
+            root: 'root'
+          }, [
+            {name: 'id'},
+            {name: 'name'},
+            {name: 'created_at'}
+          ])
+        });
+
+        var SM = new Ext.grid.CheckboxSelectionModel();
+        var CM = new Ext.grid.ColumnModel([new Ext.grid.RowNumberer(),SM,
+          {header: '编号',dataIndex: 'id',width:40,hidden:true},
+          {header: '名称',dataIndex: 'name',width:250},
+          {header: '创建时间',dataIndex: 'created_at',width:110,renderer: Ext.util.Format.dateRenderer('Y-m-d H:i')}
+        ]);
+
+        var grid =  new Ext.grid.EditorGridPanel({
+          ds: common.typeslistDS,
+          cm: CM,
+          sm: SM,
+          border:false,
+          clicksToEdit: 1,
+          height : Ext.get("types_index_div").getHeight(),
+          iconCls: 'icon-grid',
+          tbar:['-',
+            {
+              text:'增加',
+              width:50,
+              iconCls: 'addItem',
+              handler:function(){
+                openWindow('win','增加',"types/new",364,177,common.typeslistDS)
+              }
+            },'-',{
+              text:'编辑',
+              width:50,
+              iconCls: 'editItem',
+              handler:function(){
+                var records = grid.getSelectionModel().getSelections();
+                if(records.length==0){
+                  Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
+                }else{
+                  openWindow('win','编辑',"types/"+records[0].get('id')+"/edit",360,132,common.typeslistDS)
+                }
+              }
+            },'-',{
+              text:'删除',
+              width:50,
+              iconCls: 'deleteItem',
+              handler:function(){
+                var records = grid.getSelectionModel().getSelections();
+                if(records.length==0){
+                  Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
+                }else{
+                  Ext.MessageBox.confirm('警告','确定要删除该记录吗？',function (button){
+                    if(button=='yes'){
+                      Ext.Ajax.request({
+                        url : 'types/'+records[0].get('id'),
+                        method : 'DELETE',
+                        waitMsg: '正在提交...',
+                        params: {
+                          authenticity_token: '<%= form_authenticity_token.to_s %>'
+                        },
+                        success : function (response,opts) {
+                          Ext.MessageBox.alert('消息', '操作成功！');
+                          common.typeslistDS.reload();
+                        },
+                        failure : function (result, request){
+                          Ext.MessageBox.alert('消息', data.info);
+                        }
+                      });
+                    }
+                  })
+                }
+              }
+            }],
+          bbar: new Ext.PagingToolbar({
+            pageSize: common.list_num,
+            store: common.typeslistDS,
+            displayInfo: true,
+            displayMsg: "显示第 {0} 条到 {1} 条记录，一共 {2} 条",
+            emptyMsg: "没有记录"
+          })
+        });
+        grid.render('types_index_div');
+        common.typeslistDS.load();
+      })
+    </script>
+  </head>
+  <body>
+    <div id="types_index_div" style="width:100%; height:100%"></div>
+  </body>
+</html>
+

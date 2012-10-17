@@ -1,0 +1,35 @@
+/*************
+ * Buttons
+ *************/
+
+.addItem {
+    background: url("../assets/system/add.png") no-repeat left center !important;
+}
+
+.editItem {
+    background: url("../assets/system/application_form_edit.png") no-repeat left center !important;
+}
+
+.deleteItem {
+    background: url("../assets/system/delete.png") no-repeat left center !important;
+}
+
+.viewItem {
+    background: url("../assets/system/application_form_magnify.png") no-repeat left center !important;
+}
+
+.searchItem {
+    background: url("../assets/system/find.png") no-repeat left center !important;
+}
+
+.uploadButton {
+    background: url("../assets/system/image_add.png") no-repeat left center !important;
+}
+
+.emailGo {
+    background: url("../assets/system/email_go.png") no-repeat left center !important;
+}
+
+.cartGo {
+    background: url("../assets/system/cart_go.png") no-repeat left center !important;
+}

@@ -9,7 +9,7 @@ development:
     default:
       hosts:
         - localhost:27017
-      database: rails3_extjs
+      database: rails3_extjs4
   options:
     <<: *defaults
 

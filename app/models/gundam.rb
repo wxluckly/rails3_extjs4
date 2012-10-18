@@ -5,5 +5,5 @@ class Gundam < ActiveRecord::Base
   belongs_to :period
   belongs_to :type
   
-	attr_accessible :name, :name_chs, :model, :period_id, :type_id
+	attr_accessible :name, :name_chs, :model, :period_id, :type_id, :period, :type
 end

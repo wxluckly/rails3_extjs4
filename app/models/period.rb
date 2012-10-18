@@ -1,4 +1,5 @@
 class Period < ActiveRecord::Base
+  include MongoSync
 
   has_many :gundams
 

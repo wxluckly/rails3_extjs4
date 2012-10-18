@@ -11,10 +11,12 @@ Rails3Extjs::Application.routes.draw do
   resources :gundams
 
   match 'periods/index_data' => 'periods#index_data'
+  match 'periods/all_data' => 'periods#all_data'
   match 'periods/edit_data' => 'periods#edit_data'
   resources :periods
 
   match 'types/index_data' => 'types#index_data'
+  match 'types/all_data' => 'types#all_data'
   match 'types/edit_data' => 'types#edit_data'
   resources :types
 

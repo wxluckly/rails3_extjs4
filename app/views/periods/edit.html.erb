@@ -4,6 +4,16 @@
     <script type="text/javascript">
 
       Ext.onReady(function(){
+        Ext.define('WinThread', {
+          extend: 'Ext.data.Model',
+          fields: [
+            {name: 'id'},
+            {name: 'name'},
+            {name: 'year'},
+            {name: 'series'}
+          ]
+        });
+        
         var winForm = new Ext.form.FormPanel({
           url:'periods/<%=params[:id]%>',
           height: 268,
@@ -12,12 +22,8 @@
           border: false,
           frame:true,
           reader: new Ext.data.JsonReader({
-          },[
-            {name: 'id'},
-            {name: 'name'},
-            {name: 'year'},
-            {name: 'series'}
-          ]),
+            model: 'WinThread'
+          }),
           items: [
             {
               xtype: 'hidden',
@@ -96,7 +102,6 @@
 
         winForm.form.load({
           url: 'periods/edit_data?id=<%=params[:id]%>',
-          waitMsg: '正在载入数据...',
           params: {
             authenticity_token: '<%= form_authenticity_token.to_s %>'
           },

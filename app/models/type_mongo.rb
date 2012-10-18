@@ -1,10 +1,9 @@
-class GundamMongo
+class TypeMongo
   include Mongoid::Document
   include Mongoid::Timestamps
 
   field :_id, type: Integer
 
-  belongs_to :period
-  belongs_to :type
+  has_many :gundams
 
 end

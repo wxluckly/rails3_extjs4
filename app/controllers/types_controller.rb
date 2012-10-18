@@ -48,4 +48,8 @@ class TypesController < ApplicationController
     types = Type.limit(params[:limit]).offset(params[:start])
     render :text=>"{'totalProperty':#{Type.count},'root':#{types.to_json()}}", :layout=>false
   end
+
+  def all_data
+    render :text=>"{'totalProperty':#{Type.count},'root':#{Type.select("id,name").to_json()}}", :layout=>false
+  end
 end

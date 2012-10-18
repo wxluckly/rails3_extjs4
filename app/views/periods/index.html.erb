@@ -5,49 +5,54 @@
 
       Ext.onReady(function(){
 
-        common.periodslistDS = new Ext.data.Store({
-          paramNames: {
-            start: "start",
-            limit: "limit",
-            authenticity_token: "authenticity_token"
-          },
-          baseParams: {
-            start: 0,
-            limit: common.list_num,
-            authenticity_token: '<%= form_authenticity_token.to_s %>'
-          },
-          proxy: new Ext.data.HttpProxy({
-            url: 'periods/index_data'
-          }),
-          reader: new Ext.data.JsonReader({
-            totalProperty: 'totalProperty',
-            root: 'root'
-          }, [
+        Ext.define('ForumThread', {
+          extend: 'Ext.data.Model',
+          fields: [
             {name: 'id'},
+            {name: 'series'},
             {name: 'year'},
             {name: 'name'},
-            {name: 'series'},
             {name: 'created_at'}
-          ])
+          ],
+          idProperty: 'threadid'
         });
 
-        var SM = new Ext.grid.CheckboxSelectionModel();
-        var CM = new Ext.grid.ColumnModel([new Ext.grid.RowNumberer(),SM,
-          {header: '编号',dataIndex: 'id',width:40,hidden:true},
-          {header: '系列',dataIndex: 'series',width:150},
-          {header: '年份',dataIndex: 'year',width:50},
-          {header: '名称',dataIndex: 'name',width:150},
-          {header: '创建时间',dataIndex: 'created_at',width:110,renderer: Ext.util.Format.dateRenderer('Y-m-d H:i')}
-        ]);
+        common.periodslistDS = Ext.create('Ext.data.Store', {
+          id: 'store',
+          model: 'ForumThread',
+          remoteGroup: true,
+          pageSize: common.list_num,
+          proxy: {
+            type: 'ajax',
+            url: 'periods/index_data',
+            reader: {
+              root: 'root',
+              totalProperty: 'totalProperty'
+            },
+            simpleSortMode: true,
+            simpleGroupMode: true,
+            groupParam: 'sort',
+            groupDirectionParam: 'dir'
+          },
+          sorters: [{
+              property: 'threadid',
+              direction: 'ASC'
+            }]
+        });
 
-        var grid =  new Ext.grid.EditorGridPanel({
-          ds: common.periodslistDS,
-          cm: CM,
-          sm: SM,
-          border:false,
-          clicksToEdit: 1,
-          height : Ext.get("periods_index_div").getHeight(),
-          iconCls: 'icon-grid',
+        var grid = Ext.create('Ext.grid.Panel', {
+          id:'button-grid',
+          store: common.periodslistDS,
+          header : false,
+          columns: [
+            {text: '',dataIndex: 'id',width:40,hidden:true},
+            {text: '系列',dataIndex: 'series',width:150},
+            {text: '年份',dataIndex: 'year',width:50},
+            {text: '名称',dataIndex: 'name',width:150},
+            {text: '创建时间',dataIndex: 'created_at',width:110,renderer: Ext.util.Format.dateRenderer('Y-m-d H:i')}
+          ],
+          columnLines: true,
+          selModel: Ext.create('Ext.selection.CheckboxModel'),
           tbar:['-',
             {
               text:'增加',
@@ -90,8 +95,8 @@
                           Ext.MessageBox.alert('消息', '操作成功！');
                           common.periodslistDS.reload();
                         },
-                        failure : function (result, request){
-                          Ext.MessageBox.alert('消息', data.info);
+                        failure : function (result, response){
+                          Ext.MessageBox.alert('消息', response.result);
                         }
                       });
                     }
@@ -105,8 +110,12 @@
             displayInfo: true,
             displayMsg: "显示第 {0} 条到 {1} 条记录，一共 {2} 条",
             emptyMsg: "没有记录"
-          })
+          }),
+          border:false,
+          height : Ext.get("periods_index_div").getHeight(),
+          iconCls: 'icon-grid'
         });
+
         grid.render('periods_index_div');
         common.periodslistDS.load();
       })
@@ -116,4 +125,5 @@
     <div id="periods_index_div" style="width:100%; height:100%"></div>
   </body>
 </html>
+
 

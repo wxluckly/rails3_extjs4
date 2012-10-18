@@ -45,4 +45,8 @@ class PeriodsController < ApplicationController
     periods = Period.limit(params[:limit]).offset(params[:start])
     render :text=>"{'totalProperty':#{Period.count},'root':#{periods.to_json()}}", :layout=>false
   end
+
+  def all_data
+    render :text=>"{'totalProperty':#{Period.count},'root':#{Period.select("id,series,year").to_json()}}", :layout=>false
+  end
 end

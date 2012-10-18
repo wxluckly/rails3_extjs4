@@ -4,6 +4,105 @@
     <script type="text/javascript">
 
       Ext.onReady(function(){
+
+        Ext.define('WinThread', {
+          extend: 'Ext.data.Model',
+          fields: [
+            {name: 'id'},
+            {name: 'name'}
+          ]
+        });
+
+        Ext.define('WinThread2', {
+          extend: 'Ext.data.Model',
+          fields: [
+            {name: 'id'},
+            {name: 'year'},
+            {name: 'series'}
+          ]
+        });
+
+        var periodDS = Ext.create('Ext.data.Store', {
+          model: 'WinThread2',
+          remoteGroup: true,
+          proxy: {
+            type: 'ajax',
+            url: '/periods/all_data',
+            reader: {
+              root: 'root',
+              totalProperty: 'totalProperty'
+            },
+            simpleSortMode: true,
+            simpleGroupMode: true,
+            groupParam: 'sort',
+            groupDirectionParam: 'dir'
+          },
+          listeners: {
+            load: function() {
+              periodCombo.setValue(periodCombo.getValue());
+            }
+          }
+        });
+
+        var periodCombo = new Ext.form.ComboBox({
+          displayField:'year',
+          emptyText:'请选择...',
+          forceSelection: true,
+          name:'period',
+          mode: 'remote',
+          store: periodDS,
+          triggerAction: 'all',
+          typeAhead: true,
+          valueField:'id',
+          x: 30,
+          y: 30,
+          labelWidth: 50,
+          fieldLabel: '年代',
+          listConfig: {
+            getInnerTpl: function() {
+              return '<div data-qtip="{year}. {series}">{year} ({series})</div>';
+            }
+          }
+        });
+
+        var typeDS = Ext.create('Ext.data.Store', {
+          model: 'WinThread',
+          remoteGroup: true,
+          proxy: {
+            type: 'ajax',
+            url: '/types/all_data',
+            reader: {
+              root: 'root',
+              totalProperty: 'totalProperty'
+            },
+            simpleSortMode: true,
+            simpleGroupMode: true,
+            groupParam: 'sort',
+            groupDirectionParam: 'dir'
+          },
+          listeners: {
+            load: function() {
+              typeCombo.setValue(typeCombo.getValue());
+            }
+          }
+        });
+
+        var typeCombo = new Ext.form.ComboBox({
+          displayField:'name',
+          emptyText:'请选择...',
+          forceSelection: true,
+          name:'type',
+          mode: 'remote',
+          store: typeDS,
+          triggerAction: 'all',
+          typeAhead: true,
+          valueField:'id',
+          x: 320,
+          y: 30,
+          labelWidth: 50,
+          fieldLabel: '类型'
+        });
+
         var winForm = new Ext.form.FormPanel({
           url:'gundams',
           height: 280,
@@ -27,13 +126,7 @@
               y: 70,
               fieldLabel: '型号'
             },
-            {
-              name: 'year',
-              xtype: 'triggerfield',
-              x: 30,
-              y: 30,
-              fieldLabel: '年代'
-            },
+            periodCombo,
             {
               name: 'name_chs',
               xtype: 'textfield',
@@ -41,13 +134,7 @@
               y: 110,
               fieldLabel: '中文名'
             },
-            {
-              name: 'type',
-              xtype: 'triggerfield',
-              x: 320,
-              y: 30,
-              fieldLabel: '类型'
-            },
+            typeCombo,
             {
               xtype: 'button',
               x: 240,
@@ -75,12 +162,12 @@
             }
           ]
         });
-        winForm.render('drivers_new_div');
+        winForm.render('gundams_new_div');
       });
     </script>
   </head>
   <body>
-    <div id="drivers_new_div" style="width:100%; height:100%"></div>
+    <div id="gundams_new_div" style="width:100%; height:100%"></div>
   </body>
 </html>
 

@@ -6,7 +6,7 @@ class GundamsController < ApplicationController
   # POST /gundams
   def create
     params_hash = {:name=>params[:name],:model=>params[:model],:name_chs=>params[:name_chs],
-      :period_id=>params[:year],:type_id=>params[:type]}
+      :period_id=>params[:period],:type_id=>params[:type]}
     @obj = Gundam.new(params_hash)
     if @obj.save
       render :json=>{:success=>true}

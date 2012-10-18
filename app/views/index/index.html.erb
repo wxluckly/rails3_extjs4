@@ -105,22 +105,27 @@
             },
             listeners: {
               itemclick: function(view,re) {
-                var dynamicPanel = new Ext.Component({
-                  title: re.data.text,
-                  loader: {
-                    url: re.data.hrefTarget,
-                    contentType: 'html',
-                    scripts: true
-                  },
-                  listeners: {
-                    activate: function(tab) {
-                      tab.loader.load();
+                if(Ext.getCmp('tab'+re.data.id)){
+                  dynamicPanel = Ext.getCmp('tab'+re.data.id)
+                }else{
+                  var dynamicPanel = new Ext.Component({
+                    title: re.data.text,
+                    id: 'tab'+re.data.id,
+                    closable: true,
+                    loader: {
+                      url: re.data.hrefTarget,
+                      contentType: 'html',
+                      scripts: true
+                    },
+                    listeners: {
+                      activate: function(tab) {
+                        tab.loader.load();
+                      }
                     }
-                  }
-                });
-                workTabs.add(dynamicPanel);
+                  });
+                  workTabs.add(dynamicPanel);
+                }
                 workTabs.setActiveTab(dynamicPanel);
-
               }
             }
           });

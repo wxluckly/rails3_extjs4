@@ -57,7 +57,7 @@
               width:50,
               iconCls: 'editItem',
               handler:function(){
-                var records = grid.getSelectionModel().getSelections();
+                var records = grid.getSelectionModel().getSelection();
                 if(records.length==0){
                   Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
                 }else{
@@ -69,7 +69,7 @@
               width:50,
               iconCls: 'deleteItem',
               handler:function(){
-                var records = grid.getSelectionModel().getSelections();
+                var records = grid.getSelectionModel().getSelection();
                 if(records.length==0){
                   Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
                 }else{

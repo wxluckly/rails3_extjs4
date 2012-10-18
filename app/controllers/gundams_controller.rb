@@ -5,12 +5,13 @@ class GundamsController < ApplicationController
 
   # POST /gundams
   def create
-    new_user = {:name=>params[:name],:passwd=>params[:passwd]}
-    @user = Gundam.new(new_user)
-    if @user.save
+    params_hash = {:name=>params[:name],:model=>params[:model],:name_chs=>params[:name_chs],
+      :period_id=>params[:year],:type_id=>params[:type]}
+    @obj = Gundam.new(params_hash)
+    if @obj.save
       render :json=>{:success=>true}
     else
-      render :json=>{:success=>false,:info=>@user.errors.full_messages}
+      render :json=>{:success=>false,:info=>@obj.errors.full_messages}
     end
   end
 

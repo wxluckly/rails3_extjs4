@@ -47,7 +47,7 @@
           store: common.gundamslistDS,
           header : false,
           columns: [
-            {text: '编号',dataIndex: 'id',width:40,hidden:true},
+            {text: '',dataIndex: 'id',width:40,hidden:true},
             {text: '年代',dataIndex: 'year',width:50},
             {text: '型号',dataIndex: 'model',width:180},
             {text: '名称',dataIndex: 'name',width:220},
@@ -63,14 +63,14 @@
               width:50,
               iconCls: 'addItem',
               handler:function(){
-                openWindow('win','增加',"gundams/new",364,177,common.gundamslistDS)
+                openWindow('win','增加',"gundams/new",614,280,common.gundamslistDS)
               }
             },'-',{
               text:'编辑',
               width:50,
               iconCls: 'editItem',
               handler:function(){
-                var records = grid.getSelectionModel().getSelections();
+                var records = grid.getSelectionModel().getSelection();
                 if(records.length==0){
                   Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
                 }else{
@@ -82,7 +82,7 @@
               width:50,
               iconCls: 'deleteItem',
               handler:function(){
-                var records = grid.getSelectionModel().getSelections();
+                var records = grid.getSelectionModel().getSelection();
                 if(records.length==0){
                   Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
                 }else{

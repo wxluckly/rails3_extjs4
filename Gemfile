@@ -7,9 +7,9 @@ gem 'rails', '3.2.8'
 
 gem 'mysql2'
 gem 'redis'
-gem "mongoid", '2.4.12'
-gem 'mongoid_spacial'
-gem 'mongo', '1.6.2' # fix mongo 1.6.3 bug : Invalid Mongo URI option pool_size when using mongo-1.6.3
+gem 'mongo'
+gem 'mongoid'
+gem 'mongoid_location'
 gem 'bson_ext'
 
 # Gems used only for assets and not required
@@ -34,7 +34,7 @@ group :production do
 end
 
 # 开发环境
-group :development, :test do
+group :development do
   gem 'rails3-generators'
   gem 'spork', '>= 0.9.0'
   gem 'capistrano'

@@ -1,4 +1,5 @@
-Mongoid.configure do |config|
-  config.logger = Logger.new("#{Rails.root}/log/mongodb.log", 'weekly')  # .tap {|logger| logger.level = Logger::INFO}
-  config.use_activesupport_time_zone = true
-end
+Mongoid.logger.level = Logger::INFO
+Moped.logger.level = Logger::INFO
+
+Mongoid.logger = Logger.new("#{Rails.root}/log/mongodb.log", 'weekly')
+Moped.logger = Logger.new("#{Rails.root}/log/mongodb.log")

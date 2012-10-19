@@ -17,8 +17,8 @@ class GundamsController < ApplicationController
 
   # DELETE /gundams/1
   def destroy
-    @user = Gundam.find(params[:id])
-    @user.destroy
+    @obj = Gundam.find(params[:id])
+    @obj.destroy
     render :json=>{:success=>true}
   end
 
@@ -32,12 +32,12 @@ class GundamsController < ApplicationController
 
   # PUT /gundams/1
   def update
-    @user = Gundam.find(params[:id])
+    @obj = Gundam.find(params[:id])
     new_user = {:name=>params[:name],:passwd=>params[:passwd]}
-    if @user.update_attributes(new_user)
+    if @obj.update_attributes(new_user)
       render :json=>{:success=>true}
     else
-      render :json=>{:success=>false,:info=>@user.errors.full_messages}
+      render :json=>{:success=>false,:info=>@obj.errors.full_messages}
     end
   end
 
@@ -46,9 +46,7 @@ class GundamsController < ApplicationController
   end
 
   def index_data
-
-    gundams = Gundam.includes(:period,:type).limit(params[:limit]).offset(params[:start])
-    
+    gundams = Gundam.includes(:period,:type).limit(params[:limit]).offset(params[:start])  
     render :text=>"{'totalProperty':#{Gundam.count},'root':#{gundams.to_json(:include=>[:period,:type])}}", :layout=>false
   end
 end

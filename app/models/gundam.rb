@@ -6,4 +6,7 @@ class Gundam < ActiveRecord::Base
   belongs_to :type
   
 	attr_accessible :name, :name_chs, :model, :period_id, :type_id, :period, :type
+  
+  validates :model, :uniqueness => { :scope => :period_id, :message => "should have only one model per period" }
+
 end

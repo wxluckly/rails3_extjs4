@@ -34,4 +34,9 @@ Rails3Extjs::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # fix generate function error : error  mongoid [not found] by @joey
+  config.generators do |g|
+    g.orm :active_record
+  end
 end

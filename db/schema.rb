@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019064854) do
+ActiveRecord::Schema.define(:version => 20121025074849) do
+
+  create_table "dimensions", :force => true do |t|
+    t.string   "name"
+    t.string   "summary"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "drivers", :force => true do |t|
     t.string   "name"
@@ -43,15 +50,15 @@ ActiveRecord::Schema.define(:version => 20121019064854) do
   add_index "gundams", ["model", "period_id"], :name => "by_model_period", :unique => true
 
   create_table "periods", :force => true do |t|
-    t.string   "series"
     t.string   "name"
     t.string   "year"
     t.string   "summary"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "dimension_id"
   end
 
-  add_index "periods", ["year", "series"], :name => "by_year_series", :unique => true
+  add_index "periods", ["year"], :name => "by_year_series", :unique => true
 
   create_table "types", :force => true do |t|
     t.string   "name"

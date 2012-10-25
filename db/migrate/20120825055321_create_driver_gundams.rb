@@ -1,4 +1,4 @@
-class AddDriverGundams < ActiveRecord::Migration
+class CreateDriverGundams < ActiveRecord::Migration
 	def change
 		create_table :driver_gundams do |t|
       t.integer :driver_id

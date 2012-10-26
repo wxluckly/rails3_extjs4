@@ -5,52 +5,13 @@
 
       Ext.onReady(function(){
 
-        Ext.define('WinThread', {
-          extend: 'Ext.data.Model',
-          fields: [
-            {name: 'id'},
-            {name: 'name'}
-          ]
-        });
-
-        Ext.define('WinThread2', {
-          extend: 'Ext.data.Model',
-          fields: [
-            {name: 'id'},
-            {name: 'year'},
-            {name: 'series'}
-          ]
-        });
-
-        var periodDS = Ext.create('Ext.data.Store', {
-          model: 'WinThread2',
-          remoteGroup: true,
-          proxy: {
-            type: 'ajax',
-            url: '/periods/all_data',
-            reader: {
-              root: 'root',
-              totalProperty: 'totalProperty'
-            },
-            simpleSortMode: true,
-            simpleGroupMode: true,
-            groupParam: 'sort',
-            groupDirectionParam: 'dir'
-          },
-          listeners: {
-            load: function() {
-              periodCombo.setValue(periodCombo.getValue());
-            }
-          }
-        });
-
         var periodCombo = new Ext.form.ComboBox({
           displayField:'year',
           emptyText:'请选择...',
           forceSelection: true,
           name:'period',
           mode: 'remote',
-          store: periodDS,
+          store: common.periodDS,
           triggerAction: 'all',
           typeAhead: true,
           valueField:'id',
@@ -60,29 +21,7 @@
           fieldLabel: '年代',
           listConfig: {
             getInnerTpl: function() {
-              return '<div data-qtip="{year}. {series}">{year} ({series})</div>';
-            }
-          }
-        });
-
-        var typeDS = Ext.create('Ext.data.Store', {
-          model: 'WinThread',
-          remoteGroup: true,
-          proxy: {
-            type: 'ajax',
-            url: '/types/all_data',
-            reader: {
-              root: 'root',
-              totalProperty: 'totalProperty'
-            },
-            simpleSortMode: true,
-            simpleGroupMode: true,
-            groupParam: 'sort',
-            groupDirectionParam: 'dir'
-          },
-          listeners: {
-            load: function() {
-              typeCombo.setValue(typeCombo.getValue());
+              return '<div data-qtip="{year}. {name}">{year} ({name})</div>';
             }
           }
         });
@@ -93,7 +32,7 @@
           forceSelection: true,
           name:'type',
           mode: 'remote',
-          store: typeDS,
+          store: common.typeDS,
           triggerAction: 'all',
           typeAhead: true,
           valueField:'id',

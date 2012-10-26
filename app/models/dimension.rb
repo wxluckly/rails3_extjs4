@@ -3,6 +3,5 @@ class Dimension < ActiveRecord::Base
 
   has_many :periods
 
-  attr_accessible :name, :summary
-  
+  validates :name, :uniqueness => true
 end

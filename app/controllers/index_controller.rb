@@ -11,12 +11,14 @@ class IndexController < ApplicationController
       { :id => 1, :name => '网站功能列表', :image => 'assets/system/bricks.png',
         :url => '#', :qtip => '网站功能列表', :leaf => true,
         :children => [
-          { :id => 11, :name => 'gundam', :image => 'assets/system/user_red.png',
+          { :id => 10, :name => '系列', :image => 'assets/system/user_red.png',
+            :hrefTarget => 'dimensions', :qtip => '系列', :leaf => true
+          },{ :id => 13, :name => '年代', :image => 'assets/system/group_gear.png',
+            :hrefTarget => 'periods', :qtip => '年代', :leaf => true
+          },{ :id => 11, :name => 'gundam', :image => 'assets/system/user_red.png',
             :hrefTarget => 'gundams', :qtip => 'gundam', :leaf => true
           },{ :id => 12, :name => '驾驶员', :image => 'assets/system/group_gear.png',
             :hrefTarget => 'drivers', :qtip => '驾驶员', :leaf => true
-          },{ :id => 13, :name => '年代', :image => 'assets/system/group_gear.png',
-            :hrefTarget => 'periods', :qtip => '年代', :leaf => true
           },{ :id => 14, :name => '机体类型', :image => 'assets/system/group_gear.png',
             :hrefTarget => 'types', :qtip => '机体类型', :leaf => true
           }

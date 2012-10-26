@@ -47,6 +47,6 @@ class PeriodsController < ApplicationController
   end
 
   def all_data
-    render :text=>"{'totalProperty':#{Period.count},'root':#{Period.select("id,series,year").to_json()}}", :layout=>false
+    render :text=>"{'totalProperty':#{Period.count},'root':#{Period.joins(:dimension).select("periods.id,year,dimensions.name").to_json()}}", :layout=>false
   end
 end

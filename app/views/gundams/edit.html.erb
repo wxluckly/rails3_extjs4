@@ -5,15 +5,52 @@
 
       Ext.onReady(function(){
 
+        var periodCombo = new Ext.form.ComboBox({
+          displayField:'year',
+          emptyText:'请选择...',
+          forceSelection: true,
+          name:'period',
+          mode: 'remote',
+          store: common.periodDS,
+          triggerAction: 'all',
+          typeAhead: true,
+          valueField:'id',
+          x: 30,
+          y: 30,
+          labelWidth: 50,
+          fieldLabel: '年代',
+          listConfig: {
+            getInnerTpl: function() {
+              return '<div data-qtip="{year}. {name}">{year} ({name})</div>';
+            }
+          }
+        });
+
+        var typeCombo = new Ext.form.ComboBox({
+          displayField:'name',
+          emptyText:'请选择...',
+          forceSelection: true,
+          name:'type',
+          mode: 'remote',
+          store: common.typeDS,
+          triggerAction: 'all',
+          typeAhead: true,
+          valueField:'id',
+          x: 320,
+          y: 30,
+          labelWidth: 50,
+          fieldLabel: '类型'
+        });
+        
         Ext.define('WinThread', {
           extend: 'Ext.data.Model',
           fields: [
             {name: 'id'},
             {name: 'name'},
             {name: 'model'},
-            {name: 'year'},
+            {name: 'period',mapping:'period_id', convert: str2IntRender},
             {name: 'name_chs'},
-            {name: 'type'}
+            {name: 'type',mapping:'type_id', convert: str2IntRender}
           ]
         });
         
@@ -43,13 +80,7 @@
               y: 70,
               fieldLabel: '型号'
             },
-            {
-              name: 'year',
-              xtype: 'triggerfield',
-              x: 30,
-              y: 30,
-              fieldLabel: '年代'
-            },
+            periodCombo,
             {
               name: 'name_chs',
               xtype: 'textfield',
@@ -57,13 +88,7 @@
               y: 110,
               fieldLabel: '中文名'
             },
-            {
-              name: 'type',
-              xtype: 'triggerfield',
-              x: 320,
-              y: 30,
-              fieldLabel: '类型'
-            },
+            typeCombo,
             {
               xtype: 'button',
               x: 240,
@@ -91,7 +116,6 @@
             }
           ]
         });
-
         winForm.form.load({
           url: 'gundams/edit_data?id='+<%=params[:id]%>,
           params: {
@@ -103,12 +127,14 @@
             Ext.MessageBox.alert('提示信息', '信息加载失败');
           }
         });
-        winForm.render('drivers_new_div');
+        winForm.render('gundams_edit_div');
+        common.periodDS.reload();
+        common.typeDS.reload();
       });
     </script>
   </head>
   <body>
-    <div id="drivers_new_div" style="width:100%; height:100%"></div>
+    <div id="gundams_edit_div" style="width:100%; height:100%"></div>
   </body>
 </html>
 

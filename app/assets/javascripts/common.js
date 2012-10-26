@@ -1,16 +1,58 @@
+// ----------------------- ext构件 --------------------------------
+
+Ext.define('typeDSModel', {
+    extend: 'Ext.data.Model',
+    fields: [{
+        name: 'id'
+    },{
+        name: 'name'
+    }]
+});
+
+Ext.define('periodDSModel', {
+    extend: 'Ext.data.Model',
+    fields: [{
+        name: 'id'
+    },{
+        name: 'year'
+    },{
+        name: 'name'
+    }]
+});
+
 // ----------------------------- 公共变量 --------------------------------------
 
 var common = {
-    web_server_domain       : "http://www.darenhui.com",
-    image_server_domain     : "http://image.darenhui.com",
-    
     editWin                 : null,
     reasonWin               : null,
-
+    list_num                : 20,
     listDS                  : null,
-    
-    list_num                : 20
-
+    periodDS : Ext.create('Ext.data.Store', {
+        model: 'periodDSModel',
+        remoteGroup: true,
+        proxy: {
+            type: 'ajax',
+            url: '/periods/all_data',
+            reader: {
+                root: 'root',
+                totalProperty: 'totalProperty'
+            },
+            autoLoad:true
+        }
+    }),
+    typeDS : Ext.create('Ext.data.Store', {
+        model: 'typeDSModel',
+        remoteGroup: true,
+        proxy: {
+            type: 'ajax',
+            url: '/types/all_data',
+            reader: {
+                root: 'root',
+                totalProperty: 'totalProperty'
+            },
+            autoLoad:true
+        }
+    })
 };
 
 
@@ -25,6 +67,16 @@ function getAttr(obj,attr){
     }
 }
 
+// 将string型转换为int类型
+function str2IntRender(str){
+    return parseInt(str);
+}
+
+// 将int型转换为string类型
+function int2StrRender(str){
+    return str + "";
+}
+
 // int类型的时间转换为date_time类型的样式
 function int2DateRender(str){
     var d = new Date();
@@ -34,17 +86,6 @@ function int2DateRender(str){
         d = null;
     }
     return d;
-}
-
-// 将message类别序号翻译成中文
-function messageCategoryRender(str){
-    var result
-    if(str == 3){
-        result = '话题';
-    }else if(str == 4){
-        result = '问题';
-    }
-    return result;
 }
 
 function booleanRender(str){

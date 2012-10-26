@@ -3,9 +3,6 @@ class Period < ActiveRecord::Base
 
   belongs_to  :dimension
   has_many    :gundams
-  
-  attr_accessible :year, :name, :series
 
-  validates :year, :uniqueness => { :scope => :series, :message => "should have only one year per series" }
- 
+  validates :year, :uniqueness => { :scope => :dimension_id, :message => "should have only one year per series" }
 end

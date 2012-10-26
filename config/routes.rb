@@ -24,4 +24,9 @@ Rails3Extjs::Application.routes.draw do
   match 'users/edit_data' => 'users#edit_data'
   resources :users
 
+  match 'dimensions/index_data' => 'dimensions#index_data'
+  match 'dimensions/all_data' => 'dimensions#all_data'
+  match 'dimensions/edit_data' => 'dimensions#edit_data'
+  resources :dimensions
+
 end

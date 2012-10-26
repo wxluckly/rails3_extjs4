@@ -1,6 +1,26 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+dimensions = Dimension.create([
+    {name: 'UC正史'},
+    {name: 'SEED'},
+    {name: '平成三部曲'}
+  ])
+p "Dimension done"
+
+periods = Period.create([
+    {:year=> '79',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '80',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '83',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '87',:name=> 'z',:dimension=>  dimensions.first},
+    {:year=> '88',:name=> 'zz',:dimension=>  dimensions.first},
+    {:year=> '92',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '93',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '99',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '123',:name=> '',:dimension=>  dimensions.first}
+  ])
+p "Period done"
+
 Driver.create([
     {name: '夏亚'},
     {name: '阿姆罗'},
@@ -23,19 +43,6 @@ types = Type.create([
     {name: '宇宙战用ms'}
   ])
 p "Type done"
-
-periods = Period.create([
-    {year: '79', name: ''},
-    {year: '80', name: ''},
-    {year: '83', name: ''},
-    {year: '87', name: 'z'},
-    {year: '88', name: 'zz'},
-    {year: '92', name: ''},
-    {year: '93', name: ''},
-    {year: '99', name: ''},
-    {year: '123', name: ''}
-  ])
-p "Period done"
 
 if types.first.id && periods.first.id
   Gundam.create([

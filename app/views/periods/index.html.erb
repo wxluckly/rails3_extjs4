@@ -9,7 +9,7 @@
           extend: 'Ext.data.Model',
           fields: [
             {name: 'id'},
-            {name: 'series'},
+            {name: 'series',mapping:'dimension', convert: function(value){return getAttr(value,'name')}},
             {name: 'year'},
             {name: 'name'},
             {name: 'created_at'}

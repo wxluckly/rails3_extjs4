@@ -2,7 +2,7 @@ class PeriodsController < ApplicationController
 
   # POST /periods
   def create
-    params_hash = {:name=>params[:name],:year=>params[:year],:series=>params[:series]}
+    params_hash = {:name=>params[:name],:year=>params[:year],:dimension_id=>params[:dimension]}
     period = Period.new(params_hash)
     if period.save
       render :json=>{:success=>true}
@@ -29,7 +29,7 @@ class PeriodsController < ApplicationController
   # PUT /periods/1
   def update
     user = Period.find(params[:id])
-    params_hash = {:name=>params[:name],:year=>params[:year],:series=>params[:series]}
+    params_hash = {:name=>params[:name],:year=>params[:year],:dimension_id=>params[:dimension]}
     if user.update_attributes(params_hash)
       render :json=>{:success=>true}
     else
@@ -42,8 +42,8 @@ class PeriodsController < ApplicationController
   end
 
   def index_data
-    periods = Period.limit(params[:limit]).offset(params[:start])
-    render :text=>"{'totalProperty':#{Period.count},'root':#{periods.to_json()}}", :layout=>false
+    periods = Period.limit(params[:limit]).offset(params[:start]).order(:year)
+    render :text=>"{'totalProperty':#{Period.count},'root':#{periods.to_json(:include=>[:dimension])}}", :layout=>false
   end
 
   def all_data

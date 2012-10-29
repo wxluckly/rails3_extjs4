@@ -1,5 +1,14 @@
 // ----------------------- ext构件 --------------------------------
 
+Ext.define('dimensionDSModel', {
+    extend: 'Ext.data.Model',
+    fields: [{
+        name: 'id'
+    },{
+        name: 'name'
+    }]
+});
+
 Ext.define('typeDSModel', {
     extend: 'Ext.data.Model',
     fields: [{
@@ -27,6 +36,19 @@ var common = {
     reasonWin               : null,
     list_num                : 20,
     listDS                  : null,
+    dimensionDS : Ext.create('Ext.data.Store', {
+        model: 'dimensionDSModel',
+        remoteGroup: true,
+        proxy: {
+            type: 'ajax',
+            url: '/dimensions/all_data',
+            reader: {
+                root: 'root',
+                totalProperty: 'totalProperty'
+            },
+            autoLoad:true
+        }
+    }),
     periodDS : Ext.create('Ext.data.Store', {
         model: 'periodDSModel',
         remoteGroup: true,

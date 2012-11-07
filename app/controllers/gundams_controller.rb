@@ -45,8 +45,16 @@ class GundamsController < ApplicationController
   def index
   end
 
+  # GET /index_data
   def index_data
     gundams = Gundam.includes(:period,:type).limit(params[:limit]).offset(params[:start])  
     render :text=>"{'totalProperty':#{Gundam.count},'root':#{gundams.to_json(:include=>[:period,:type])}}", :layout=>false
   end
+
+  # GET /send_info
+  def send_info
+    MailerBase.gundam_info(nil,params[:gundam_id]).deliver
+    render :json=>{:success=>true}
+  end
+
 end

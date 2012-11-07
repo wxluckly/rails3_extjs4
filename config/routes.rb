@@ -8,6 +8,7 @@ Rails3Extjs::Application.routes.draw do
 
   match 'gundams/index_data' => 'gundams#index_data'
   match 'gundams/edit_data' => 'gundams#edit_data'
+  match 'gundams/send_info' => 'gundams#send_info'
   resources :gundams
 
   match 'periods/index_data' => 'periods#index_data'

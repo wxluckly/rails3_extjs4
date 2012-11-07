@@ -107,6 +107,31 @@
                   })
                 }
               }
+            },'-',{
+              text:'发送邮件',
+              iconCls: 'emailGo',
+              handler:function(){
+                var records = grid.getSelectionModel().getSelection();
+                if(records.length==0){
+                  Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
+                }else{
+                  Ext.Ajax.request({
+                    url : 'gundams/send_info',
+                    method : 'GET',
+                    waitMsg: '正在提交...',
+                    params: {
+                      authenticity_token: '<%= form_authenticity_token.to_s %>',
+                      gundam_id: records[0].get('id')
+                    },
+                    success : function (response,opts) {
+                      Ext.MessageBox.alert('消息', '发送成功！');
+                    },
+                    failure : function (result, request){
+                      Ext.MessageBox.alert('消息', data.info);
+                    }
+                  });
+                }
+              }
             }],
           bbar: new Ext.PagingToolbar({
             pageSize: common.list_num,

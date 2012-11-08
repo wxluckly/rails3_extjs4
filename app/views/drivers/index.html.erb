@@ -1,124 +1,117 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-  <head>
-    <script type="text/javascript">
+<% content_for :header do%>
+  <script type="text/javascript">
 
-      Ext.onReady(function(){
+    Ext.onReady(function(){
 
-        Ext.define('ForumThread', {
-          extend: 'Ext.data.Model',
-          fields: [
-            {name: 'id'},
-            {name: 'name'},
-            {name: 'created_at'}
-          ],
-          idProperty: 'threadid'
-        });
+      Ext.define('ForumThread', {
+        extend: 'Ext.data.Model',
+        fields: [
+          {name: 'id'},
+          {name: 'name'},
+          {name: 'created_at'}
+        ],
+        idProperty: 'threadid'
+      });
 
-        common.driverslistDS = Ext.create('Ext.data.Store', {
-          id: 'store',
-          model: 'ForumThread',
-          remoteGroup: true,
-          pageSize: common.list_num,
-          proxy: {
-            type: 'ajax',
-            url: 'drivers/index_data',
-            reader: {
-              root: 'root',
-              totalProperty: 'totalProperty'
-            },
-            simpleSortMode: true,
-            simpleGroupMode: true,
-            groupParam: 'sort',
-            groupDirectionParam: 'dir'
+      common.driverslistDS = Ext.create('Ext.data.Store', {
+        id: 'store',
+        model: 'ForumThread',
+        remoteGroup: true,
+        pageSize: common.list_num,
+        proxy: {
+          type: 'ajax',
+          url: 'drivers/index_data',
+          reader: {
+            root: 'root',
+            totalProperty: 'totalProperty'
           },
-          sorters: [{
-              property: 'threadid',
-              direction: 'ASC'
-            }]
-        });
+          simpleSortMode: true,
+          simpleGroupMode: true,
+          groupParam: 'sort',
+          groupDirectionParam: 'dir'
+        },
+        sorters: [{
+            property: 'threadid',
+            direction: 'ASC'
+          }]
+      });
 
-        var grid = Ext.create('Ext.grid.Panel', {
-          id:'button-grid',
+      var grid = Ext.create('Ext.grid.Panel', {
+        id:'button-grid',
+        store: common.driverslistDS,
+        header : false,
+        columns: [
+          {text: '编号',dataIndex: 'id',width:40,hidden:true},
+          {text: '姓名',dataIndex: 'name',width:250},
+          {text: '创建时间',dataIndex: 'created_at',width:110,renderer: Ext.util.Format.dateRenderer('Y-m-d H:i')}
+        ],
+        columnLines: true,
+        selModel: Ext.create('Ext.selection.CheckboxModel'),
+        tbar:['-',
+          {
+            text:'增加',
+            width:50,
+            iconCls: 'addItem',
+            handler:function(){
+              openWindow('win','增加',"drivers/new",360,132,common.driverslistDS)
+            }
+          },'-',{
+            text:'编辑',
+            width:50,
+            iconCls: 'editItem',
+            handler:function(){
+              var records = grid.getSelectionModel().getSelection();
+              if(records.length==0){
+                Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
+              }else{
+                openWindow('win','编辑',"drivers/"+records[0].get('id')+"/edit",360,132,common.driverslistDS)
+              }
+            }
+          },'-',{
+            text:'删除',
+            width:50,
+            iconCls: 'deleteItem',
+            handler:function(){
+              var records = grid.getSelectionModel().getSelection();
+              if(records.length==0){
+                Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
+              }else{
+                Ext.MessageBox.confirm('警告','确定要删除该记录吗？',function (button){
+                  if(button=='yes'){
+                    Ext.Ajax.request({
+                      url : 'drivers/'+records[0].get('id'),
+                      method : 'DELETE',
+                      waitMsg: '正在提交...',
+                      params: {
+                        authenticity_token: '<%= form_authenticity_token.to_s %>'
+                      },
+                      success : function (response,opts) {
+                        Ext.MessageBox.alert('消息', '操作成功！');
+                        common.driverslistDS.reload();
+                      },
+                      failure : function (result, response){
+                        Ext.MessageBox.alert('消息', response.result);
+                      }
+                    });
+                  }
+                })
+              }
+            }
+          }],
+        bbar: new Ext.PagingToolbar({
+          pageSize: common.list_num,
           store: common.driverslistDS,
-          header : false,
-          columns: [
-            {text: '编号',dataIndex: 'id',width:40,hidden:true},
-            {text: '姓名',dataIndex: 'name',width:250},
-            {text: '创建时间',dataIndex: 'created_at',width:110,renderer: Ext.util.Format.dateRenderer('Y-m-d H:i')}
-          ],
-          columnLines: true,
-          selModel: Ext.create('Ext.selection.CheckboxModel'),
-          tbar:['-',
-            {
-              text:'增加',
-              width:50,
-              iconCls: 'addItem',
-              handler:function(){
-                openWindow('win','增加',"drivers/new",360,132,common.driverslistDS)
-              }
-            },'-',{
-              text:'编辑',
-              width:50,
-              iconCls: 'editItem',
-              handler:function(){
-                var records = grid.getSelectionModel().getSelection();
-                if(records.length==0){
-                  Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
-                }else{
-                  openWindow('win','编辑',"drivers/"+records[0].get('id')+"/edit",360,132,common.driverslistDS)
-                }
-              }
-            },'-',{
-              text:'删除',
-              width:50,
-              iconCls: 'deleteItem',
-              handler:function(){
-                var records = grid.getSelectionModel().getSelection();
-                if(records.length==0){
-                  Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
-                }else{
-                  Ext.MessageBox.confirm('警告','确定要删除该记录吗？',function (button){
-                    if(button=='yes'){
-                      Ext.Ajax.request({
-                        url : 'drivers/'+records[0].get('id'),
-                        method : 'DELETE',
-                        waitMsg: '正在提交...',
-                        params: {
-                          authenticity_token: '<%= form_authenticity_token.to_s %>'
-                        },
-                        success : function (response,opts) {
-                          Ext.MessageBox.alert('消息', '操作成功！');
-                          common.driverslistDS.reload();
-                        },
-                        failure : function (result, response){
-                          Ext.MessageBox.alert('消息', response.result);
-                        }
-                      });
-                    }
-                  })
-                }
-              }
-            }],
-          bbar: new Ext.PagingToolbar({
-            pageSize: common.list_num,
-            store: common.driverslistDS,
-            displayInfo: true,
-            displayMsg: "显示第 {0} 条到 {1} 条记录，一共 {2} 条",
-            emptyMsg: "没有记录"
-          }),
-          border:false,
-          height : Ext.get("drivers_index_div").getHeight(),
-          iconCls: 'icon-grid'
-        });
+          displayInfo: true,
+          displayMsg: "显示第 {0} 条到 {1} 条记录，一共 {2} 条",
+          emptyMsg: "没有记录"
+        }),
+        border:false,
+        height : Ext.get("<%=params[:controller]%>_<%=params[:action]%>_div").getHeight(),
+        iconCls: 'icon-grid'
+      });
 
-        grid.render('drivers_index_div');
-        common.driverslistDS.load();
-      })
-    </script>
-  </head>
-  <body>
-    <div id="drivers_index_div" style="width:100%; height:100%"></div>
-  </body>
-</html>
-
+      grid.render('<%=params[:controller]%>_<%=params[:action]%>_div');
+      common.driverslistDS.load();
+    })
+  </script>
+<%end%>

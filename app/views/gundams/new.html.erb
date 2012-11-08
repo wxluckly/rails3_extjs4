@@ -1,112 +1,105 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-  <head>
-    <script type="text/javascript">
+<% content_for :header do%>
+  <script type="text/javascript">
 
-      Ext.onReady(function(){
+    Ext.onReady(function(){
 
-        var periodCombo = new Ext.form.ComboBox({
-          displayField:'year',
-          emptyText:'请选择...',
-          forceSelection: true,
-          name:'period',
-          mode: 'remote',
-          store: common.periodDS,
-          triggerAction: 'all',
-          typeAhead: true,
-          valueField:'id',
-          x: 30,
-          y: 30,
-          labelWidth: 50,
-          fieldLabel: '年代',
-          listConfig: {
-            getInnerTpl: function() {
-              return '<div data-qtip="{year}. {name}">{year} ({name})</div>';
-            }
+      var periodCombo = new Ext.form.ComboBox({
+        displayField:'year',
+        emptyText:'请选择...',
+        forceSelection: true,
+        name:'period',
+        mode: 'remote',
+        store: common.periodDS,
+        triggerAction: 'all',
+        typeAhead: true,
+        valueField:'id',
+        x: 30,
+        y: 30,
+        labelWidth: 50,
+        fieldLabel: '年代',
+        listConfig: {
+          getInnerTpl: function() {
+            return '<div data-qtip="{year}. {name}">{year} ({name})</div>';
           }
-        });
+        }
+      });
 
-        var typeCombo = new Ext.form.ComboBox({
-          displayField:'name',
-          emptyText:'请选择...',
-          forceSelection: true,
-          name:'type',
-          mode: 'remote',
-          store: common.typeDS,
-          triggerAction: 'all',
-          typeAhead: true,
-          valueField:'id',
-          x: 320,
-          y: 30,
-          labelWidth: 50,
-          fieldLabel: '类型'
-        });
+      var typeCombo = new Ext.form.ComboBox({
+        displayField:'name',
+        emptyText:'请选择...',
+        forceSelection: true,
+        name:'type',
+        mode: 'remote',
+        store: common.typeDS,
+        triggerAction: 'all',
+        typeAhead: true,
+        valueField:'id',
+        x: 320,
+        y: 30,
+        labelWidth: 50,
+        fieldLabel: '类型'
+      });
 
-        var winForm = new Ext.form.FormPanel({
-          url:'gundams',
-          height: 280,
-          width: 614,
-          layout: 'absolute',
-          border: false,
-          frame:true,
-          defaults:{labelWidth: 50},
-          items: [
-            {
-              name: 'name',
-              xtype: 'textfield',
-              x: 320,
-              y: 70,
-              fieldLabel: '名称'
-            },
-            {
-              name: 'model',
-              xtype: 'textfield',
-              x: 30,
-              y: 70,
-              fieldLabel: '型号'
-            },
-            periodCombo,
-            {
-              name: 'name_chs',
-              xtype: 'textfield',
-              x: 30,
-              y: 110,
-              fieldLabel: '中文名'
-            },
-            typeCombo,
-            {
-              xtype: 'button',
-              x: 240,
-              y: 170,
-              height: 40,
-              width: 100,
-              text: '保存',
-              handler: function(){
-                if (winForm.form.isValid()) {
-                  winForm.form.submit({
-                    method: 'post',
-                    waitMsg: '正在处理...',
-                    success: function(result, response){
-                      Ext.MessageBox.alert('提示', '成功！');
-                      Ext.getCmp('win').close();
-                    },
-                    failure: function(result, response){
-                      Ext.MessageBox.alert('错误提示', response.result.info);
-                    }
-                  });
-                }else {
-                  Ext.MessageBox.alert('错误提示', '请按要求填写必输选项.');
-                }
+      var winForm = new Ext.form.FormPanel({
+        url:'gundams',
+        height: 280,
+        width: 614,
+        layout: 'absolute',
+        border: false,
+        frame:true,
+        defaults:{labelWidth: 50},
+        items: [
+          {
+            name: 'name',
+            xtype: 'textfield',
+            x: 320,
+            y: 70,
+            fieldLabel: '名称'
+          },
+          {
+            name: 'model',
+            xtype: 'textfield',
+            x: 30,
+            y: 70,
+            fieldLabel: '型号'
+          },
+          periodCombo,
+          {
+            name: 'name_chs',
+            xtype: 'textfield',
+            x: 30,
+            y: 110,
+            fieldLabel: '中文名'
+          },
+          typeCombo,
+          {
+            xtype: 'button',
+            x: 240,
+            y: 170,
+            height: 40,
+            width: 100,
+            text: '保存',
+            handler: function(){
+              if (winForm.form.isValid()) {
+                winForm.form.submit({
+                  method: 'post',
+                  waitMsg: '正在处理...',
+                  success: function(result, response){
+                    Ext.MessageBox.alert('提示', '成功！');
+                    Ext.getCmp('win').close();
+                  },
+                  failure: function(result, response){
+                    Ext.MessageBox.alert('错误提示', response.result.info);
+                  }
+                });
+              }else {
+                Ext.MessageBox.alert('错误提示', '请按要求填写必输选项.');
               }
             }
-          ]
-        });
-        winForm.render('gundams_new_div');
+          }
+        ]
       });
-    </script>
-  </head>
-  <body>
-    <div id="gundams_new_div" style="width:100%; height:100%"></div>
-  </body>
-</html>
-
+      winForm.render('<%=params[:controller]%>_<%=params[:action]%>_div');
+    });
+  </script>
+<%end%>

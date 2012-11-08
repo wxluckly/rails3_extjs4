@@ -1,100 +1,93 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-  <head>
-    <script type="text/javascript">
-      Ext.onReady(function(){
+<% content_for :header do%>
+  <script type="text/javascript">
+    Ext.onReady(function(){
 
-        var dimensionCombo = new Ext.form.ComboBox({
-          displayField:'name',
-          emptyText:'请选择...',
-          forceSelection: true,
-          name:'dimension',
-          mode: 'remote',
-          store: common.dimensionDS,
-          triggerAction: 'all',
-          typeAhead: true,
-          valueField:'id',
-          x: 70,
-          y: 30,
-          labelWidth: 50,
-          fieldLabel: '系列'
-        });
+      var dimensionCombo = new Ext.form.ComboBox({
+        displayField:'name',
+        emptyText:'请选择...',
+        forceSelection: true,
+        name:'dimension',
+        mode: 'remote',
+        store: common.dimensionDS,
+        triggerAction: 'all',
+        typeAhead: true,
+        valueField:'id',
+        x: 70,
+        y: 30,
+        labelWidth: 50,
+        fieldLabel: '系列'
+      });
         
-        var winForm = new Ext.form.FormPanel({
-          url:'periods',
-          height: 268,
-          width: 369,
-          layout: 'absolute',
-          border: false,
-          frame:true,
-          items: [
-            {
-              xtype: 'hidden',
-              value: '<%= form_authenticity_token.to_s %>',
-              name: 'authenticity_token'
-            },
-            dimensionCombo,
-            {
-              xtype: 'label',
-              x: 70,
-              y: 80,
-              height: 20,
-              width: 50,
-              text: '年份：'
-            },
-            {
-              xtype: 'textfield',
-              x: 140,
-              y: 80,
-              name: 'year'
-            },
-            {
-              xtype: 'label',
-              x: 70,
-              y: 130,
-              height: 20,
-              width: 50,
-              text: '名称：'
-            },
-            {
-              xtype: 'textfield',
-              x: 140,
-              y: 130,
-              name: 'name'
-            },
-            {
-              xtype: 'button',
-              x: 140,
-              y: 180,
-              height: 30,
-              width: 80,
-              text: '保存',
-              handler: function(){
-                if (winForm.form.isValid()) {
-                  winForm.form.submit({
-                    method: 'post',
-                    waitMsg: '正在处理...',
-                    success: function(result, response){
-                      Ext.MessageBox.alert('提示', '成功！');
-                      Ext.getCmp('win').close();
-                    },
-                    failure: function(result, response){
-                      Ext.MessageBox.alert('错误提示', response.result.info);
-                    }
-                  });
-                }else {
-                  Ext.MessageBox.alert('错误提示', '请按要求填写必输选项.');
-                }
+      var winForm = new Ext.form.FormPanel({
+        url:'periods',
+        height: 268,
+        width: 369,
+        layout: 'absolute',
+        border: false,
+        frame:true,
+        items: [
+          {
+            xtype: 'hidden',
+            value: '<%= form_authenticity_token.to_s %>',
+            name: 'authenticity_token'
+          },
+          dimensionCombo,
+          {
+            xtype: 'label',
+            x: 70,
+            y: 80,
+            height: 20,
+            width: 50,
+            text: '年份：'
+          },
+          {
+            xtype: 'textfield',
+            x: 140,
+            y: 80,
+            name: 'year'
+          },
+          {
+            xtype: 'label',
+            x: 70,
+            y: 130,
+            height: 20,
+            width: 50,
+            text: '名称：'
+          },
+          {
+            xtype: 'textfield',
+            x: 140,
+            y: 130,
+            name: 'name'
+          },
+          {
+            xtype: 'button',
+            x: 140,
+            y: 180,
+            height: 30,
+            width: 80,
+            text: '保存',
+            handler: function(){
+              if (winForm.form.isValid()) {
+                winForm.form.submit({
+                  method: 'post',
+                  waitMsg: '正在处理...',
+                  success: function(result, response){
+                    Ext.MessageBox.alert('提示', '成功！');
+                    Ext.getCmp('win').close();
+                  },
+                  failure: function(result, response){
+                    Ext.MessageBox.alert('错误提示', response.result.info);
+                  }
+                });
+              }else {
+                Ext.MessageBox.alert('错误提示', '请按要求填写必输选项.');
               }
             }
-          ]
-        });
-        winForm.render('periods_new_div');
+          }
+        ]
       });
-    </script>
-  </head>
-  <body>
-    <div id="periods_new_div" style="width:100%; height:100%"></div>
-  </body>
-</html>
-
+      winForm.render('<%=params[:controller]%>_<%=params[:action]%>_div');
+    });
+  </script>
+<%end%>

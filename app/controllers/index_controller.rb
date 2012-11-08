@@ -1,4 +1,7 @@
 class IndexController < ApplicationController
+
+  caches_page :index
+
   def index
     @menus = @@menuMap[1].to_json
     $output_logger.info("welcome to index ,#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}")

@@ -12,20 +12,22 @@ gem 'mongoid'
 gem 'mongoid_location'
 gem 'bson_ext'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+# 资源模板引擎
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'cells'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
-end
+# 缓存系统
+gem 'redis-activesupport'
+gem 'redis-objects'
 
 # js组件
-gem 'jquery-rails'
+gem 'jquery-rails', '2.0.2'
+
+# 异步和定时任务
+gem 'resque'
+gem 'resque-scheduler'
 
 # 产品环境
 group :production do

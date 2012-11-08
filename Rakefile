@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Rails3Extjs::Application.load_tasks
+Rails3Extjs4::Application.load_tasks

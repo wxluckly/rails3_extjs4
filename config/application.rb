@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 require File.expand_path('../boot', __FILE__)
+
 
 require 'rails/all'
 
@@ -9,7 +11,11 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module Rails3Extjs
+# 初始化全局配置
+require File.expand_path('../conf', __FILE__)
+$conf = Conf.new
+
+module Rails3Extjs4
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -59,5 +65,8 @@ module Rails3Extjs
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # 使用redis作为默认缓存
+    config.cache_store = :redis_store, $conf[:redis][:server]
   end
 end

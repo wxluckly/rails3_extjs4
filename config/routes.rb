@@ -1,4 +1,4 @@
-Rails3Extjs::Application.routes.draw do
+Rails3Extjs4::Application.routes.draw do
 
   root :to => "index#index"
 

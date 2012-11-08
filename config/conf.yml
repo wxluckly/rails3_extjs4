@@ -1,0 +1,10 @@
+defaults: &defaults
+  name: rails3_extjs4
+
+development: &non_production_settings
+  <<: *defaults
+  redis:
+    server: redis://localhost:6379
+
+test:
+  <<: *non_production_settings

@@ -53,7 +53,10 @@ class GundamsController < ApplicationController
 
   # GET /send_info
   def send_info
-    MailerBase.gundam_info(nil,params[:gundam_id]).deliver
+    emails = emails || ["wxl_test@126.com"]
+    emails.each do |email|
+      Resque.enqueue(InfoMailer, email, params[:gundam_id])
+    end
     render :json=>{:success=>true}
   end
 

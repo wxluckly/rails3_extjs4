@@ -1,91 +1,83 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-  <head>
-    <script type="text/javascript">
-      Ext.onReady(function(){
+<% content_for :header do%>
+  <script type="text/javascript">
+    Ext.onReady(function(){
 
-        Ext.define('WinThread', {
-          extend: 'Ext.data.Model',
-          fields: [
-            {name: 'id'},
-            {name: 'name'}
-          ]
-        });
+      Ext.define('WinThread', {
+        extend: 'Ext.data.Model',
+        fields: [
+          {name: 'id'},
+          {name: 'name'}
+        ]
+      });
         
-        var winForm = new Ext.form.FormPanel({
-          url:'drivers/<%=params[:id]%>',
-          height: 132,
-          width: 360,
-          layout: 'absolute',
-          border: false,
-          frame:true,
-          reader : new Ext.data.reader.Json({
-            model: 'WinThread'
-          }),
-          items: [
-            {
-              xtype: 'label',
-              x: 50,
-              y: 30,
-              height: 20,
-              width: 60,
-              text: '姓名：'
-            },
-            {
-              xtype: 'textfield',
-              x: 110,
-              y: 30,
-              name: 'name',
-              width: 210
-            },
-            {
-              xtype: 'button',
-              x: 130,
-              y: 80,
-              height: 30,
-              width: 90,
-              text: '保存',
-              handler: function(){
-                if (winForm.form.isValid()) {
-                  winForm.form.submit({
-                    method: 'put',
-                    waitMsg: '正在处理...',
-                    success: function(result, response){
-                      Ext.MessageBox.alert('提示', '成功！');
-                      Ext.getCmp('win').close();
-                    },
-                    failure: function(result, response){
-                      Ext.MessageBox.alert('错误提示', response.result.info);
-                    }
-                  });
-                }else {
-                  Ext.MessageBox.alert('错误提示', '请按要求填写必输选项.');
-                }
+      var winForm = new Ext.form.FormPanel({
+        url:'drivers/<%=params[:id]%>',
+        height: 132,
+        width: 360,
+        layout: 'absolute',
+        border: false,
+        frame:true,
+        reader : new Ext.data.reader.Json({
+          model: 'WinThread'
+        }),
+        items: [
+          {
+            xtype: 'label',
+            x: 50,
+            y: 30,
+            height: 20,
+            width: 60,
+            text: '姓名：'
+          },
+          {
+            xtype: 'textfield',
+            x: 110,
+            y: 30,
+            name: 'name',
+            width: 210
+          },
+          {
+            xtype: 'button',
+            x: 130,
+            y: 80,
+            height: 30,
+            width: 90,
+            text: '保存',
+            handler: function(){
+              if (winForm.form.isValid()) {
+                winForm.form.submit({
+                  method: 'put',
+                  waitMsg: '正在处理...',
+                  success: function(result, response){
+                    Ext.MessageBox.alert('提示', '成功！');
+                    Ext.getCmp('win').close();
+                  },
+                  failure: function(result, response){
+                    Ext.MessageBox.alert('错误提示', response.result.info);
+                  }
+                });
+              }else {
+                Ext.MessageBox.alert('错误提示', '请按要求填写必输选项.');
               }
             }
-          ]
-        });
-        
-        winForm.form.load({
-          url: 'drivers/edit_data?id='+<%=params[:id]%>,
-          <%#*waitMsg: '正在载入数据...',%>   //给当前表单增加等待效果，会导致窗口最终被大遮蔽层盖住
-          params: {
-            authenticity_token: '<%= form_authenticity_token.to_s %>'
-          },
-          success: function(form, action){
-          },
-          failure: function(form, action){
-            Ext.MessageBox.alert('提示信息', '信息加载失败');
           }
-        });
-
-        winForm.render('drivers_edit_div');
-        
+        ]
       });
-    </script>
-  </head>
-  <body>
-    <div id="drivers_edit_div" style="width:100%; height:100%"></div>
-  </body>
-</html>
+        
+      winForm.form.load({
+        url: 'drivers/edit_data?id='+<%=params[:id]%>,
+        params: {
+          authenticity_token: '<%= form_authenticity_token.to_s %>'
+        },
+        success: function(form, action){
+        },
+        failure: function(form, action){
+          Ext.MessageBox.alert('提示信息', '信息加载失败');
+        }
+      });
 
+      winForm.render('<%=params[:controller]%>_<%=params[:action]%>_div');
+        
+    });
+  </script>
+<%end%>

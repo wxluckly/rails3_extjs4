@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
-  
-	attr_accessible :name, :passwd
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, :length => { :maximum => 10 }
-  validates :passwd, :length => { :maximum => 5 }
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
 
 end

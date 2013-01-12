@@ -1,0 +1,93 @@
+<% content_for :header do%>
+  <script type="text/javascript">
+
+    Ext.onReady(function(){
+      var winForm = new Ext.form.FormPanel({
+        url:'users/<%=params[:id]%>',
+        height: 177,
+        width: 364,
+        layout: 'absolute',
+        border: false,
+        frame:true,
+        reader: new Ext.data.JsonReader({
+        },[
+          {name: 'id'},
+          {name: 'name'},
+          {name: 'passwd'}
+        ]),
+        items: [
+
+          {
+            xtype: 'label',
+            x: 90,
+            y: 20,
+            height: 20,
+            width: 60,
+            text: '名称：'
+          },
+          {
+            xtype: 'textfield',
+            x: 150,
+            y: 20,
+            width: 110,
+            name: 'name'
+          },
+          {
+            xtype: 'label',
+            x: 90,
+            y: 70,
+            height: 20,
+            width: 50,
+            text: '密码：'
+          },
+          {
+            xtype: 'textfield',
+            x: 150,
+            y: 70,
+            width: 110,
+            name: 'passwd'
+          },
+          {
+            xtype: 'button',
+            x: 150,
+            y: 120,
+            height: 30,
+            width: 90,
+            text: '保存',
+            handler: function(){
+              if (winForm.form.isValid()) {
+                winForm.form.submit({
+                  method: 'put',
+                  waitMsg: '正在处理...',
+                  success: function(result, response){
+                    Ext.MessageBox.alert('提示', '成功！');
+                    Ext.getCmp('win').close();
+                  },
+                  failure: function(result, response){
+                    Ext.MessageBox.alert('错误提示', response.result.info);
+                  }
+                });
+              }else {
+                Ext.MessageBox.alert('错误提示', '请按要求填写必输选项.');
+              }
+            }
+          }
+        ]
+      });
+      winForm.form.load({
+        url: 'users/edit_data?id='+<%=params[:id]%>,
+        method: 'get',
+        waitMsg: '正在载入数据...',
+        params: {
+          authenticity_token: '<%= form_authenticity_token.to_s %>'
+        },
+        success: function(form, action){
+        },
+        failure: function(form, action){
+          Ext.MessageBox.alert('提示信息', '信息加载失败');
+        }
+      });
+      winForm.render('<%=params[:controller]%>_<%=params[:action]%>_div');
+    });
+  </script>
+<%end%>

@@ -29,6 +29,9 @@ gem 'jquery-rails', '2.0.2'
 gem 'resque'
 gem 'resque-scheduler'
 
+# 其他
+gem 'devise'
+
 # 产品环境
 group :production do
   gem 'unicorn'

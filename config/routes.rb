@@ -1,33 +1,60 @@
 Rails3Extjs4::Application.routes.draw do
 
-  root :to => "index#index"
 
-  match 'drivers/index_data' => 'drivers#index_data'
-  match 'drivers/edit_data' => 'drivers#edit_data'
-  resources :drivers
+  # root :to => "index#index"
 
-  match 'gundams/index_data' => 'gundams#index_data'
-  match 'gundams/edit_data' => 'gundams#edit_data'
-  match 'gundams/send_info' => 'gundams#send_info'
-  resources :gundams
+  namespace "admin" do
+    
+    root :to => "index#index"
 
-  match 'periods/index_data' => 'periods#index_data'
-  match 'periods/all_data' => 'periods#all_data'
-  match 'periods/edit_data' => 'periods#edit_data'
-  resources :periods
+    resources :drivers do 
+      collection do
+        get 'index_data'
+        get 'edit_data'
+      end
+    end
 
-  match 'types/index_data' => 'types#index_data'
-  match 'types/all_data' => 'types#all_data'
-  match 'types/edit_data' => 'types#edit_data'
-  resources :types
+    resources :gundams do 
+      collection do
+        get 'index_data'
+        get 'edit_data'
+        get 'send_info'
+      end
+    end
 
-  match 'users/index_data' => 'users#index_data'
-  match 'users/edit_data' => 'users#edit_data'
-  resources :users
+    resources :periods do 
+      collection do
+        get 'index_data'
+        get 'all_data'
+        get 'edit_data'
+      end
+    end
 
-  match 'dimensions/index_data' => 'dimensions#index_data'
-  match 'dimensions/all_data' => 'dimensions#all_data'
-  match 'dimensions/edit_data' => 'dimensions#edit_data'
-  resources :dimensions
+    resources :types do 
+      collection do
+        get 'index_data'
+        get 'all_data'
+        get 'edit_data'
+      end
+    end
+
+    resources :users do 
+      collection do
+        get 'index_data'
+        get 'all_data'
+        get 'edit_data'
+      end
+    end
+
+    resources :dimensions do 
+      collection do
+        get 'index_data'
+        get 'all_data'
+        get 'edit_data'
+      end
+    end
+
+  end
+  devise_for :users
 
 end

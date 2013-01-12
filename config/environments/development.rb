@@ -49,4 +49,6 @@ Rails3Extjs4::Application.configure do
   config.generators do |g|
     g.orm :active_record
   end
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end

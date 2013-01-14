@@ -1,0 +1,13 @@
+<% content_for :header do%>
+  <title>rails3_extjs4</title>
+<% end %>
+
+<% if user_signed_in? %>
+  welcome to my web!
+  <%= link_to 'Edit profile', edit_user_registration_path %> |
+  <%= link_to 'Logout', destroy_user_session_path, method: :delete %> |
+  <%= link_to "Admin", admin_root_path %>
+<% else %>
+  <%= link_to 'Sign up', new_user_registration_path %> |
+  <%= link_to 'Login', new_user_session_path %>
+<% end %>

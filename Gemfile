@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -29,8 +29,9 @@ gem 'jquery-rails', '2.0.2'
 gem 'resque'
 gem 'resque-scheduler'
 
-# 其他
+# 用户登录
 gem 'devise'
+gem 'omniauth-twitter'
 
 # 产品环境
 group :production do
@@ -43,13 +44,15 @@ group :development do
   gem 'rails3-generators'
   gem 'spork', '>= 0.9.0'
   gem 'capistrano'
-  gem 'pry' if RUBY_PLATFORM =~ /linux/i
-  #gem "bullet" # 检查N+1查询
+  gem 'pry'
+  gem 'pry-nav'
+  #gem 'bullet' # 检查N+1查询
 end
 
 # 开发测试环境共用
 group :development, :test do
   gem 'sqlite3'
+  gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl_rails', require: false  # 修复对model的preload
   gem 'capybara'

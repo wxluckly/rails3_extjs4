@@ -22,7 +22,7 @@
         pageSize: common.list_num,
         proxy: {
           type: 'ajax',
-          url: 'periods/index_data',
+          url: 'admin/periods/index_data',
           reader: {
             root: 'root',
             totalProperty: 'totalProperty'
@@ -68,7 +68,7 @@
               if(records.length==0){
                 Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
               }else{
-                openWindow('win','编辑',"periods/"+records[0].get('id')+"/edit",369,268,common.periodslistDS)
+                openWindow('win','编辑',"admin/periods/"+records[0].get('id')+"/edit",369,268,common.periodslistDS)
               }
             }
           },'-',{
@@ -83,7 +83,7 @@
                 Ext.MessageBox.confirm('警告','确定要删除该记录吗？',function (button){
                   if(button=='yes'){
                     Ext.Ajax.request({
-                      url : 'periods/'+records[0].get('id'),
+                      url : 'admin/periods/'+records[0].get('id'),
                       method : 'DELETE',
                       waitMsg: '正在提交...',
                       params: {

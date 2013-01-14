@@ -11,7 +11,7 @@
       });
         
       var winForm = new Ext.form.FormPanel({
-        url:'drivers/<%=params[:id]%>',
+        url:'admin/drivers/<%=params[:id]%>',
         height: 132,
         width: 360,
         layout: 'absolute',
@@ -65,7 +65,7 @@
       });
         
       winForm.form.load({
-        url: 'drivers/edit_data?id='+<%=params[:id]%>,
+        url: 'admin/drivers/edit_data?id='+<%=params[:id]%>,
         method: 'get',
         params: {
           authenticity_token: '<%= form_authenticity_token.to_s %>'

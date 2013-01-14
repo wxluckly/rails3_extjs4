@@ -41,7 +41,7 @@ var common = {
         remoteGroup: true,
         proxy: {
             type: 'ajax',
-            url: '/dimensions/all_data',
+            url: 'admin/dimensions/all_data',
             reader: {
                 root: 'root',
                 totalProperty: 'totalProperty'
@@ -54,7 +54,7 @@ var common = {
         remoteGroup: true,
         proxy: {
             type: 'ajax',
-            url: '/periods/all_data',
+            url: 'admin/periods/all_data',
             reader: {
                 root: 'root',
                 totalProperty: 'totalProperty'
@@ -67,7 +67,7 @@ var common = {
         remoteGroup: true,
         proxy: {
             type: 'ajax',
-            url: '/types/all_data',
+            url: 'admin/types/all_data',
             reader: {
                 root: 'root',
                 totalProperty: 'totalProperty'

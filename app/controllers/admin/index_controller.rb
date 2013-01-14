@@ -1,4 +1,5 @@
 class Admin::IndexController < Admin::ApplicationController
+  before_filter :authenticate_user!
 
   def index
     @menus = @@menuMap[1].to_json

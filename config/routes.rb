@@ -1,7 +1,8 @@
 Rails3Extjs4::Application.routes.draw do
 
-
-  # root :to => "index#index"
+  devise_for :users
+  
+  root :to => "index#index"
 
   namespace "admin" do
     
@@ -55,6 +56,5 @@ Rails3Extjs4::Application.routes.draw do
     end
 
   end
-  devise_for :users
 
 end

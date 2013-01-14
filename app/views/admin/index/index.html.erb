@@ -6,31 +6,15 @@
 
   <%= javascript_include_tag '/ext-4.1.1a/ext-all.js'  -%>
   <%= javascript_include_tag '/ext-4.1.1a/examples/ux/CheckColumn.js'  -%>
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'admin' %>
 
   <script type="text/javascript">
     Ext.onReady(function() {
 
       Ext.QuickTips.init();
 
-      //如果未登录
       var topPanel = new Ext.Panel({
-        bbar: ['<b style="font-size:14px;">后台管理---欢迎您，请进行登录</b>', '->',{
-            text: '<img src="assets/system/user_go.png"/><font style="font-size:13px;">登录系统</font>',
-            scope: this,
-            handler: function() {
-              Ext.Ajax.request({
-                url : 'index/login',
-                success : function (result, request) {
-                  window.document.location.href = 'index/admin';
-                },
-                failure : function (result, request){
-                  Ext.MessageBox.alert("提示","通讯失败，请从新操作");
-                },
-                method : 'POST'
-              });
-            }
-          }],
+        bbar: ['<b style="font-size:14px;">后台管理---欢迎您：<%= current_user.email %></b>', '->','<img src="assets/system/user_go.png"/><font style="font-size:13px;">','<%= link_to "登出系统", destroy_user_session_path, method: :delete %>','</font>'],
         cls:'empty',
         region:'north'
       });

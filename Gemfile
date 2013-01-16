@@ -47,6 +47,7 @@ gem 'acts_as_list'
 gem 'state_machine'
 gem 'will_paginate'
 gem 'will_paginate_mongoid'
+gem 'typhoeus'
 
 # 开发环境
 group :development do

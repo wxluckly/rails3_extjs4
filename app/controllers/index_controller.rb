@@ -1,7 +1,10 @@
 class IndexController < ApplicationController
 
   def index
-    p "goood"
+    params[:page] ||= 0
+    params[:per_page] ||= 20
+    params[:query] ||= ""
+    @result = Gundam.search_by_keywords params
   end
 
 end

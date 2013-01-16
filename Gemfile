@@ -22,6 +22,9 @@ gem 'cells'
 gem 'redis-activesupport'
 gem 'redis-objects'
 
+# 搜索引擎
+gem 'tire'
+
 # js组件
 gem 'jquery-rails', '2.0.2'
 
@@ -35,6 +38,11 @@ gem 'rails_config'
 # 用户登录
 gem 'devise'
 gem 'omniauth-twitter'
+gem 'omniauth'
+gem 'omniauth-weibo-oauth2'
+gem 'weibo'
+gem 'weibo2'
+gem 'weibo2_plugins'
 
 # 开发环境
 group :development do

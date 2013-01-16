@@ -24,13 +24,13 @@
         }
       });
 
-      var typeCombo = new Ext.form.ComboBox({
+      var usageCombo = new Ext.form.ComboBox({
         displayField:'name',
         emptyText:'请选择...',
         forceSelection: true,
-        name:'type',
+        name:'usage',
         mode: 'remote',
-        store: common.typeDS,
+        store: common.usageDS,
         triggerAction: 'all',
         typeAhead: true,
         valueField:'id',
@@ -71,7 +71,7 @@
             y: 110,
             fieldLabel: '中文名'
           },
-          typeCombo,
+          usageCombo,
           {
             xtype: 'button',
             x: 240,

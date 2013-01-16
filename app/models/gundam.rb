@@ -9,7 +9,7 @@ class Gundam < ActiveRecord::Base
   
 	attr_accessible :name, :name_chs, :model, :period_id, :period, :usage_id, :usage
   
-  validates :model, :uniqueness => { :scope => :period_id, :message => "should have only one model per period" }
+  validates :model, :uniqueness => { :scope => :period_id, :message => "should have only one model per period" }, :on => :create
 
 
   def self.search_by_keywords(params = {})

@@ -40,14 +40,12 @@ ActiveRecord::Schema.define(:version => 20130116084627) do
     t.string   "name"
     t.string   "name_chs"
     t.string   "model"
-    t.string   "type_id"
+    t.string   "usage_id"
     t.string   "force"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "period_id"
   end
-
-  add_index "gundams", ["model", "period_id"], :name => "index_gundams_on_model_and_period_id", :unique => true
 
   create_table "periods", :force => true do |t|
     t.string   "name"
@@ -57,8 +55,6 @@ ActiveRecord::Schema.define(:version => 20130116084627) do
     t.datetime "updated_at",   :null => false
     t.integer  "dimension_id"
   end
-
-  add_index "periods", ["year"], :name => "index_periods_on_year_and_series", :unique => true
 
   create_table "usages", :force => true do |t|
     t.string   "name"

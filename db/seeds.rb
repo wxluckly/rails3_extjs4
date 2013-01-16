@@ -17,7 +17,11 @@ periods = Period.create([
     {:year=> '92',:name=> '',:dimension=>  dimensions.first},
     {:year=> '93',:name=> '',:dimension=>  dimensions.first},
     {:year=> '99',:name=> '',:dimension=>  dimensions.first},
-    {:year=> '123',:name=> '',:dimension=>  dimensions.first}
+    {:year=> '123',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '',:name=> 'SEED',:dimension=>  dimensions[1]},
+    {:year=> '',:name=> 'SEED Destiny',:dimension=>  dimensions[1]},
+    {:year=> '',:name=> 'G',:dimension=>  dimensions[2]},
+    {:year=> '',:name=> 'W',:dimension=>  dimensions[2]}
   ])
 p "Period done"
 
@@ -42,7 +46,7 @@ usages = Usage.create([
     {name: '地球圈战用ms'},
     {name: '宇宙战用ms'}
   ])
-p "Type done"
+p "Usage done"
 
 if usages.first.id && periods.first.id
   Gundam.create([
@@ -115,7 +119,44 @@ if usages.first.id && periods.first.id
       { model: 'XM-05', name: 'BERGA GIROS', name_chs: '贝尔格.基罗斯', period: periods[8] ,usage: usages.first},
       { model: 'XM-06', name: 'DAHGI IRIS', name_chs: '达基.伊里斯', period: periods[8] ,usage: usages.first},
       { model: 'XM-07', name: 'VIGNA GHINA', name_chs: '比基那.基那', period: periods[8] ,usage: usages.first},
-      { model: 'XM-X2', name: 'CROSS BONE GUNDAM X2', name_chs: '十字先锋高达二号机', period: periods[8] ,usage: usages.first}
+      { model: 'XM-X2', name: 'CROSS BONE GUNDAM X2', name_chs: '十字先锋高达二号机', period: periods[8] ,usage: usages.first},
+
+
+      { model: 'AMF-101', name: 'DINN', name_chs: '', period: periods[9] ,usage: usages[0]},
+      { model: 'CAT-X1/3', name: 'HYPERION GUNDAM', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'GAT-01', name: 'Strike Dagger', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'GAT-X102', name: 'DUEL GUNDAM', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'GAT-X103', name: 'BUSTER GUNDAM', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'GAT-X105', name: 'STRIKE GUNDAM', name_chs: '强袭高达', period: periods[9] ,usage: usages.first},
+      { model: 'GAT-X131', name: 'CALAMITY GUNDAM', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'GAT-X207', name: 'BLITZ GUNDAM', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'GAT-X252', name: 'FORBIDDEN GUNDAM', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'GAT-X303', name: 'AEGIS GUNDAM', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'GAT-X370', name: '', name_chs: '劫掠高达', period: periods[9] ,usage: usages.first},
+      { model: 'MBF-02', name: 'STRIKE ROUGE', name_chs: '嫣红强袭', period: periods[9] ,usage: usages.first},
+      { model: 'MBF-M1', name: 'ASTRAY', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'MBF-P01', name: 'GUNDAM ASTRAY 01', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'MBF-P02', name: 'GUNDAM ASTRAY 02', name_chs: '红色异端', period: periods[9] ,usage: usages.first},
+      { model: 'MBF-P03', name: 'GUNDAM ASTRAY 03', name_chs: '蓝色异端', period: periods[9] ,usage: usages.first},
+      { model: 'UMF-4A', name: 'GOOHN', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'ZGMF-1017', name: 'GINN', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'ZGMF-1017M', name: '', name_chs: '高机动吉恩', period: periods[9] ,usage: usages.first},
+      { model: 'ZGMF-515', name: 'CGUE', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'ZGMF-600', name: 'GUAIZ', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'ZGMF-X09A', name: 'JUSTICE GUNDAM', name_chs: '正义高达', period: periods[9] ,usage: usages.first},
+      { model: 'ZGMF-X10A', name: 'FREEDOM GUNDAM', name_chs: '自由高达', period: periods[9] ,usage: usages.first},
+      { model: 'ZGMF-X13A', name: 'PROVIDENCE GUNDAM', name_chs: '', period: periods[9] ,usage: usages.first},
+      { model: 'ZGMF-X20A', name: 'Strike Freedom Gundam', name_chs: '强袭自由', period: periods[10] ,usage: usages.first},
+      { model: 'ZGMF-X42S', name: 'Destiny Gundam', name_chs: '命运高达', period: periods[10] ,usage: usages.first},
+      { model: 'ZGMF-X56S', name: 'Impulse gundam', name_chs: '', period: periods[10] ,usage: usages.first},
+
+      { model: 'GF13-001NHII', name: 'MASTER GUNDAM', name_chs: '', period: periods[10] ,usage: usages.first},
+      { model: 'GF13-017NJ', name: 'SHINING GUNDAM', name_chs: '闪光高达', period: periods[10] ,usage: usages.first},
+      { model: 'GF13-017NJII', name: 'GOD GUNDAM', name_chs: '神高达', period: periods[10] ,usage: usages.first},
+      { model: 'GF13-021NG', name: 'GUNDAM SPIFGEL', name_chs: '', period: periods[10] ,usage: usages.first},
+      { model: 'MRX-009', name: 'PSYCO GUNDAM', name_chs: '精神力高达', period: periods[10] ,usage: usages.first},
+      { model: 'MMS-01', name: 'SERPENT CUSTOM', name_chs: '', period: periods[11] ,usage: usages.first},
+      { model: 'XXXG-00W0', name: 'Wing Zero', name_chs: '飞翼零式', period: periods[11] ,usage: usages.first}
     ])
   p "Gundam done"
 end

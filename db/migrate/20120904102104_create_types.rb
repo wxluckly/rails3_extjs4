@@ -4,5 +4,6 @@ class CreateTypes < ActiveRecord::Migration
       t.string :name
       t.timestamps
     end
+    add_index(:types, :name, :unique => true)
   end
 end

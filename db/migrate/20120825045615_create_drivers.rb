@@ -5,5 +5,6 @@ class CreateDrivers < ActiveRecord::Migration
       t.string :summary
 			t.timestamps
 		end
+    add_index(:drivers, :name, :unique => true)
 	end
 end

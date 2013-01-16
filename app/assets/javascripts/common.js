@@ -9,7 +9,7 @@ Ext.define('dimensionDSModel', {
     }]
 });
 
-Ext.define('typeDSModel', {
+Ext.define('usageDSModel', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'id'
@@ -62,12 +62,12 @@ var common = {
             autoLoad:true
         }
     }),
-    typeDS : Ext.create('Ext.data.Store', {
-        model: 'typeDSModel',
+    usageDS : Ext.create('Ext.data.Store', {
+        model: 'usageDSModel',
         remoteGroup: true,
         proxy: {
             type: 'ajax',
-            url: 'admin/types/all_data',
+            url: 'admin/usages/all_data',
             reader: {
                 root: 'root',
                 totalProperty: 'totalProperty'

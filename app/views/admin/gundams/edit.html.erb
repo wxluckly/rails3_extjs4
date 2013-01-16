@@ -7,7 +7,7 @@
         displayField:'year',
         emptyText:'请选择...',
         forceSelection: true,
-        name:'period',
+        name:'period_id',
         mode: 'remote',
         store: common.periodDS,
         triggerAction: 'all',
@@ -24,13 +24,13 @@
         }
       });
 
-      var typeCombo = new Ext.form.ComboBox({
+      var usageCombo = new Ext.form.ComboBox({
         displayField:'name',
         emptyText:'请选择...',
         forceSelection: true,
-        name:'type',
+        name:'usage_id',
         mode: 'remote',
-        store: common.typeDS,
+        store: common.usageDS,
         triggerAction: 'all',
         typeAhead: true,
         valueField:'id',
@@ -46,14 +46,14 @@
           {name: 'id'},
           {name: 'name'},
           {name: 'model'},
-          {name: 'period',mapping:'period_id', convert: str2IntRender},
+          {name: 'period_id',mapping:'period_id', convert: str2IntRender},
           {name: 'name_chs'},
-          {name: 'type',mapping:'type_id', convert: str2IntRender}
+          {name: 'usage_id',mapping:'usage_id', convert: str2IntRender}
         ]
       });
         
       var winForm = new Ext.form.FormPanel({
-        url:'gundams',
+        url:"admin/gundams/<%=params[:id]%>",
         height: 280,
         width: 614,
         layout: 'absolute',
@@ -86,7 +86,7 @@
             y: 110,
             fieldLabel: '中文名'
           },
-          typeCombo,
+          usageCombo,
           {
             xtype: 'button',
             x: 240,
@@ -97,7 +97,7 @@
             handler: function(){
               if (winForm.form.isValid()) {
                 winForm.form.submit({
-                  method: 'post',
+                  method: 'put',
                   waitMsg: '正在处理...',
                   success: function(result, response){
                     Ext.MessageBox.alert('提示', '成功！');
@@ -128,7 +128,7 @@
       });
       winForm.render('<%=params[:controller]%>_<%=params[:action]%>_div');
       common.periodDS.reload();
-      common.typeDS.reload();
+      common.usageDS.reload();
     });
   </script>
 <%end%>

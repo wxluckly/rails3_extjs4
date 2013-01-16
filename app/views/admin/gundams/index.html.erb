@@ -11,8 +11,8 @@
           {name: 'name_chs'},
           {name: 'model'},
           {name: 'created_at'},
-          {name: 'year',mapping:'period', convert: function(value){return getAttr(value,'year')}},
-          {name: 'type',mapping:'type', convert: function(value){return getAttr(value,'name')}}
+          {name: 'year', mapping:'period', convert: function(value){return getAttr(value,'year')}},
+          {name: 'usage', mapping:'usage', convert: function(value){return getAttr(value,'name')}}
         ],
         idProperty: 'threadid'
       });
@@ -50,7 +50,7 @@
           {text: '型号',dataIndex: 'model',width:180},
           {text: '名称',dataIndex: 'name',width:220},
           {text: '中文名',dataIndex: 'name_chs',width:180},
-          {text: '类型',dataIndex: 'type',width:90},
+          {text: '类型',dataIndex: 'usage',width:90},
           {text: '创建时间',dataIndex: 'created_at',width:110,renderer: Ext.util.Format.dateRenderer('Y-m-d H:i')}
         ],
         columnLines: true,

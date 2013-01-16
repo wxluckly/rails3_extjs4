@@ -6,7 +6,7 @@ class Admin::GundamsController < Admin::ApplicationController
   # POST /gundams
   def create
     params_hash = {:name=>params[:name],:model=>params[:model],:name_chs=>params[:name_chs],
-      :period_id=>params[:period],:type_id=>params[:type]}
+      :period_id=>params[:period],:usage_id=>params[:usage]}
     @obj = Gundam.new(params_hash)
     if @obj.save
       render :json=>{:success=>true}
@@ -32,9 +32,8 @@ class Admin::GundamsController < Admin::ApplicationController
 
   # PUT /gundams/1
   def update
-    @obj = Gundam.find(params[:id])
-    new_user = {:name=>params[:name],:passwd=>params[:passwd]}
-    if @obj.update_attributes(new_user)
+    gundam = Gundam.find(params[:id])
+    if gundam.update_attributes(params.except(:id, :controller, :action))
       render :json=>{:success=>true}
     else
       render :json=>{:success=>false,:info=>@obj.errors.full_messages}
@@ -47,8 +46,8 @@ class Admin::GundamsController < Admin::ApplicationController
 
   # GET /index_data
   def index_data
-    gundams = Gundam.includes(:period,:type).limit(params[:limit]).offset(params[:start])  
-    render :text=>"{'totalProperty':#{Gundam.count},'root':#{gundams.to_json(:include=>[:period,:type])}}", :layout=>false
+    gundams = Gundam.includes(:period,:usage).limit(params[:limit]).offset(params[:start])  
+    render :text=>"{'totalProperty':#{Gundam.count},'root':#{gundams.to_json(:include=>[:period,:usage])}}", :layout=>false
   end
 
   # GET /send_info

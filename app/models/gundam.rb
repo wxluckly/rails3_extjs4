@@ -5,9 +5,9 @@ class Gundam < ActiveRecord::Base
 
 	has_and_belongs_to_many :drivers
   belongs_to :period
-  belongs_to :type
+  belongs_to :usage
   
-	attr_accessible :name, :name_chs, :model, :period_id, :type_id, :period, :type
+	attr_accessible :name, :name_chs, :model, :period_id, :period, :usage_id, :usage
   
   validates :model, :uniqueness => { :scope => :period_id, :message => "should have only one model per period" }
 

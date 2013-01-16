@@ -13,14 +13,14 @@
         idProperty: 'threadid'
       });
 
-      common.typeslistDS = Ext.create('Ext.data.Store', {
+      common.usageslistDS = Ext.create('Ext.data.Store', {
         id: 'store',
         model: 'ForumThread',
         remoteGroup: true,
         pageSize: common.list_num,
         proxy: {
           type: 'ajax',
-          url: '<%= index_data_admin_types_path %>',
+          url: '<%= index_data_admin_usages_path %>',
           reader: {
             root: 'root',
             totalProperty: 'totalProperty'
@@ -38,7 +38,7 @@
 
       var grid = Ext.create('Ext.grid.Panel', {
         id:'button-grid',
-        store: common.typeslistDS,
+        store: common.usageslistDS,
         header : false,
         columns: [
           {text: '',dataIndex: 'id',width:40,hidden:true},
@@ -53,7 +53,7 @@
             width:50,
             iconCls: 'addItem',
             handler:function(){
-              openWindow('win','增加',"admin/types/new",360,132,common.typeslistDS)
+              openWindow('win','增加',"admin/usages/new",360,132,common.usageslistDS)
             }
           },'-',{
             text:'编辑',
@@ -64,7 +64,7 @@
               if(records.length==0){
                 Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
               }else{
-                openWindow('win','编辑',"admin/types/"+records[0].get('id')+"/edit",360,132,common.typeslistDS)
+                openWindow('win','编辑',"admin/usages/"+records[0].get('id')+"/edit",360,132,common.usageslistDS)
               }
             }
           },'-',{
@@ -79,7 +79,7 @@
                 Ext.MessageBox.confirm('警告','确定要删除该记录吗？',function (button){
                   if(button=='yes'){
                     Ext.Ajax.request({
-                      url : 'admin/types/'+records[0].get('id'),
+                      url : 'admin/usages/'+records[0].get('id'),
                       method : 'DELETE',
                       waitMsg: '正在提交...',
                       params: {
@@ -87,7 +87,7 @@
                       },
                       success : function (response,opts) {
                         Ext.MessageBox.alert('消息', '操作成功！');
-                        common.typeslistDS.reload();
+                        common.usageslistDS.reload();
                       },
                       failure : function (result, response){
                         Ext.MessageBox.alert('消息', response.result);
@@ -100,7 +100,7 @@
           }],
         bbar: new Ext.PagingToolbar({
           pageSize: common.list_num,
-          store: common.typeslistDS,
+          store: common.usageslistDS,
           displayInfo: true,
           displayMsg: "显示第 {0} 条到 {1} 条记录，一共 {2} 条",
           emptyMsg: "没有记录"
@@ -111,7 +111,7 @@
       });
 
       grid.render('<%=params[:controller]%>_<%=params[:action]%>_div');
-      common.typeslistDS.load();
+      common.usageslistDS.load();
     })
   </script>
 <%end%>

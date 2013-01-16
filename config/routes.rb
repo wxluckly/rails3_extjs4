@@ -31,7 +31,7 @@ Rails3Extjs4::Application.routes.draw do
       end
     end
 
-    resources :types do 
+    resources :usages do 
       collection do
         get 'index_data'
         get 'all_data'

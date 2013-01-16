@@ -1,4 +1,4 @@
-class Type < ActiveRecord::Base
+class Usage < ActiveRecord::Base
   include MongoSync
 
   has_many :gundam

@@ -1,4 +1,4 @@
-class TypeMongo
+class UsageMongo
   include Mongoid::Document
   include Mongoid::Timestamps
 

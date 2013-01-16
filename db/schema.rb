@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111141639) do
+ActiveRecord::Schema.define(:version => 20130116084627) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
@@ -60,13 +60,13 @@ ActiveRecord::Schema.define(:version => 20130111141639) do
 
   add_index "periods", ["year"], :name => "index_periods_on_year_and_series", :unique => true
 
-  create_table "types", :force => true do |t|
+  create_table "usages", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "types", ["name"], :name => "index_types_on_name", :unique => true
+  add_index "usages", ["name"], :name => "index_types_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

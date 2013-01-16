@@ -32,9 +32,6 @@ gem 'jquery-rails', '2.0.2'
 gem 'resque'
 gem 'resque-scheduler'
 
-# config setting
-gem 'rails_config'
-
 # 用户登录
 gem 'devise'
 gem 'omniauth-twitter'
@@ -43,6 +40,13 @@ gem 'omniauth-weibo-oauth2'
 gem 'weibo'
 gem 'weibo2'
 gem 'weibo2_plugins'
+
+# 辅助组件
+gem 'rails_config'
+gem 'acts_as_list'
+gem 'state_machine'
+gem 'will_paginate'
+gem 'will_paginate_mongoid'
 
 # 开发环境
 group :development do

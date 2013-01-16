@@ -5,6 +5,6 @@ class GundamMongo
   field :_id, type: Integer
 
   belongs_to :period
-  belongs_to :type
+  belongs_to :usage
 
 end

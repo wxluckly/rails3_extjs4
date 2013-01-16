@@ -22,7 +22,7 @@ class Admin::IndexController < Admin::ApplicationController
           },{ :id => 12, :name => '驾驶员', :image => 'assets/system/group_gear.png',
             :hrefTarget => 'admin/drivers', :qtip => '驾驶员', :leaf => true
           },{ :id => 14, :name => '机体类型', :image => 'assets/system/group_gear.png',
-            :hrefTarget => 'admin/types', :qtip => '机体类型', :leaf => true
+            :hrefTarget => 'admin/usages', :qtip => '机体类型', :leaf => true
           }
         ]
       },

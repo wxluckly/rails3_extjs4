@@ -29,6 +29,9 @@ gem 'jquery-rails', '2.0.2'
 gem 'resque'
 gem 'resque-scheduler'
 
+# config setting
+gem 'rails_config'
+
 # 用户登录
 gem 'devise'
 gem 'omniauth-twitter'

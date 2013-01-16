@@ -1,8 +1,11 @@
 require 'spec_helper'
 
 describe Type do
-  it "includes articles published less than one week ago" do
-    type = Type.create!(:published_at => Date.today - 1.week + 1.second)
-    expect(Type.recent).to eq([type])
+  before do
+    @type = Type.create(:name => "foobar")
+  end
+
+  it "name is repeat" do
+    Type.create!(:name => "foobar").should_not be_valid
   end
 end

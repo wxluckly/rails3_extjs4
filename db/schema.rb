@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20130111141639) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "drivers", ["name"], :name => "by_name", :unique => true
+  add_index "drivers", ["name"], :name => "index_drivers_on_name", :unique => true
 
   create_table "drivers_gundams", :force => true do |t|
     t.integer  "driver_id"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20130111141639) do
     t.integer  "period_id"
   end
 
-  add_index "gundams", ["model", "period_id"], :name => "by_model_period", :unique => true
+  add_index "gundams", ["model", "period_id"], :name => "index_gundams_on_model_and_period_id", :unique => true
 
   create_table "periods", :force => true do |t|
     t.string   "name"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20130111141639) do
     t.integer  "dimension_id"
   end
 
-  add_index "periods", ["year"], :name => "by_year_series", :unique => true
+  add_index "periods", ["year"], :name => "index_periods_on_year_and_series", :unique => true
 
   create_table "types", :force => true do |t|
     t.string   "name"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(:version => 20130111141639) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "types", ["name"], :name => "by_name", :unique => true
+  add_index "types", ["name"], :name => "index_types_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

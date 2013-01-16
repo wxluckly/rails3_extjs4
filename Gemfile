@@ -33,12 +33,6 @@ gem 'resque-scheduler'
 gem 'devise'
 gem 'omniauth-twitter'
 
-# 产品环境
-group :production do
-  gem 'unicorn'
-  gem 'bluepill'
-end
-
 # 开发环境
 group :development do
   gem 'rails3-generators'
@@ -46,15 +40,11 @@ group :development do
   gem 'capistrano'
   gem 'pry'
   gem 'pry-nav'
-  #gem 'bullet' # 检查N+1查询
 end
 
 # 开发测试环境共用
 group :development, :test do
   gem 'sqlite3'
-  gem 'rspec'
   gem 'rspec-rails'
-  gem 'factory_girl_rails', require: false  # 修复对model的preload
-  gem 'capybara'
-  gem 'database_cleaner'
+  gem 'factory_girl_rails'#, require: false  # 修复对model的preload
 end

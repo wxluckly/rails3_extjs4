@@ -55,6 +55,8 @@ Rails3Extjs4::Application.routes.draw do
       end
     end
 
+    match "/processes" => ProcessesApp
+
   end
 
 end

@@ -305,6 +305,7 @@ DEPENDENCIES
   sqlite3
   state_machine
   tire
+  typhoeus
   uglifier
   weibo
   weibo2

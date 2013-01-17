@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130117062210) do
+ActiveRecord::Schema.define(:version => 20130117153738) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
-    t.string   "summary"
+    t.text     "summary"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20130117062210) do
 
   create_table "drivers", :force => true do |t|
     t.string   "name"
-    t.string   "summary"
+    t.text     "summary"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -53,15 +53,32 @@ ActiveRecord::Schema.define(:version => 20130117062210) do
     t.string   "name_chs"
     t.string   "model"
     t.string   "usage_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.integer  "period_id"
+    t.string   "name_jp"
+    t.integer  "story_id"
+    t.integer  "manufactory_id"
+    t.string   "specifications"
+    t.string   "internal_environment"
+    t.string   "measurement"
+    t.string   "weight"
+    t.string   "armor"
+    t.string   "output"
+    t.string   "propulsion"
+    t.string   "acceleration"
+    t.string   "special_equipped"
+    t.string   "default_weapon"
+    t.string   "selected_weapon"
+    t.string   "hand_weapon"
+    t.string   "ranged_weapon"
+    t.text     "summary"
   end
 
   create_table "periods", :force => true do |t|
     t.string   "name"
     t.string   "year"
-    t.string   "summary"
+    t.text     "summary"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "dimension_id"

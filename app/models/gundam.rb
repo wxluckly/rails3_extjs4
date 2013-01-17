@@ -3,8 +3,8 @@ class Gundam < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-	has_and_belongs_to_many :drivers
-  has_and_belongs_to_many :forces
+  has_and_belongs_to_many :drivers, join_table: "driver_gundams"
+  has_and_belongs_to_many :forces, join_table: "force_gundams"
   belongs_to :period
   belongs_to :usage
   

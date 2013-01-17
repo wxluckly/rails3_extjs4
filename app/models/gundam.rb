@@ -1,10 +1,11 @@
 class Gundam < ActiveRecord::Base
-  include MongoSync
   include Tire::Model::Search
   include Tire::Model::Callbacks
+  
+  include MongoSync
 
-  has_and_belongs_to_many :drivers, join_table: "driver_gundams"
-  has_and_belongs_to_many :forces, join_table: "force_gundams"
+  has_many :driver_gundams
+  has_many :force_gundams
   belongs_to :period
   belongs_to :usage
   

@@ -1,9 +1,9 @@
-class PeriodMongo
+class ForceMongo
   include Mongoid::Document
   include Mongoid::Timestamps
 
   field :_id, type: Integer
 
-  has_many :gundams
+  has_and_belongs_to_many :gundams
 
 end

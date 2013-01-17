@@ -4,6 +4,8 @@ class GundamMongo
 
   field :_id, type: Integer
 
+  has_and_belongs_to_many :drivers
+  has_and_belongs_to_many :forces
   belongs_to :period
   belongs_to :usage
 

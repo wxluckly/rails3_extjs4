@@ -11,11 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116084627) do
+ActiveRecord::Schema.define(:version => 20130117062210) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
     t.string   "summary"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "driver_gundams", :force => true do |t|
+    t.integer  "driver_id"
+    t.integer  "gundam_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -27,11 +34,16 @@ ActiveRecord::Schema.define(:version => 20130116084627) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "drivers", ["name"], :name => "index_drivers_on_name", :unique => true
-
-  create_table "drivers_gundams", :force => true do |t|
-    t.integer  "driver_id"
+  create_table "force_gundams", :force => true do |t|
+    t.integer  "force_id"
     t.integer  "gundam_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "forces", :force => true do |t|
+    t.string   "name"
+    t.string   "summary"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -41,7 +53,6 @@ ActiveRecord::Schema.define(:version => 20130116084627) do
     t.string   "name_chs"
     t.string   "model"
     t.string   "usage_id"
-    t.string   "force"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "period_id"
@@ -61,8 +72,6 @@ ActiveRecord::Schema.define(:version => 20130116084627) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "usages", ["name"], :name => "index_types_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

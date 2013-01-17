@@ -4,6 +4,7 @@ class Gundam < ActiveRecord::Base
   include Tire::Model::Callbacks
 
 	has_and_belongs_to_many :drivers
+  has_and_belongs_to_many :forces
   belongs_to :period
   belongs_to :usage
   

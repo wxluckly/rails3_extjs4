@@ -1,8 +1,8 @@
-class ForceMongo
+class ManufactoryMongo
   include Mongoid::Document
   include Mongoid::Timestamps
 
   field :_id, type: Integer
 
-  has_and_belongs_to_many :gundams
+  has_many :gundams
 end

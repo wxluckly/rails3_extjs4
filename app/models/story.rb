@@ -1,3 +1,9 @@
 class Story < ActiveRecord::Base
-  # attr_accessible :title, :body
+  include MongoSync
+
+  has_many :gundams
+
+  attr_accessible :name, :summary, :gundam_id
+
+  validates :name, :presence => true, :uniqueness => true
 end

@@ -1,7 +1,9 @@
 class Usage < ActiveRecord::Base
   include MongoSync
 
-  has_many :gundam
+  has_many :gundams
 
-  validates :name, :uniqueness => true
+  attr_accessible :name, :summary, :gundam_id
+
+  validates :name, :presence => true, :uniqueness => true
 end

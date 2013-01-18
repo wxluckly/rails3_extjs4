@@ -1,17 +1,18 @@
 class Gundam < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
-  
   include MongoSync
 
   has_many :driver_gundams
   has_many :force_gundams
   belongs_to :period
   belongs_to :usage
+  belongs_to :manufactory
+  belongs_to :story
   
 	attr_accessible :name, :name_chs, :model, :period_id, :period, :usage_id, :usage
   
-  validates :model, :uniqueness => { :scope => :period_id, :message => "should have only one model per period" }, :on => :create
+  validates :model, :presence => true, :uniqueness => {:scope => :period_id, :message => "should have only one model per period", :on => :create}
 
 
   def self.search_by_keywords(params = {})

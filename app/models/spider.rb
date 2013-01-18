@@ -48,7 +48,7 @@ class Spider
           var["PageNo"]=page_no
           url = "#{list_BASE_URL}?#{var.to_param}"
           response = Typhoeus::Request.get("#{url}")
-          html = Nokogiri::HTML(response.body)
+          html = Nokogiri::HTML(response.body,nil,'GBK')
           list_trs = html.css('tr')
           if pre_list_trs.present? and pre_list_trs.to_html == list_trs.to_html
             break

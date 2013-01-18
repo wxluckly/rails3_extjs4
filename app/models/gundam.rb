@@ -35,5 +35,14 @@ class Gundam < ActiveRecord::Base
     indexes :model
     indexes :updated_at,   type: 'date', include_in_all: false
   end
+  # attr_accessor :story_name, :usage_name, :manufactory_name, :force_name, :period_name
+  # def init_names
+  #   %w{story usage manufactory force period}.each do |source|
+  #     if send("#{source}_name").present?
+  #       instance_variable_set("#{source}_class_id") = source.classify.constantize.where(name: send("#{source}_name")).first_or_create
+  #       send("#{source}_id=(#{instance_variable_get("#{source}_class_id")})")
+  #     end
+  #   end
+  # end
 
 end

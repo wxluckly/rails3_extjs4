@@ -117,6 +117,7 @@ GEM
     net-ssh (2.6.3)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
+    nokogiri (1.5.6)
     oauth (0.4.7)
     oauth2 (0.5.2)
       faraday (~> 0.7)
@@ -286,6 +287,7 @@ DEPENDENCIES
   mongoid
   mongoid_location
   mysql2
+  nokogiri
   omniauth
   omniauth-twitter
   omniauth-weibo-oauth2

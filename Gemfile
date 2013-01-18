@@ -48,6 +48,7 @@ gem 'state_machine'
 gem 'will_paginate'
 gem 'will_paginate_mongoid'
 gem 'typhoeus'
+gem 'nokogiri'
 
 # 开发环境
 group :development do

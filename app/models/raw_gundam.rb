@@ -1,3 +1,3 @@
 class RawGundam < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :name, :name_chs, :model, :period, :usage
 end

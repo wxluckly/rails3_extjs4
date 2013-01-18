@@ -5,6 +5,11 @@ class Spider
     DESCS = ["机体番号：","机体代号(日文)：","中文：","英文：","出现作品：","机体类型：","制造商：","所属：","初次配备：","技术参数：","内部环境：","尺寸：","重量：","装甲材料及结构：","发电机出力：","推进力：","加速度：","装备及设计特征：","固定武装：","选用武装：","选用手部武器：","远程武器："]
     BASE_URL = 'http://ae.cnmsl.net'
 
+    def self.get_charset(body)
+      /charset=(\w*)[\"\s\']/.match(body)
+      $1
+    end
+
     def self.desc_attr
       hash = {
         "机体番号：" => "model",
@@ -47,8 +52,9 @@ class Spider
         1.upto(100) do|page_no|
           var["PageNo"]=page_no
           url = "#{list_BASE_URL}?#{var.to_param}"
-          response = Typhoeus::Request.get("#{url}")
-          html = Nokogiri::HTML(response.body,nil,'GBK')
+          response = Typhoeus::Request.get(url)
+          charset = get_charset(response.body)
+          html = Nokogiri::HTML(response.body,nil,charset)
           list_trs = html.css('tr')
           if pre_list_trs.present? and pre_list_trs.to_html == list_trs.to_html
             break
@@ -66,7 +72,7 @@ class Spider
     end
 
     def self.test(url = 'http://ae.cnmsl.net//MachineData/20071113145629.htm')
-      RawGundam.create(info(url))
+      RawGundam.new(info(url))
     end
 
     def self.get_infos
@@ -75,7 +81,8 @@ class Spider
 
     def self.info(url)
       response = Typhoeus::Request.get("#{url}")
-      info_trs = Nokogiri::HTML(response.body).css('table')[4].css('tr')
+      charset = get_charset(response.body)
+      info_trs = Nokogiri::HTML(response.body,nil,charset).css('table')[4].css('tr')
       var = {}
       var['summary'] = info_trs[1].css('td').text
       info_trs.each do |info_tr|

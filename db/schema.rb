@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130117153738) do
+ActiveRecord::Schema.define(:version => 20130118030555) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
@@ -75,6 +75,14 @@ ActiveRecord::Schema.define(:version => 20130117153738) do
     t.text     "summary"
   end
 
+  create_table "manufactories", :force => true do |t|
+    t.integer  "gundam_id"
+    t.string   "name"
+    t.text     "summary"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "periods", :force => true do |t|
     t.string   "name"
     t.string   "year"
@@ -82,6 +90,42 @@ ActiveRecord::Schema.define(:version => 20130117153738) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "dimension_id"
+  end
+
+  create_table "raw_gundams", :force => true do |t|
+    t.string   "period"
+    t.string   "name"
+    t.string   "name_chs"
+    t.string   "name_jp"
+    t.string   "model"
+    t.string   "usage"
+    t.string   "force"
+    t.string   "story"
+    t.string   "manufactory"
+    t.string   "specifications"
+    t.string   "internal_environment"
+    t.string   "measurement"
+    t.string   "weight"
+    t.string   "armor"
+    t.string   "output"
+    t.string   "propulsion"
+    t.string   "acceleration"
+    t.string   "special_equipped"
+    t.string   "default_weapon"
+    t.string   "selected_weapon"
+    t.string   "hand_weapon"
+    t.string   "ranged_weapon"
+    t.text     "summary"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "stories", :force => true do |t|
+    t.integer  "gundam_id"
+    t.string   "name"
+    t.text     "summary"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "usages", :force => true do |t|

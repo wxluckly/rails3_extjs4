@@ -1,9 +1,15 @@
-class AddGundamColumns < ActiveRecord::Migration
+class CreateRawGundams < ActiveRecord::Migration
   def change
-    change_table :gundams do |t|
+    create_table :raw_gundams do |t|
+      t.string :period
+      t.string :name    
+      t.string :name_chs
       t.string :name_jp
-      t.integer :story_id
-      t.integer :manufactory_id
+      t.string :model
+      t.string :usage
+      t.string :force
+      t.string :story
+      t.string :manufactory
       t.string :specifications
       t.string :internal_environment
       t.string :measurement
@@ -18,6 +24,7 @@ class AddGundamColumns < ActiveRecord::Migration
       t.string :hand_weapon
       t.string :ranged_weapon
       t.text :summary
+      t.timestamps
     end
   end
 end

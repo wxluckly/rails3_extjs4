@@ -1,6 +1,7 @@
 class CreateRawGundams < ActiveRecord::Migration
   def change
     create_table :raw_gundams do |t|
+      t.string :url
       t.string :period
       t.string :name    
       t.string :name_chs

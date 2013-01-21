@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Spider
   class CNMSL
     @@url_list = []
@@ -42,7 +43,7 @@ class Spider
       SIDES.each do |side|
         pre_list_trs = ''
         var = {}
-        var["Operator"] = side.encode!('GBK')
+        var["Operator"] = side.encode!('GB2312')
         p var
         1.upto(100) do|page_no|
           var["PageNo"]=page_no

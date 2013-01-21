@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20130118030555) do
   end
 
   create_table "raw_gundams", :force => true do |t|
+    t.string   "url"
     t.string   "period"
     t.string   "name"
     t.string   "name_chs"

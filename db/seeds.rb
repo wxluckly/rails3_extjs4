@@ -8,6 +8,52 @@ dimensions = Dimension.create([
   ])
 p "Dimension done"
 
+sides = Side.create([
+  { name: 'DSSD'},
+  { name: 'MO-V资源卫星防卫队'},
+  { name: 'OZ'},
+  { name: 'P3武装组织'},
+  { name: 'Preventer'},
+  { name: 'SIDE'},
+  { name: 'ZAFT'},
+  { name: '阿克泰昂'},
+  { name: '阿纳海姆'},
+  { name: '艾斯丹东王国'},
+  { name: '奥布'},
+  { name: '奥古'},
+  { name: '白色芬古'},
+  { name: '大天使号/永恒号'},
+  { name: '抵抗组织'},
+  { name: '地球联合军'},
+  { name: '地球议会军'},
+  { name: '地球住民'},
+  { name: '回收屋'},
+  { name: '火星独立吉恩军'},
+  { name: '吉恩'},
+  { name: '旧地球联邦'},
+  { name: '巨蛇之尾'},
+  { name: '卡拉巴'},
+  { name: '联邦'},
+  { name: '猎鹰'},
+  { name: '马法迪'},
+  { name: '玛莉美亚军'},
+  { name: '民间'},
+  { name: '木星帝国'},
+  { name: '神圣军事同盟'},
+  { name: '死亡先锋'},
+  { name: '泰坦斯'},
+  { name: '统一联合军'},
+  { name: '新迪塞斯'},
+  { name: '新地球联邦'},
+  { name: '新吉恩'},
+  { name: '宇宙革命军'},
+  { name: '月面住民'},
+  { name: '赞斯卡尔帝国'},
+  { name: '殖民卫星'},
+{ name: '殖民卫星联合'}
+])
+
+
 periods = Period.create([
     {:year=> '79',:name=> '',:dimension=>  dimensions.first},
     {:year=> '80',:name=> '',:dimension=>  dimensions.first},

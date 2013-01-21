@@ -1,0 +1,21 @@
+<%= will_paginate @gundams %>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>时期</th>
+      <th>型号</th>
+      <th>英文名</th>
+      <th>中文名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @gundams.each do |gundam| %>
+      <tr>
+        <td><%= "#{gundam.period.year} #{gundam.period.name}" %></td>
+        <td><%= gundam.model %></td>
+        <td><%= gundam.name %></td>
+        <td><%= gundam.name_chs %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

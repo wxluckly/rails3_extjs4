@@ -8,7 +8,7 @@ dimensions = Dimension.create([
   ])
 p "Dimension done"
 
-sides = Side.create([
+forces = Force.create([
   { name: 'DSSD'},
   { name: 'MO-V资源卫星防卫队'},
   { name: 'OZ'},
@@ -55,15 +55,15 @@ sides = Side.create([
 
 
 periods = Period.create([
-    {:year=> '79',:name=> '',:dimension=>  dimensions.first},
-    {:year=> '80',:name=> '',:dimension=>  dimensions.first},
-    {:year=> '83',:name=> '',:dimension=>  dimensions.first},
-    {:year=> '87',:name=> 'z',:dimension=>  dimensions.first},
-    {:year=> '88',:name=> 'zz',:dimension=>  dimensions.first},
-    {:year=> '92',:name=> '',:dimension=>  dimensions.first},
-    {:year=> '93',:name=> '',:dimension=>  dimensions.first},
-    {:year=> '99',:name=> '',:dimension=>  dimensions.first},
-    {:year=> '123',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '0079',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '0080',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '0083',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '0087',:name=> 'z',:dimension=>  dimensions.first},
+    {:year=> '0088',:name=> 'zz',:dimension=>  dimensions.first},
+    {:year=> '0092',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '0093',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '0099',:name=> '',:dimension=>  dimensions.first},
+    {:year=> '0123',:name=> '',:dimension=>  dimensions.first},
     {:year=> '',:name=> 'SEED',:dimension=>  dimensions[1]},
     {:year=> '',:name=> 'SEED Destiny',:dimension=>  dimensions[1]},
     {:year=> '',:name=> 'G',:dimension=>  dimensions[2]},
@@ -94,7 +94,7 @@ usages = Usage.create([
   ])
 p "Usage done"
 
-if usages.first.id && periods.first.id
+if usages.first.present? && periods.first.present?
   Gundam.create([
       { model: 'F71', name: 'G-GANNON', name_chs: 'G加农', period: periods.first ,usage: usages.first},
       { model: 'MS-05B', name: 'ZAKU I', name_chs: '扎古I后期型', period: periods.first ,usage: usages.first},

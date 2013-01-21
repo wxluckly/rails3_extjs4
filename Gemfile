@@ -54,6 +54,9 @@ gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 
+# 禁用assets log
+gem 'quiet_assets'
+
 # 开发环境
 group :development do
   gem 'rails3-generators'

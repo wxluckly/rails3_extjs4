@@ -4,6 +4,8 @@ Rails3Extjs4::Application.routes.draw do
   
   root :to => "index#index"
 
+  resources :gundams
+
   namespace "admin" do
     
     root :to => "index#index"

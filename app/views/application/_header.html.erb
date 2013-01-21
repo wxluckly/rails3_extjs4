@@ -9,12 +9,13 @@
       <a class="brand" href="/">Gundams</a>
       <div class="nav-collapse">
         <ul class="nav">
-          <li><%= link_to "Browse Products" %></li>
-          <li><%= link_to "Price List" %></li>
-          <li><%= link_to "Contact Us" %></li>
-          <li><%= link_to "Cart" %></li>
+          <li <% if params[:controller] == "gundams" and params[:action] == "index" %>class="active"<% end %>><%= link_to "资料浏览", gundams_path %></li>
+          <li><%= link_to "图片瀑布" %></li>
         </ul>
       </div>
+      <form class="navbar-search pull-right" action="/">
+        <input type="text" class="search-query" placeholder="Search" name="query">
+      </form>
     </div>
   </div>
 </div>

@@ -50,6 +50,10 @@ gem 'will_paginate_mongoid'
 gem 'typhoeus'
 gem 'nokogiri'
 
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
+
 # 开发环境
 group :development do
   gem 'rails3-generators'

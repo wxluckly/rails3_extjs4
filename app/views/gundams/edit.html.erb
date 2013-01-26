@@ -1,0 +1,15 @@
+<h1>Editing gundam_avatar</h1>
+
+<%= form_for(@gundam) do |f| %>
+
+  <%= image_tag @gundam.avatar_url(:big) %>
+
+  <%= f.file_field :avatar %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', @gundam %> |
+<%= link_to 'Back', gundams_path %>

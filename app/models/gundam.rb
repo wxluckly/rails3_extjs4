@@ -10,10 +10,11 @@ class Gundam < ActiveRecord::Base
   belongs_to :manufactory
   belongs_to :story
   
-	attr_accessible :name, :name_chs, :model, :period_id, :period, :usage_id, :usage
-  
-  validates :model, :presence => true, :uniqueness => {:scope => :period_id, :message => "should have only one model per period", :on => :create}
+	attr_accessible :name, :name_chs, :model, :period_id, :period, :usage_id, :usage, :avatar
 
+  mount_uploader :avatar, GundamAvatarUploader
+
+  validates :model, :presence => true, :uniqueness => {:scope => :period_id, :message => "should have only one model per period", :on => :create}
 
   def self.search_by_keywords(params = {})
     tire.search(page: params[:page], per_page: params[:per_page]) do |search|

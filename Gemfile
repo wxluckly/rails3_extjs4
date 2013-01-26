@@ -32,6 +32,11 @@ gem 'jquery-rails', '2.0.2'
 gem 'resque'
 gem 'resque-scheduler'
 
+# 文件和图片处理
+gem 'mini_magick'
+gem 'carrierwave'
+gem 'carrierwave-aliyun'
+
 # 用户登录
 gem 'devise'
 gem 'omniauth-twitter'
@@ -49,6 +54,7 @@ gem 'will_paginate'
 gem 'will_paginate_mongoid'
 gem 'typhoeus'
 gem 'nokogiri'
+gem 'rest-client'
 
 gem "therubyracer"
 gem "less-rails"

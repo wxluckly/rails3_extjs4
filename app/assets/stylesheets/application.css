@@ -9,5 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require app_photo.css
+ *= require lib/jquery.masonry
  *= require bootstrap_and_overrides
 */

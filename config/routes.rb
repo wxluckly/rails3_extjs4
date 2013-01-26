@@ -1,13 +1,12 @@
 Rails3Extjs4::Application.routes.draw do
-
-  devise_for :users
-  
   root :to => "index#index"
 
+  devise_for :users
+
   resources :gundams
+  resources :gundam_photos
 
   namespace "admin" do
-    
     root :to => "index#index"
 
     resources :drivers do 
@@ -58,7 +57,6 @@ Rails3Extjs4::Application.routes.draw do
     end
 
     match "/processes" => ProcessesApp
-
   end
 
 end

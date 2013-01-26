@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118030555) do
+ActiveRecord::Schema.define(:version => 20130123160722) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(:version => 20130118030555) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "gundam_photos", :force => true do |t|
+    t.integer  "gundam_id"
+    t.string   "image"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "gundams", :force => true do |t|
     t.string   "name"
     t.string   "name_chs"
@@ -73,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20130118030555) do
     t.string   "hand_weapon"
     t.string   "ranged_weapon"
     t.text     "summary"
+    t.string   "avatar"
   end
 
   create_table "manufactories", :force => true do |t|

@@ -46,7 +46,8 @@ Rails3Extjs4::Application.configure do
   config.assets.debug = true
 
   # See everything in the log (default is :info)
-  config.log_level = :debug
+  # rewrite by lib/mongoid.rb -- by @joey
+  # config.log_level = :debug
 
   # fix generate function error : error  mongoid [not found] by @joey
   config.generators do |g|

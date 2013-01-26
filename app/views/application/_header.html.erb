@@ -9,8 +9,8 @@
       <a class="brand" href="/">Gundams</a>
       <div class="nav-collapse">
         <ul class="nav">
-          <li <% if params[:controller] == "gundams" and params[:action] == "index" %>class="active"<% end %>><%= link_to "资料浏览", gundams_path %></li>
-          <li><%= link_to "图片瀑布" %></li>
+          <li <% if params[:controller] == "gundams" %>class="active"<% end %>><%= link_to "资料浏览", gundams_path %></li>
+          <li <% if params[:controller] == "gundam_photos" %>class="active"<% end %>><%= link_to "图片瀑布", gundam_photos_path %></li>
         </ul>
       </div>
       <form class="navbar-search pull-right" action="/">

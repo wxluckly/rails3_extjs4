@@ -1,5 +1,5 @@
 <%= will_paginate @gundams %>
-<table class="table table-bordered">
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th>时期</th>
@@ -12,10 +12,11 @@
     <% @gundams.each do |gundam| %>
       <tr>
         <td><%= "#{gundam.period.year} #{gundam.period.name}" %></td>
-        <td><%= gundam.model %></td>
-        <td><%= gundam.name %></td>
-        <td><%= gundam.name_chs %></td>
+        <td><%= link_to gundam.model, gundam %></td>
+        <td><%= link_to gundam.name, gundam %></td>
+        <td><%= link_to gundam.name_chs, gundam %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @gundams %>

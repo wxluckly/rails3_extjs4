@@ -17,7 +17,7 @@ class GundamAvatarUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/gundam/#{mounted_as}/#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -37,11 +37,11 @@ class GundamAvatarUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :big do
-    process :resize_and_pad => [300, 400]
+    process :resize_and_pad => [400, 400]
   end
 
   version :thumb do
-    process :resize_and_pad => [150, 200]
+    process :resize_and_pad => [150, 150]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

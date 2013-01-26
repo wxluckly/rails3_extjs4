@@ -11,5 +11,6 @@
  *= require app_photo.css
  *= require lib/jquery.masonry
  *= require lib/lightbox
+ *= require lib/cloud-zoom
  *= require bootstrap_and_overrides
 */

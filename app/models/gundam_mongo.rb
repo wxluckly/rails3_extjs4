@@ -8,5 +8,8 @@ class GundamMongo
   has_and_belongs_to_many :forces
   belongs_to :period
   belongs_to :usage
+  belongs_to :manufactory
+  belongs_to :story
 
+  mount_uploader :avatar, GundamAvatarUploader
 end

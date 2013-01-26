@@ -5,6 +5,7 @@ class Gundam < ActiveRecord::Base
 
   has_many :driver_gundams
   has_many :force_gundams
+  has_many :forces, :through => :force_gundams
   belongs_to :period
   belongs_to :usage
   belongs_to :manufactory
@@ -45,5 +46,11 @@ class Gundam < ActiveRecord::Base
   #     end
   #   end
   # end
+
+
+  # 解决mongo数据无法被同步更新的问题
+  after_save do 
+    mongo.update_attribute(:avatar, self.attributes["avatar"])
+  end
 
 end

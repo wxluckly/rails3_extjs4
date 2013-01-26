@@ -36,6 +36,7 @@ gem 'resque-scheduler'
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'carrierwave-aliyun'
+gem "carrierwave-mongoid", :git => "git://github.com/jnicklas/carrierwave-mongoid.git", :branch => "mongoid-3.0"
 
 # 用户登录
 gem 'devise'

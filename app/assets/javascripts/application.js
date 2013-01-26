@@ -14,4 +14,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require lib/jquery.masonry.min
+//= require lib/lightbox
 //= require twitter/bootstrap

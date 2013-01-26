@@ -1,8 +1,7 @@
-<h1>Listing gundam_photos</h1>
 <div id="container">
 <% @gundam_photos.each do |gundam_photo| %>
   <div class="item">
-    <a href="<%= gundam_photo_path(gundam_photo) %>"><%= image_tag gundam_photo.image_url(:list), class: "img-polaroid" %></a>
+    <a href="<%= gundam_photo.image_url(:big) %>" rel="lightbox"><%= image_tag gundam_photo.image_url(:list), class: "img-polaroid" %></a>
   </div>
 <% end %>
 </div>

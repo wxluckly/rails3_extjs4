@@ -1,6 +1,6 @@
-<%= form_for(@gundam_photo) do |f| %>
+<%= form_for [@gundam, @gundam_photo], :html => { :multipart => true } do |gundam| %>
   <% if @gundam_photo.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-error">
       <h2><%= pluralize(@gundam_photo.errors.count, "error") %> prohibited this gundam_photo from being saved:</h2>
       <ul>
       <% @gundam_photo.errors.full_messages.each do |msg| %>
@@ -9,12 +9,10 @@
       </ul>
     </div>
   <% end %>
-
-  <%= image_tag @gundam_photo.image_url(:list) %>
-
-  <%= f.file_field :image %>
-
+  <%= fields_for @gundam_photo do |f| %>
+    <%= f.file_field :image %>
+  <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <%= gundam.submit %>
   </div>
 <% end %>

@@ -1,3 +1,6 @@
+<% content_for :header do%>
+  <%= javascript_include_tag  "gundams" %>
+<%end%>
 <div class="row">
   <div class="span9">
     <table class="table table-bordered table-hover">
@@ -36,56 +39,64 @@
       </tr>
       <tr>
         <td>重量</td>
-        <td>&nbsp;</td>
+        <td><%= @gundam.weight %></td>
       </tr>
       <tr>
         <td>尺寸</td>
-        <td>&nbsp;</td>
+        <td><%= @gundam.measurement %></td>
       </tr>
       <tr>
         <td>出现作品</td>
-        <td>&nbsp;</td>
+        <td><%= @gundam.story.try(:name) %></td>
       </tr>
        <tr>
-        <td colspan="4">&nbsp;</td>
+        <td colspan="4"><%= @gundam.summary %></td>
       </tr>
       <tr>
         <td>内部环境</td>
-        <td></td>
+        <td><%= @gundam.internal_environment %></td>
         <td>装甲材料及结构</td>
-        <td>&nbsp;</td>
+        <td><%= @gundam.armor %></td>
       </tr>
       <tr>
         <td>发电机出力</td>
-        <td></td>
+        <td><%= @gundam.output %></td>
         <td>推进力</td>
-        <td>&nbsp;</td>
+        <td><%= @gundam.propulsion %></td>
       </tr>
       <tr>
         <td>加速度</td>
-        <td></td>
+        <td><%= @gundam.acceleration %></td>
         <td>装备及设计特征</td>
-        <td>&nbsp;</td>
+        <td><%= @gundam.special_equipped %></td>
       </tr>
       <tr>
         <td>固定武装</td>
-        <td></td>
+        <td><%= @gundam.default_weapon %></td>
         <td>选用武装</td>
-        <td>&nbsp;</td>
+        <td><%= @gundam.selected_weapon %></td>
       </tr>
       <tr>
         <td>选用手部武器</td>
-        <td></td>
+        <td><%= @gundam.hand_weapon %></td>
         <td>远程武器</td>
-        <td>&nbsp;</td>
+        <td><%= @gundam.ranged_weapon %></td>
       </tr>
     </table>
-    <%= link_to 'Back', gundams_path %>
+    <%= link_to 'Upload photos', new_gundam_gundam_photo_path(@gundam), class:"btn btn-primary" %>
+    <%= link_to 'Back', gundams_path, class:"btn" %>
+    <div id="container">
+      <% @gundam_photos.each do |gundam_photo| %>
+        <div class="item">
+          <a href="<%= gundam_photo.image_url(:big) %>" rel="lightbox" title="my caption"><%= image_tag gundam_photo.image_url(:list), class: "img-polaroid" %></a>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="span3">
     <div class="span3" data-spy="affix" data-offset-top="0">
       <h2>About Us</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>We are Gundam fun ~~ and coder</p>
     </div>
   </div>
 </div>

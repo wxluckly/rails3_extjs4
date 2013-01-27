@@ -2,9 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'mysql2'
 gem 'redis'
 gem 'mongo'
@@ -56,13 +53,11 @@ gem 'will_paginate_mongoid'
 gem 'typhoeus'
 gem 'nokogiri'
 gem 'rest-client'
-
 gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
-
-# 禁用assets log
-gem 'quiet_assets'
+gem 'will_paginate-bootstrap'
+gem 'quiet_assets'  # 禁用assets log
 
 # 开发环境
 group :development do

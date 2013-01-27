@@ -6,6 +6,7 @@ class Gundam < ActiveRecord::Base
   has_many :driver_gundams
   has_many :force_gundams
   has_many :forces, :through => :force_gundams
+  has_many :gundam_photos
   belongs_to :period
   belongs_to :usage
   belongs_to :manufactory

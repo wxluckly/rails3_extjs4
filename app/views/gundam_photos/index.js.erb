@@ -1,0 +1,5 @@
+var $contents = $('<%= j render(partial: "gundam_photo",:collection => @gundam_photos) %>');
+$contents.imagesLoaded(function(){
+  $('#container').append($contents).masonry( 'appended', $contents);
+});
+$('.pagination').html("<%= j will_paginate @gundam_photos, :renderer => BootstrapPagination::Rails %>");

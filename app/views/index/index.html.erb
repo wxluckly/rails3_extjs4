@@ -1,6 +1,22 @@
 <% content_for :header do%>
   <title>rails3_extjs4</title>
 <% end %>
+<div id="myCarousel" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="item active">
+      <center><img src="/images/index_1.jpg" alt=""></center>
+      <div class="container">
+      </div>
+    </div>
+    <div class="item">
+      <center><img src="/images/index_2.jpg" alt=""></center>
+      <div class="container">
+      </div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+</div>
 
 <% if user_signed_in? %>
   welcome to my web!

@@ -9,6 +9,7 @@
       <a class="brand" href="/">Gundams</a>
       <div class="nav-collapse">
         <ul class="nav">
+          <li <% if params[:controller] == "index" and ["index", "show"].include?(params[:action]) %>class="active"<% end %>><%= link_to "首页", root_path %></li>
           <li <% if params[:controller] == "gundams" and ["index", "show"].include?(params[:action]) %>class="active"<% end %>><%= link_to "资料浏览", gundams_path %></li>
           <li <% if params[:controller] == "gundam_photos" and ["index"].include?(params[:action]) %>class="active"<% end %>><%= link_to "图片瀑布", gundam_photos_path %></li>
         </ul>

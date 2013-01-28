@@ -2,9 +2,6 @@
   <%= javascript_include_tag  "gundam_photos" %>
 <%end%>
 <div id="container">
-  <% @gundam_photos.each do |gundam_photo| %>
-    <div class="item">
-      <a href="<%= gundam_photo.image_url(:big) %>" rel="lightbox" title="<%= gundam_title gundam_photo.gundam %>"><%= image_tag gundam_photo.image_url(:list), class: "img-polaroid" %></a>
-    </div>
-  <% end %>
+  <%= render(partial: 'gundam_photo',:collection => @gundam_photos) %>
 </div>
+<%= will_paginate @gundam_photos, :renderer => BootstrapPagination::Rails %>

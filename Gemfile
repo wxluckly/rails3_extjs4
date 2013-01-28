@@ -1,29 +1,39 @@
 source 'https://rubygems.org'
 
+# basic
 gem 'rails'
-
 gem 'mysql2'
 gem 'redis'
-gem 'mongo'
-gem 'mongoid'
-gem 'mongoid_location'
+
+# dependence && functions are dependent on
+gem 'will_paginate'
+gem 'rails_config'
+gem 'acts_as_list'
+gem 'state_machine'
+gem 'typhoeus'
+gem 'rest-client'
+gem "therubyracer"
 gem 'bson_ext'
 
-# 资源模板引擎
+# resource
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
-gem 'cells'
+gem "less-rails"
 
-# 缓存系统
+# mongo
+gem 'mongo'
+gem 'mongoid'
+gem 'mongoid_location'
+gem 'will_paginate_mongoid'
+gem "carrierwave-mongoid", :git => "git://github.com/jnicklas/carrierwave-mongoid.git", :branch => "mongoid-3.0"
+
+# cache system
 gem 'redis-activesupport'
 gem 'redis-objects'
 
-# 搜索引擎
+# search
 gem 'tire'
-
-# js组件
-gem 'jquery-rails', '2.0.2'
 
 # 异步和定时任务
 gem 'resque'
@@ -33,7 +43,6 @@ gem 'resque-scheduler'
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'carrierwave-aliyun'
-gem "carrierwave-mongoid", :git => "git://github.com/jnicklas/carrierwave-mongoid.git", :branch => "mongoid-3.0"
 
 # 用户登录
 gem 'devise'
@@ -44,20 +53,15 @@ gem 'weibo'
 gem 'weibo2'
 gem 'weibo2_plugins'
 
-# 辅助组件
-gem 'rails_config'
-gem 'acts_as_list'
-gem 'state_machine'
-gem 'will_paginate'
-gem 'will_paginate_mongoid'
-gem 'typhoeus'
-gem 'nokogiri'
-gem 'rest-client'
-gem "therubyracer"
-gem "less-rails"
+# 界面组件
+gem 'jquery-rails', '2.0.2'
 gem "twitter-bootstrap-rails"
 gem 'will_paginate-bootstrap'
+
+# 辅助控件
 gem 'quiet_assets'  # 禁用assets log
+gem 'nokogiri'
+gem 'sitemap_generator'
 
 # 开发环境
 group :development do

@@ -41,7 +41,7 @@ class GundamAvatarUploader < CarrierWave::Uploader::Base
   end
 
   version :thumb do
-    process :resize_and_pad => [150, 150]
+    process :resize_and_pad => [60, 60]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

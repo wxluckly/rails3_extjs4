@@ -20,12 +20,33 @@
 
 <% if user_signed_in? %>
   welcome to my web!
-  <%= link_to 'Edit profile', edit_user_registration_path %> |
-  <%= link_to 'Logout', destroy_user_session_path, method: :delete %> |
-  <%= link_to "Admin", admin_root_path %>
+  <%= link_to 'Edit profile', edit_user_registration_path, class:"btn btn-primary" %> |
+  <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-primary" %> |
+  <%= link_to "Admin", admin_root_path, class:"btn btn-primary" %>
 <% else %>
-  <%= link_to 'Sign up', new_user_registration_path %> |
-  <%= link_to 'Login', new_user_session_path %>
+  <%= link_to 'Sign up', new_user_registration_path, class:"btn btn-primary" %> |
+  <%= link_to 'Login', new_user_session_path, class:"btn btn-primary" %>
 <% end %>
-
-<%= debug(@result) %>
+<hr>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>大头贴</th>
+      <th>时期</th>
+      <th>型号</th>
+      <th>英文名</th>
+      <th>中文名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @gundams.each do |gundam| %>
+      <tr>
+        <td><%= link_to image_tag(gundam.avatar.try(:thumb).try(:url)), gundam %></td>
+        <td><%= "#{gundam.period.year} #{gundam.period.name}" %></td>
+        <td><%= link_to gundam.model, gundam %></td>
+        <td><%= link_to gundam.name, gundam %></td>
+        <td><%= link_to gundam.name_chs, gundam %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

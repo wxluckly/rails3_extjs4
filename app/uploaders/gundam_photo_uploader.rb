@@ -37,15 +37,11 @@ class GundamPhotoUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :big do
-    process :resize_to_limit => [800, 800]
+    process :resize_to_limit => [1000, 1000]
   end
 
   version :list do
     process :resize_to_limit => [200, nil]
-  end
-
-  version :cube do
-    process :resize_and_pad => [120, 120, background = :transparent, gravity = 'Center']
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

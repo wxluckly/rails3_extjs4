@@ -4,7 +4,7 @@ class IndexController < ApplicationController
     params[:page] ||= 0
     params[:per_page] ||= 20
     params[:query] ||= "gundam"
-    @result = Gundam.search_by_keywords params rescue nil
+    @gundams = GundamMongo.includes(:period).find(Gundam.search_by_keywords(params).collect(&:id))
   end
 
 end

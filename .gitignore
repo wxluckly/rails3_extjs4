@@ -21,5 +21,7 @@ config/settings/*.local.yml
 config/environments/*.local.yml
 public/uploads
 
+# another file
 .tags
 .tags_sorted_by_file
+nohup.out

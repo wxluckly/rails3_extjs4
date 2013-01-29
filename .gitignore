@@ -10,7 +10,7 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 config/database.yml
-config/mongoid.rb
+config/mongoid.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
@@ -20,7 +20,6 @@ config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
 public/uploads
-config/database.yml
 
 .tags
 .tags_sorted_by_file

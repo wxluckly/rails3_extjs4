@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130123160722) do
+ActiveRecord::Schema.define(:version => 20130128150224) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
@@ -51,8 +51,9 @@ ActiveRecord::Schema.define(:version => 20130123160722) do
   create_table "gundam_photos", :force => true do |t|
     t.integer  "gundam_id"
     t.string   "image"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "is_verfied", :default => false
   end
 
   create_table "gundams", :force => true do |t|

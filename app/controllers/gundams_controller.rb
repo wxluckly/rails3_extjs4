@@ -30,7 +30,7 @@ class GundamsController < ApplicationController
   # GET /gundams/1.json
   def show
     @gundam = GundamMongo.find(params[:id])
-    @gundam_photos = GundamPhoto.where(gundam_id: params[:id]).order("id desc")
+    @gundam_photos = GundamPhoto.verfied.where(gundam_id: params[:id]).order("id desc")
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @gundam }

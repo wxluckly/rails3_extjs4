@@ -9,6 +9,8 @@ class GundamPhoto < ActiveRecord::Base
 
   mount_uploader :image, GundamPhotoUploader
 
+  scope :verfied, where(:is_verfied => true)
+
   # 解决mongo数据无法被同步更新的问题
   after_save do 
     mongo.update_attribute(:image, self.attributes["image"])

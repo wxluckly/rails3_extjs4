@@ -8,4 +8,6 @@ class GundamPhotoMongo
   belongs_to  :gundam
 
   mount_uploader :image, GundamPhotoUploader
+
+  scope :verfied, where(:is_verfied => true)
 end

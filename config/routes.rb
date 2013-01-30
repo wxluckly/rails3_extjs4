@@ -27,6 +27,13 @@ Rails3Extjs4::Application.routes.draw do
       end
     end
 
+    resources :gundam_photos do 
+      collection do
+        get 'index_data'
+        get 'edit_data'
+      end
+    end
+
     resources :periods do 
       collection do
         get 'index_data'

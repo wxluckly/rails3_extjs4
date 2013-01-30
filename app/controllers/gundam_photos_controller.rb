@@ -2,7 +2,7 @@ class GundamPhotosController < ApplicationController
   # GET /gundam_photos
   # GET /gundam_photos.json
   def index
-    @gundam_photos = GundamPhotoMongo.includes(:gundam).desc(:id).paginate(:page => params[:page] || 1, :limit => 10)
+    @gundam_photos = GundamPhotoMongo.verfied.includes(:gundam).desc(:id).paginate(:page => params[:page] || 1, :limit => 10)
     respond_to do |format|
       format.html # index.html.erb
       format.js

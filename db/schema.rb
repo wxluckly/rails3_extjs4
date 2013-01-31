@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128150224) do
+ActiveRecord::Schema.define(:version => 20130131132407) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(:version => 20130128150224) do
   create_table "gundam_photos", :force => true do |t|
     t.integer  "gundam_id"
     t.string   "image"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.boolean  "is_verified", :default => false
   end
 
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(:version => 20130128150224) do
     t.string   "name"
     t.string   "name_chs"
     t.string   "model"
-    t.string   "usage_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.integer  "period_id"
@@ -82,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20130128150224) do
     t.string   "ranged_weapon"
     t.text     "summary"
     t.string   "avatar"
+    t.integer  "usage_id"
+    t.integer  "raw_gundam_id"
   end
 
   create_table "manufactories", :force => true do |t|

@@ -63,6 +63,9 @@ gem 'quiet_assets'  # 禁用assets log
 gem 'nokogiri'
 gem 'sitemap_generator'
 
+#wiki
+gem 'htmldiff'
+
 # 开发环境
 group :development do
   gem 'rails3-generators'

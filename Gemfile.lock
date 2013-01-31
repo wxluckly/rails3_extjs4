@@ -88,6 +88,7 @@ GEM
     hashr (0.0.22)
     highline (1.6.15)
     hike (1.2.1)
+    htmldiff (0.0.1)
     httparty (0.10.0)
       multi_json (~> 1.0)
       multi_xml
@@ -322,6 +323,7 @@ DEPENDENCIES
   coffee-rails
   devise
   factory_girl_rails
+  htmldiff
   jquery-rails (= 2.0.2)
   less-rails
   mini_magick

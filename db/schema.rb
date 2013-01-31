@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128150224) do
+ActiveRecord::Schema.define(:version => 20130130172428) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20130128150224) do
     t.text     "summary"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "name_chs"
+    t.string   "name_js"
   end
 
   create_table "force_gundams", :force => true do |t|
@@ -51,9 +53,39 @@ ActiveRecord::Schema.define(:version => 20130128150224) do
   create_table "gundam_photos", :force => true do |t|
     t.integer  "gundam_id"
     t.string   "image"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "is_verfied", :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "is_verified", :default => false
+  end
+
+  create_table "gundam_verions", :force => true do |t|
+    t.integer  "gundam_id"
+    t.integer  "user_id"
+    t.string   "model"
+    t.string   "name"
+    t.string   "name_chs"
+    t.string   "name_jp"
+    t.integer  "usage_id"
+    t.integer  "period_id"
+    t.integer  "story_id"
+    t.integer  "manufactory_id"
+    t.string   "specifications"
+    t.string   "internal_environment"
+    t.string   "measurement"
+    t.string   "weight"
+    t.string   "armor"
+    t.string   "output"
+    t.string   "propulsion"
+    t.string   "acceleration"
+    t.string   "special_equipped"
+    t.string   "default_weapon"
+    t.string   "selected_weapon"
+    t.string   "hand_weapon"
+    t.string   "ranged_weapon"
+    t.text     "summary"
+    t.string   "avatar"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "gundams", :force => true do |t|
@@ -100,6 +132,23 @@ ActiveRecord::Schema.define(:version => 20130128150224) do
     t.datetime "updated_at",   :null => false
     t.integer  "dimension_id"
   end
+
+  create_table "raw_data", :force => true do |t|
+    t.string   "data"
+    t.string   "data_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "raw_data_gundams", :force => true do |t|
+    t.integer  "raw_data_id"
+    t.integer  "raw_gundam_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "raw_data_gundams", ["raw_data_id"], :name => "index_raw_data_gundams_on_raw_data_id"
+  add_index "raw_data_gundams", ["raw_gundam_id"], :name => "index_raw_data_gundams_on_raw_gundam_id"
 
   create_table "raw_gundams", :force => true do |t|
     t.string   "url"
@@ -159,5 +208,24 @@ ActiveRecord::Schema.define(:version => 20130128150224) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "versions", :force => true do |t|
+    t.integer  "versioned_id"
+    t.string   "versioned_type"
+    t.integer  "user_id"
+    t.text     "modifications"
+    t.integer  "number"
+    t.integer  "reverted_from"
+    t.string   "tag"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.string   "user_name",      :limit => 20
+  end
+
+  add_index "versions", ["created_at"], :name => "index_versions_on_created_at"
+  add_index "versions", ["number"], :name => "index_versions_on_number"
+  add_index "versions", ["tag"], :name => "index_versions_on_tag"
+  add_index "versions", ["user_id"], :name => "index_versions_on_user_id"
+  add_index "versions", ["versioned_id", "versioned_type"], :name => "index_versions_on_versioned_id_and_versioned_type"
 
 end

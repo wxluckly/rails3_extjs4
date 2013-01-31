@@ -65,6 +65,7 @@ gem 'sitemap_generator'
 
 # 开发环境
 group :development do
+  gem 'thin'
   gem 'rails3-generators'
   gem 'spork', '>= 0.9.0'
   gem 'capistrano'

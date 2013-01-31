@@ -53,8 +53,7 @@ class GundamPhotosController < ApplicationController
   # POST /gundam_photos/1/crop
   def crop
     @gundam_photo = GundamPhoto.find(params[:id])
-    attrs = params.slice(:crop_x, :crop_y, :crop_w, :crop_h, :remote_avatar_url)
-    @gundam_photo.gundam.update_attributes(attrs)
+    @gundam_photo.gundam.update_attributes(params.slice(:crop_x, :crop_y, :crop_w, :crop_h).merge({remote_avatar_url: "http://#{request.host_with_port}#{@gundam_photo.image}"}))
     redirect_to @gundam_photo.gundam
   end
 

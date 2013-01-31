@@ -21,7 +21,7 @@ $(function() {
   }else if(action == "avatar"){
 
     // Create variables (in this scope) to hold the API and image size
-    var jcrop_api, boundx, boundy;
+    var jcrop_api, boundx, boundy, scale;
 
     $('#cropbox').Jcrop({        
       boxWidth: 650, 
@@ -30,7 +30,17 @@ $(function() {
       onSelect: updatePreview,
       setSelect : [0, 0, 80, 100],
       aspectRatio : 80/100
-    });
+    },function(){
+        // Use the API to get the real image size
+        var bounds = this.getBounds();
+        boundx = bounds[0];
+        boundy = bounds[1];
+        var img = new Image();
+        img.src = $('#cropbox').attr("src");
+        scale = img.height / $('#cropbox').height();
+        // Store the API in the jcrop_api variable
+        jcrop_api = this;
+      });
 
     function updatePreview(coords)
     {
@@ -41,10 +51,10 @@ $(function() {
         var lw = $('#cropbox').width();
         var lh = $('#cropbox').height();
 
-        $("#crop_x").val(Math.round(coords.x));
-        $("#crop_y").val(Math.round(coords.y));
-        $("#crop_w").val(Math.round(coords.w));
-        $("#crop_h").val(Math.round(coords.h)); 
+        $("#crop_x").val(Math.round(coords.x * scale));
+        $("#crop_y").val(Math.round(coords.y * scale));
+        $("#crop_w").val(Math.round(coords.w * scale));
+        $("#crop_h").val(Math.round(coords.h * scale)); 
 
         $('#preview').css({
           width: Math.round(rx * lw) + 'px',

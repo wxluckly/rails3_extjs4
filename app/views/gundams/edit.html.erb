@@ -1,6 +1,16 @@
 <h1>Editing gundam_avatar</h1>
 
 <%= form_for(@gundam) do |f| %>
+  <% if @gundam.errors.any? %>
+    <div id="error_explanation" class="alert alert-error">
+      <h2><%= pluralize(@gundam.errors.count, "error") %> prohibited this gundam_photo from being saved:</h2>
+      <ul>
+      <% @gundam.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <%= image_tag @gundam.avatar_url(:big) %>
 

@@ -71,7 +71,7 @@ class Gundam < ActiveRecord::Base
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end 
   
-  def reprocess_avatar   
+  def reprocess_avatar
     self.avatar.recreate_versions!
   end  
 

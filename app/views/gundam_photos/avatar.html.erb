@@ -14,7 +14,6 @@
       <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
         <%= hidden_field_tag attribute, "", :id => attribute %>
       <% end %>
-      <%= hidden_field_tag "remote_avatar_url", "http://localhost:4002#{@gundam_photo.image_url}" %>
       <%= image_tag @gundam_photo.image_url, :id => "cropbox" %>
       <%= submit_tag "裁剪", class: "sub" if @gundam_photo.present? %>
     <% end %>

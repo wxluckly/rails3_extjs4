@@ -1,0 +1,22 @@
+<% content_for :header do%>
+  <%= javascript_include_tag  "gundam_photos" %>
+<%end%>
+
+<div class="row">
+  <h1>Editing gundam_avatar</h1>
+  <div class="span5">
+    <div style="width:400px;height:500px;overflow:hidden;">
+      <img src="<%= @gundam_photo.image_url %>" id="preview" alt="Preview" class="jcrop-preview" />
+    </div>
+  </div>
+  <div class="span7">
+    <%= form_tag("/gundam_photos/#{@gundam_photo.id}/crop") do |form| %>
+      <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+        <%= hidden_field_tag attribute, "", :id => attribute %>
+      <% end %>
+      <%= hidden_field_tag "remote_avatar_url", "http://localhost:4002#{@gundam_photo.image_url}" %>
+      <%= image_tag @gundam_photo.image_url, :id => "cropbox" %>
+      <%= submit_tag "裁剪", class: "sub" if @gundam_photo.present? %>
+    <% end %>
+  </div>
+</div>

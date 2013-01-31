@@ -7,7 +7,10 @@ Rails3Extjs4::Application.routes.draw do
     resources :gundam_photos, :only => [:new, :create, :show]
   end
 
-  resources :gundam_photos, :only => [:index]
+  resources :gundam_photos, :only => [:index, :avatar] do 
+    get 'avatar', :on => :member
+    post 'crop', :on => :member
+  end
 
   namespace "admin" do
     root :to => "index#index"
@@ -31,6 +34,7 @@ Rails3Extjs4::Application.routes.draw do
       collection do
         get 'index_data'
         get 'edit_data'
+        post 'set_verified'
       end
     end
 

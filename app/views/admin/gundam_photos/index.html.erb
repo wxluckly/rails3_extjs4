@@ -7,7 +7,11 @@
         extend: 'Ext.data.Model',
         fields: [
           {name: 'id'},
-          {name: 'image', mapping: 'image.url'},
+          {name: 'gundam_name', mapping:'gundam.name'},
+          {name: 'gundam_model', mapping:'gundam.model'},
+          {name: 'gundam_model', mapping:'gundam.model'},
+          {name: 'gundam_avatar_thumb_url', mapping:'gundam.avatar.thumb.url', convert:linkRender},
+          {name: 'image_url', mapping:'image.url', convert:linkRender},
           {name: 'created_at'}
         ],
         idProperty: 'threadid'
@@ -41,33 +45,17 @@
         store: common.gundamslistDS,
         header : false,
         columns: [
-          {text: '',dataIndex: 'id', width:40, hidden:true},
-          {text: 'image',dataIndex: 'image', width:140},
-          {text: '创建时间',dataIndex: 'created_at', width:110, renderer: Ext.util.Format.dateRenderer('Y-m-d H:i')}
+          {text: '', dataIndex: 'id', hidden:true},
+          {text: '头像', dataIndex: 'gundam_avatar_thumb_url', width:100},
+          {text: '型号', dataIndex: 'gundam_model', width:100},
+          {text: '名称', dataIndex: 'gundam_name', width:100},
+          {text: '新图片', dataIndex: 'image_url', width:100},
+          {text: '创建时间', dataIndex: 'created_at', width:110, renderer: Ext.util.Format.dateRenderer('Y-m-d H:i')}
         ],
         columnLines: true,
         selModel: Ext.create('Ext.selection.CheckboxModel', {}),
         tbar:['-',
           {
-            text:'增加',
-            width:50,
-            iconCls: 'addItem',
-            handler:function(){
-              openWindow('win','增加',"admin/gundams/new",614,280,common.gundamslistDS)
-            }
-          },'-',{
-            text:'编辑',
-            width:50,
-            iconCls: 'editItem',
-            handler:function(){
-              var records = grid.getSelectionModel().getSelection();
-              if(records.length==0){
-                Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
-              }else{
-                openWindow('win','编辑',"admin/gundams/"+records[0].get('id')+"/edit",614,280,common.gundamslistDS)
-              }
-            }
-          },'-',{
             text:'删除',
             width:50,
             iconCls: 'deleteItem',
@@ -79,14 +67,13 @@
                 Ext.MessageBox.confirm('警告','确定要删除该记录吗？',function (button){
                   if(button=='yes'){
                     Ext.Ajax.request({
-                      url : 'admin/gundams/'+records[0].get('id'),
+                      url : 'admin/gundam_photos/'+records[0].get('id'),
                       method : 'DELETE',
                       waitMsg: '正在提交...',
                       params: {
                         authenticity_token: '<%= form_authenticity_token.to_s %>'
                       },
                       success : function (response,opts) {
-                        Ext.MessageBox.alert('消息', '操作成功！');
                         common.gundamslistDS.reload();
                       },
                       failure : function (result, request){
@@ -98,7 +85,7 @@
               }
             }
           },'-',{
-            text:'发送邮件',
+            text:'审核通过',
             iconCls: 'emailGo',
             handler:function(){
               var records = grid.getSelectionModel().getSelection();
@@ -106,15 +93,15 @@
                 Ext.MessageBox.alert('提示信息', '请先选中一条记录。');
               }else{
                 Ext.Ajax.request({
-                  url : 'admin/gundams/send_info',
-                  method : 'GET',
+                  url : 'admin/gundam_photos/set_verified',
+                  method : 'POST',
                   waitMsg: '正在提交...',
                   params: {
                     authenticity_token: '<%= form_authenticity_token.to_s %>',
-                    gundam_id: records[0].get('id')
+                    id: records[0].get('id')
                   },
                   success : function (response,opts) {
-                    Ext.MessageBox.alert('消息', '发送成功！');
+                    common.gundamslistDS.reload();
                   },
                   failure : function (result, request){
                     Ext.MessageBox.alert('消息', data.info);

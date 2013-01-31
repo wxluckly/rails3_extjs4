@@ -12,5 +12,6 @@
  *= require lib/jquery.masonry
  *= require lib/lightbox
  *= require lib/cloud-zoom
+ *= require lib/jquery.Jcrop.min
  *= require bootstrap_and_overrides
 */

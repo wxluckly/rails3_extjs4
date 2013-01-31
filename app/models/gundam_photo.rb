@@ -9,7 +9,8 @@ class GundamPhoto < ActiveRecord::Base
 
   mount_uploader :image, GundamPhotoUploader
 
-  scope :verfied, where(:is_verfied => true)
+  scope :verified, where(:is_verified => true)
+  scope :unverified, where(:is_verified => false)
 
   # 解决mongo数据无法被同步更新的问题
   after_save do 

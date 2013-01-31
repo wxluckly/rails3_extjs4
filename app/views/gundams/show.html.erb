@@ -90,6 +90,7 @@
         <div class="item">
           <a href="<%= gundam_photo.image_url(:big) %>" rel="lightbox" title="my caption"><%= image_tag gundam_photo.image_url(:list), class: "img-polaroid" %></a>
         </div>
+        <a href="/gundam_photos/<%= gundam_photo.id %>/avatar" target="_blank">设为头像</a>
       <% end %>
     </div>
   </div>

@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20130128150224) do
     t.string   "image"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-    t.boolean  "is_verfied", :default => false
+    t.boolean  "is_verified", :default => false
   end
 
   create_table "gundams", :force => true do |t|

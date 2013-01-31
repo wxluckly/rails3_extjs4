@@ -6,8 +6,14 @@ Rails3Extjs4::Application.routes.draw do
   resources :gundams do
     resources :gundam_photos, :only => [:new, :create, :show]
   end
-
+  
   resources :gundam_photos, :only => [:index]
+
+  resources :versions do
+    member do
+      put "merge"
+    end
+  end
 
   namespace "admin" do
     root :to => "index#index"

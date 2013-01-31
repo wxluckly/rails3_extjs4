@@ -9,5 +9,5 @@ class GundamPhotoMongo
 
   mount_uploader :image, GundamPhotoUploader
 
-  scope :verfied, where(:is_verfied => true)
+  scope :verfied, where(:is_verified => true)
 end

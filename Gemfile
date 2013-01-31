@@ -66,6 +66,11 @@ gem 'sitemap_generator'
 #wiki
 gem 'htmldiff'
 
+#form
+gem 'simple_form'
+gem "client_side_validations", '3.2.1'
+gem 'client_side_validations-simple_form', '2.0.1'
+
 # 开发环境
 group :development do
   gem 'rails3-generators'

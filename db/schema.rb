@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20130130172428) do
     t.boolean  "is_verified", :default => false
   end
 
-  create_table "gundam_verions", :force => true do |t|
+  create_table "gundam_versions", :force => true do |t|
     t.integer  "gundam_id"
     t.integer  "user_id"
     t.string   "model"

@@ -1,4 +1,5 @@
 class GundamVersion < ActiveRecord::Base
+
   attr_accessible :gundam_id, :user_id, :model, :name, :name_chs, :name_jp, :usage_id, :period_id, :story_id, :manufactory_id,
     :specifications, :internal_environment, :measurement, :weight, :armor, :output, :propulsion, :acceleration, :special_equipped,
     :default_weapon, :selected_weapon, :hand_weapon, :ranged_weapon, :summary
@@ -10,10 +11,14 @@ class GundamVersion < ActiveRecord::Base
   belongs_to  :story
   belongs_to  :manufactory
 
-  validates :gunadm_id, :presence
+  validates_associated :gundam
   validate :not_all_nil
 
   before_save :clear_unchanged_column
+
+  def version
+    "#{id}-#{created_at.to_i}"
+  end
 
   def not_all_nil
     (attribute_names - ["id", "gundam_id", "user_id", "created_at", "updated_at"]).each do |attr_name|

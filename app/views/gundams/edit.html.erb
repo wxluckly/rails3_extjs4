@@ -1,17 +1,85 @@
-<h1>Editing gundam_avatar</h1>
-
-<%= form_for(@gundam) do |f| %>
-
-  <%= image_tag @gundam.avatar_url(:big) %>
-
-  <%= f.text_field :name %>
-
-  <%= f.file_field :avatar %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-<%= link_to 'Show', @gundam %> |
-<%= link_to 'Back', gundams_path %>
+<div class="row">
+  <%= form_for @gundam do |f| %>
+    <table class="table table-bordered table-hover">
+      <tr>
+        <td colspan="2" rowspan="11" width="250px"><div><%= image_tag(@gundam.avatar_url(:big)) %></div></td>
+        <td>年代</td>
+        <td><%= f.select :period_id, Period.all.collect{|e|[[e.year,e.name].join(' '),e.id]} %></td>
+      </tr>
+      <tr>
+        <td>型号</td>
+        <td><%= f.text_field :model %></td>
+      </tr>
+      <tr>
+        <td>英文</td>
+        <td><%= f.text_field :name %></td>
+      </tr>
+      <tr>
+        <td>日文名</td>
+        <td><%= f.text_field :name_jp %></td>
+      </tr>
+      <tr>
+        <td>中文名</td>
+        <td><%= f.text_field :name_chs %></td>
+      </tr>
+      <tr>
+        <td>机体类型</td>
+        <td><%= f.select :usage_id, Usage.all.collect{|e|[e.name,e.id]} %></td>
+      </tr>
+      <tr>
+        <td>制造商</td>
+        <td><%= f.select :manufactory_id, Manufactory.all.collect{|e|[e.name,e.id]} %></td>
+      </tr>
+      <tr>
+        <td>所属</td>
+        <td><%= @gundam.forces.first.try(:name) %></td>
+      </tr>
+      <tr>
+        <td>重量</td>
+        <td><%= f.text_field :weight %></td>
+      </tr>
+      <tr>
+        <td>尺寸</td>
+        <td><%= f.text_field :measurement %></td>
+      </tr>
+      <tr>
+        <td>出现作品</td>
+        <td><%= f.select :story_id, Story.all.collect{|e|[e.name,e.id]} %></td>
+      </tr>
+       <tr>
+        <td colspan="4"><%= @gundam.summary %></td>
+      </tr>
+      <tr>
+        <td>内部环境</td>
+        <td><%= f.text_field :internal_environment %></td>
+        <td>装甲材料及结构</td>
+        <td><%= f.text_field :armor %></td>
+      </tr>
+      <tr>
+        <td>发电机出力</td>
+        <td><%= f.text_field :output %></td>
+        <td>推进力</td>
+        <td><%= f.text_field :propulsion %></td>
+      </tr>
+      <tr>
+        <td>加速度</td>
+        <td><%= f.text_field :acceleration %></td>
+        <td>装备及设计特征</td>
+        <td><%= f.text_field :special_equipped %></td>
+      </tr>
+      <tr>
+        <td>固定武装</td>
+        <td><%= f.text_field :default_weapon %></td>
+        <td>选用武装</td>
+        <td><%= f.text_field :selected_weapon %></td>
+      </tr>
+      <tr>
+        <td>选用手部武器</td>
+        <td><%= f.text_field :hand_weapon %></td>
+        <td>远程武器</td>
+        <td><%= f.text_field :ranged_weapon %></td>
+      </tr>
+    </table>
+    <%= f.submit '提交', class:"btn btn-primary" %>
+  <% end %>
+</div>

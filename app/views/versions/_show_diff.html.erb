@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="span9">
+    <table class="table table-bordered table-hover">
+      <tr>
+        <td>年代</td>
+        <td><%= "#{raw showdiff(@gundam,@version,"period","year")} #{raw showdiff(@gundam,@version,"period","name")}" %></td>
+      </tr>
+      <tr>
+        <td>型号</td>
+        <td><%= raw showdiff(@gundam,@version,"model") %></td>
+      </tr>
+      <tr>
+        <td>英文</td>
+        <td><%= raw showdiff(@gundam,@version,"name") %></td>
+      </tr>
+      <tr>
+        <td>日文名</td>
+        <td><%= raw showdiff(@gundam,@version,"name_jp") %></td>
+      </tr>
+      <tr>
+        <td>中文名</td>
+        <td><%= raw showdiff(@gundam,@version,"name_chs") %></td>
+      </tr>
+      <tr>
+        <td>机体类型</td>
+        <td><%= raw showdiff(@gundam,@version,"usage","name") %></td>
+      </tr>
+      <tr>
+        <td>制造商</td>
+        <td><%= raw showdiff(@gundam,@version,"manufactory","name") %></td>
+      </tr>
+      <tr>
+        <td>所属</td>
+        <td><%= @gundam.forces.first.try(:name) %></td>
+      </tr>
+      <tr>
+        <td>重量</td>
+        <td><%= raw showdiff(@gundam,@version,"weight") %></td>
+      </tr>
+      <tr>
+        <td>尺寸</td>
+        <td><%= raw showdiff(@gundam,@version,"measurement") %></td>
+      </tr>
+      <tr>
+        <td>出现作品</td>
+        <td><%= raw showdiff(@gundam,@version,"story","name") %></td>
+      </tr>
+       <tr>
+        <td colspan="4"><%= raw showdiff(@gundam,@version,"summary") %></td>
+      </tr>
+      <tr>
+        <td>内部环境</td>
+        <td><%= raw showdiff(@gundam,@version,"internal_environment") %></td>
+        <td>装甲材料及结构</td>
+        <td><%= raw showdiff(@gundam,@version,"armor") %></td>
+      </tr>
+      <tr>
+        <td>发电机出力</td>
+        <td><%= raw showdiff(@gundam,@version,"output") %></td>
+        <td>推进力</td>
+        <td><%= raw showdiff(@gundam,@version,"propulsion") %></td>
+      </tr>
+      <tr>
+        <td>加速度</td>
+        <td><%= raw showdiff(@gundam,@version,"acceleration") %></td>
+        <td>装备及设计特征</td>
+        <td><%= raw showdiff(@gundam,@version,"special_equipped") %></td>
+      </tr>
+      <tr>
+        <td>固定武装</td>
+        <td><%= raw showdiff(@gundam,@version,"default_weapon") %></td>
+        <td>选用武装</td>
+        <td><%= raw showdiff(@gundam,@version,"selected_weapon") %></td>
+      </tr>
+      <tr>
+        <td>选用手部武器</td>
+        <td><%= raw showdiff(@gundam,@version,"hand_weapon") %></td>
+        <td>远程武器</td>
+        <td><%= raw showdiff(@gundam,@version,"ranged_weapon") %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="span3">
+    <div class="span3" data-spy="affix" data-offset-top="0">
+      <h2>About Us</h2>
+      <p>We are Gundam fun ~~ and coder</p>
+    </div>
+  </div>
+</div>

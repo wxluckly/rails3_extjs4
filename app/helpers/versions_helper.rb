@@ -7,6 +7,6 @@ module VersionsHelper
       gundam_attr = gundam_attr.try(attr_name)
       version_attr = version_attr.try(attr_name)
     end
-    version_attr.nil? ? gundam_attr : diff(gundam_attr,version_attr)
+    version_attr.nil? ? gundam_attr : diff(gundam_attr||'',version_attr)
   end
 end

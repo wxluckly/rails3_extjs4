@@ -3,7 +3,12 @@ class VersionsController < ApplicationController
   end
 
   def show
-    @gundam = Gundam.find(params[:id])
+    if request.xhr?
+      @version = GundamVersion.find(params[:id])
+    else
+      @gundam = Gundam.find(params[:id])
+      @version = @gundam.versions.first
+    end
   end
 
   def new

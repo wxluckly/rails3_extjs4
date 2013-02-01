@@ -85,6 +85,7 @@
     </table>
     <%= link_to 'Upload photos', new_gundam_gundam_photo_path(@gundam), class:"btn btn-primary" %>
     <%= link_to 'Back', gundams_path, class:"btn" %>
+    <%= link_to 'Edit', edit_gundam_path(@gundam), class:"btn" %>
     <div id="container">
       <% @gundam_photos.each do |gundam_photo| %>
         <div class="item">
@@ -102,3 +103,22 @@
     </div>
   </div>
 </div>
+<!--
+Button to trigger modal
+<a href="#edit_form" role="button" class="btn" data-toggle="modal">纠错</a>
+ 
+Modal
+<div id="edit_form" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">编辑</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+</div>
+-->

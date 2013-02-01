@@ -14,6 +14,12 @@ Rails3Extjs4::Application.routes.draw do
 
   get '/search(/:query)' => "search#index"
 
+  resources :versions do
+    member do
+      put "merge"
+    end
+  end
+
   namespace "admin" do
     root :to => "index#index"
 

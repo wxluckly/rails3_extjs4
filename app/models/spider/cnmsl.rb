@@ -36,40 +36,42 @@ class Spider::CNMSL < Spider::Spider
     }
   end
 
-  def self.desc2attr(name)
-    desc_attr[name]
-  end
+    def self.get_url
+      @url_list = []
+      list_base_url = 'http://ae.cnmsl.net/MobileSuit_Data.aspx'
+      SIDES.each do |side|
+        size = 0
+        pre_list_trs = ''
+        var = {}
+        var["Operator"] = side.encode!('GB2312')
+        1.upto(100) do|page_no|
+          var["PageNo"]=page_no
+          url = "#{list_base_url}?#{var.to_param}"
+          response = Typhoeus::Request.get(url)
+          p "response.body.size : #{response.body.size}"
+          charset = response.get_charset
+          p "response.get_charset : #{response.get_charset}"
 
-  def self.get_url
-    @url_list = []
-    list_BASE_URL = 'http://ae.cnmsl.net/MobileSuit_Data.aspx'
-    SIDES.each do |side|
-      pre_list_trs = ''
-      var = {}
-      var["Operator"] = side.encode!('GB2312')
-      p var
-      1.upto(100) do|page_no|
-        var["PageNo"]=page_no
-        url = "#{list_BASE_URL}?#{var.to_param}"
-        response = Typhoeus::Request.get(url)
-        charset = get_charset(response.body)
-        html = Nokogiri::HTML(response.body,nil,charset)
-        list_trs = html.css('tr')
-        binding.pry
-        if pre_list_trs.present? and pre_list_trs.to_html == list_trs.to_html
-          break
-        else
-          pre_list_trs = list_trs
-          list_trs.each do |tr_element|
-            /href=\"(.*?)\"/.match tr_element.css('td').at(0).to_html
-            if $1.present?
-              p $1
-              p info("#{BASE_URL}#{$1}")
-              RawGundam.create(info("#{BASE_URL}#{$1}")) 
+
+          html = Nokogiri::HTML(response.body,nil,'GBK')
+          p "html.to_html.size : #{html.to_html.size}"
+          list_trs = html.css('tr')
+          if pre_list_trs.present? and pre_list_trs.to_html == list_trs.to_html
+            break
+          else
+            pre_list_trs = list_trs
+            list_trs[11..list_trs.size-3].each do |tr_element|
+              /href=\"(.*?)\"/.match tr_element.css('td').at(0).to_html
+              @@url_list << "#{BASE_URL}#{$1}"
+              size += 1
             end
           end
         end
+        p "#{size.to_s.ljust(3)}  #{side.encode!('UTF-8')}"
+        p '-'*30
       end
+      p "==========  Fin  #{@@url_list.size}  =========="
+      return @@url_list
     end
     @@url_list
     return @@url_list
@@ -79,9 +81,9 @@ class Spider::CNMSL < Spider::Spider
     RawGundam.new(info(url))
   end
 
-  def self.get_infos
-    get_url
-  end
+    def self.get_infos
+      get_url.each{|url| p url, RawGundam.create(info(url))}
+    end
 
   def self.info(url)
     response = Typhoeus::Request.get("#{url}")

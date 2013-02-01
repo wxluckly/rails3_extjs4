@@ -14,6 +14,7 @@ class Gundam < ActiveRecord::Base
   has_many :force_gundams
   has_many :forces, :through => :force_gundams
   has_many :gundam_photos
+  has_many :versions, class_name: "GundamVersion"
   belongs_to :period
   belongs_to :usage
   belongs_to :manufactory

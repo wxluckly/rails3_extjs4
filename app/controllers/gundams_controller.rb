@@ -8,21 +8,19 @@ class GundamsController < ApplicationController
   # GET /gundams/1/edit
   def edit
     @gundam = Gundam.find(params[:id])
+    @gundam_version = GundamVersion.new(gundam_id: @gundam.id)
   end
 
   # PUT /gundams/1
   # PUT /gundams/1.json
   def update
     @gundam = Gundam.find(params[:id])
-
-    respond_to do |format|
-      if @gundam.update_attributes(params[:gundam])
-        format.html { redirect_to @gundam, notice: 'Gundam photo was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @gundam.errors, status: :unprocessable_entity }
-      end
+    @version = @gundam.versions.new(params[:gundam])
+    if @version.save
+      redirect_to @gundam, notice: '您的更改已经保存，请等待管理员审批。'
+    else
+      @gundam.assign_attributes(params[:gundam])
+      render action: :edit
     end
   end
 

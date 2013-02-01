@@ -8,12 +8,14 @@ class Gundam < ActiveRecord::Base
   has_many :forces, :through => :force_gundams
   has_many :gundam_photos
   has_many :versions, class_name: "GundamVersion"
+  has_many :history_versions, class_name: "GundamVersion", conditions: proc{ "id <= #{self.version_id||0}" }
+  has_many :unmerge_versions, class_name: "GundamVersion", conditions: proc{ "id > #{self.version_id||0}" }
   belongs_to :period
   belongs_to :usage
   belongs_to :manufactory
   belongs_to :story
   
-	attr_accessible :name, :name_chs, :model, :period_id, :period, :usage_id, :usage, :avatar
+	attr_accessible :name, :name_chs, :model, :period_id, :period, :usage_id, :usage, :avatar, :version_id
 
   mount_uploader :avatar, GundamAvatarUploader
 

@@ -11,7 +11,7 @@ Rails3Extjs4::Application.routes.draw do
 
   resources :versions do
     member do
-      put "merge"
+      post "merge"
     end
   end
 

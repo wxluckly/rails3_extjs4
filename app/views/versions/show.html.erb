@@ -1,6 +1,6 @@
 <h1><%= @gundam.name %></h1>
 <table class='table table-striped version_list'>
-  <% @gundam.versions.each_with_index do |version,index| %>
+  <% @gundam.unmerge_versions.each_with_index do |version,index| %>
     <tr data-version='<%= version.id %>'>
       <td>#<%= index+1 %></td>
       <td><%= version.created_at %></td>

@@ -39,6 +39,7 @@ class GundamVersion < ActiveRecord::Base
     (attribute_names - ["id", "gundam_id", "user_id", "created_at", "updated_at"]).each do |attr_name|
       gundam.send("#{attr_name}=",send(attr_name)) unless send(attr_name).nil?
     end
+    gundam.version_id = id
     gundam.save
   end
 end

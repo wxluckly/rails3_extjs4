@@ -50,7 +50,6 @@
           p "response.body.size : #{response.body.size}"
           charset = response.get_charset
           html = Nokogiri::HTML(response.body,nil,charset)
-          binding.pry
           p "html.to_html.size : #{html.to_html.size}"
           list_trs = html.css('tr')
           if pre_list_trs.present? and pre_list_trs.to_html == list_trs.to_html

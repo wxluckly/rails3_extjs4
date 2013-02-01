@@ -6,80 +6,80 @@
     <table class="table table-bordered table-hover">
       <tr>
         <td colspan="2" rowspan="11" width="250px"><div><%= link_to(image_tag(@gundam.avatar_url(:big)), @gundam.avatar_url, class: "cloud-zoom", rel: "adjustX:60,adjustY:0,smoothMove:1") %></div></td>
-        <td>年代</td>
+        <td class="attribute">年代</td>
         <td><%= "#{@gundam.period.year} #{@gundam.period.name}" %></td>
       </tr>
       <tr>
-        <td>型号</td>
+        <td class="attribute">型号</td>
         <td><%= @gundam.model %></td>
       </tr>
       <tr>
-        <td>英文</td>
+        <td class="attribute">英文</td>
         <td><%= @gundam.name %></td>
       </tr>
       <tr>
-        <td>日文名</td>
+        <td class="attribute">日文名</td>
         <td><%= @gundam.name_jp %></td>
       </tr>
       <tr>
-        <td>中文名</td>
+        <td class="attribute">中文名</td>
         <td><%= @gundam.name_chs %></td>
       </tr>
       <tr>
-        <td>机体类型</td>
+        <td class="attribute">机体类型</td>
         <td><%= @gundam.usage.try(:name) %></td>
       </tr>
       <tr>
-        <td>制造商</td>
+        <td class="attribute">制造商</td>
         <td><%= @gundam.manufactory.try(:name) %></td>
       </tr>
       <tr>
-        <td>所属</td>
+        <td class="attribute">所属</td>
         <td><%= @gundam.forces.first.try(:name) %></td>
       </tr>
       <tr>
-        <td>重量</td>
+        <td class="attribute">重量</td>
         <td><%= @gundam.weight %></td>
       </tr>
       <tr>
-        <td>尺寸</td>
+        <td class="attribute">尺寸</td>
         <td><%= @gundam.measurement %></td>
       </tr>
       <tr>
-        <td>出现作品</td>
+        <td class="attribute">出现作品</td>
         <td><%= @gundam.story.try(:name) %></td>
       </tr>
        <tr>
         <td colspan="4"><%= @gundam.summary %></td>
       </tr>
       <tr>
-        <td>内部环境</td>
+        <td class="attribute">内部环境</td>
         <td><%= @gundam.internal_environment %></td>
-        <td>装甲材料及结构</td>
+        <td class="attribute">装甲材料及结构</td>
         <td><%= @gundam.armor %></td>
       </tr>
       <tr>
-        <td>发电机出力</td>
+        <td class="attribute">发电机出力</td>
         <td><%= @gundam.output %></td>
-        <td>推进力</td>
+        <td class="attribute">推进力</td>
         <td><%= @gundam.propulsion %></td>
       </tr>
       <tr>
-        <td>加速度</td>
+        <td class="attribute">加速度</td>
         <td><%= @gundam.acceleration %></td>
-        <td>装备及设计特征</td>
+        <td class="attribute">装备及设计特征</td>
         <td><%= @gundam.special_equipped %></td>
       </tr>
       <tr>
-        <td>固定武装</td>
+        <td class="attribute">固定武装</td>
         <td><%= @gundam.default_weapon %></td>
-        <td>选用武装</td>
+        <td class="attribute">选用武装</td>
         <td><%= @gundam.selected_weapon %></td>
       </tr>
       <tr>
-        <td>选用手部武器</td>
+        <td class="attribute">选用手部武器</td>
         <td><%= @gundam.hand_weapon %></td>
-        <td>远程武器</td>
+        <td class="attribute">远程武器</td>
         <td><%= @gundam.ranged_weapon %></td>
       </tr>
     </table>

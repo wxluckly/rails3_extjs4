@@ -65,6 +65,7 @@ gem 'sitemap_generator'
 
 #wiki
 gem 'htmldiff'
+gem 'gollum'
 
 #form
 gem 'simple_form'

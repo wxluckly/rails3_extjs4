@@ -33,6 +33,12 @@ class Gundam < ActiveRecord::Base
   end
 
   # scopes ....................................................................
+  scope :from_period, lambda{ |period_id| where(period_id: period_id) if period_id.present?}
+  scope :from_dimension, lambda{ |period_id, dimension_id|
+    if period_id.blank? and dimension_id.present?
+      where(period_id: Period.where(dimension_id: dimension_id).map(&:id))
+    end
+  }
 
   # additional config .........................................................
   mount_uploader :avatar, GundamAvatarUploader

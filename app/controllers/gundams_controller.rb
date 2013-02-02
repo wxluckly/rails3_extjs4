@@ -2,7 +2,17 @@ class GundamsController < ApplicationController
 
   # GET /gundams
   def index
-    @gundams = GundamMongo.includes(:period).asc(:id).paginate(:page=>params[:page] || 1, :per_page => 20)
+    # use mysql
+    # @gundams = Gundam.from_dimension(params[:period_id], params[:dimension_id]).from_period(params[:period_id]).includes(:period).order("periods.year").paginate(:page=>params[:page] || 1, :per_page => 20)
+    # use mongo
+
+    binding.pry
+    @gundams = GundamMongo.from_dimension(params[:period_id], params[:dimension_id]).from_period(params[:period_id]).includes(:period).paginate(:page=>params[:page] || 1, :per_page => 20)
+    @search = Search.new(params)
+    respond_to do |format|
+      format.html # show.html.erb
+      format.js
+    end
   end
 
   # GET /gundams/1/edit

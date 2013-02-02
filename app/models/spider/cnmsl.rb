@@ -36,44 +36,37 @@ class Spider::CNMSL < Spider::Spider
     }
   end
 
-    def self.get_url
-      @url_list = []
-      list_base_url = 'http://ae.cnmsl.net/MobileSuit_Data.aspx'
-      SIDES.each do |side|
-        size = 0
-        pre_list_trs = ''
-        var = {}
-        var["Operator"] = side.encode!('GB2312')
-        1.upto(100) do|page_no|
-          var["PageNo"]=page_no
-          url = "#{list_base_url}?#{var.to_param}"
-          response = Typhoeus::Request.get(url)
-          p "response.body.size : #{response.body.size}"
-          charset = response.get_charset
-          p "response.get_charset : #{response.get_charset}"
-
-
-          html = Nokogiri::HTML(response.body,nil,'GBK')
-          p "html.to_html.size : #{html.to_html.size}"
-          list_trs = html.css('tr')
-          if pre_list_trs.present? and pre_list_trs.to_html == list_trs.to_html
-            break
-          else
-            pre_list_trs = list_trs
-            list_trs[11..list_trs.size-3].each do |tr_element|
-              /href=\"(.*?)\"/.match tr_element.css('td').at(0).to_html
-              @@url_list << "#{BASE_URL}#{$1}"
-              size += 1
-            end
+  def self.get_url
+    @url_list = []
+    list_base_url = 'http://ae.cnmsl.net/MobileSuit_Data.aspx'
+    SIDES.each do |side|
+      size = 0
+      pre_list_trs = ''
+      var = {}
+      var["Operator"] = side.encode!('GB2312')
+      1.upto(100) do|page_no|
+        var["PageNo"]=page_no
+        url = "#{list_base_url}?#{var.to_param}"
+        response = Typhoeus::Request.get(url)
+        charset = response.get_charset
+        html = Nokogiri::HTML(response.body,nil,'GBK')
+        p "html.to_html.size : #{html.to_html.size}"
+        list_trs = html.css('tr')
+        if pre_list_trs.present? and pre_list_trs.to_html == list_trs.to_html
+          break
+        else
+          pre_list_trs = list_trs
+          list_trs[11..list_trs.size-3].each do |tr_element|
+            /href=\"(.*?)\"/.match tr_element.css('td').at(0).to_html
+            @@url_list << "#{BASE_URL}#{$1}"
+            size += 1
           end
         end
-        p "#{size.to_s.ljust(3)}  #{side.encode!('UTF-8')}"
-        p '-'*30
       end
-      p "==========  Fin  #{@@url_list.size}  =========="
-      return @@url_list
+      p "#{size.to_s.ljust(3)}  #{side.encode!('UTF-8')}"
+      p '-'*30
     end
-    @@url_list
+    p "==========  Fin  #{@@url_list.size}  =========="
     return @@url_list
   end
 
@@ -88,7 +81,7 @@ class Spider::CNMSL < Spider::Spider
   def self.info(url)
     response = Typhoeus::Request.get("#{url}")
     charset = get_charset(response.body)
-    info_trs = Nokogiri::HTML(response.body,nil,charset).css('table')[4].css('tr')
+    info_trs = Nokogiri::HTML(response.body,nil,'GBK').css('table')[4].css('tr')
     var = {}
     var['summary'] = info_trs[1].css('td').text
     info_trs.each do |info_tr|

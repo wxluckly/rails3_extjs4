@@ -7,7 +7,7 @@ class Gundam < ActiveRecord::Base
   
   # security (i.e. attr_accessible) ...........................................
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-  attr_accessible :name, :name_chs, :model, :period_id, :period, :usage_id, :usage, :avatar, :remote_avatar_url, :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessible :name, :name_chs, :name_jp, :model, :period_id, :period, :usage_id, :usage, :avatar, :remote_avatar_url, :crop_x, :crop_y, :crop_w, :crop_h, :specifications, :internal_environment, :measurement, :weight, :armor, :output, :propulsion, :acceleration, :special_equipped, :default_weapon, :selected_weapon, :hand_weapon, :ranged_weapon, :summary
   
   # relationships .............................................................
   has_many :driver_gundams
@@ -15,6 +15,7 @@ class Gundam < ActiveRecord::Base
   has_many :forces, :through => :force_gundams
   has_many :gundam_photos
   has_many :versions, class_name: "GundamVersion"
+  belongs_to :raw_gundam
   belongs_to :period
   belongs_to :usage
   belongs_to :manufactory

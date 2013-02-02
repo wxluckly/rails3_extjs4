@@ -18,10 +18,6 @@ class Admin::PeriodsController < Admin::ApplicationController
     render :json=>{:success=>true}
   end
 
-  # GET /periods/1/edit
-  def edit
-  end
-
   def edit_data
     render :json=>Period.find(params[:id]), :layout=>false
   end
@@ -37,16 +33,12 @@ class Admin::PeriodsController < Admin::ApplicationController
     end
   end
 
-  # GET /periods
-  def index
-  end
-
   def index_data
-    periods = Period.limit(params[:limit]).offset(params[:start]).order(:year)
+    periods = Period.limit(params[:limit]).offset(params[:start]).order("dimension_id").order(:year)
     render :text=>"{'totalProperty':#{Period.count},'root':#{periods.to_json(:include=>[:dimension])}}", :layout=>false
   end
 
   def all_data
-    render :text=>"{'totalProperty':#{Period.count},'root':#{Period.joins(:dimension).select("periods.id,year,dimensions.name").to_json()}}", :layout=>false
+    render :text=>"{'totalProperty':#{Period.count},'root':#{Period.joins(:dimension).order("dimension_id").order("year").select("periods.id,year,dimensions.name").to_json()}}", :layout=>false
   end
 end

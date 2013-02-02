@@ -5,9 +5,9 @@
   <div class="span9">
     <table class="table table-bordered table-hover">
       <tr>
-        <td colspan="2" rowspan="11" width="250px"><div><%= link_to(image_tag(@gundam.avatar_url(:big)), @gundam.avatar_url, class: "cloud-zoom", rel: "adjustX:60,adjustY:0,smoothMove:1") %></div></td>
+        <td colspan="2" rowspan="11"><%= link_to(image_tag(@gundam.avatar_url(:big)), @gundam.avatar_url, class: "cloud-zoom", rel: "adjustX:60,adjustY:0,smoothMove:1") %></td>
         <td>年代</td>
-        <td><%= "#{@gundam.period.year} #{@gundam.period.name}" %></td>
+        <td><%= year_title @gundam.period %></td>
       </tr>
       <tr>
         <td>型号</td>

@@ -19,7 +19,7 @@
         fieldLabel: '年代',
         listConfig: {
           getInnerTpl: function() {
-            return '<div data-qtip="{year}. {name}">{year} ({name})</div>';
+            return '<div data-qtip="{year}. {name}">({name}){year}</div>';
           }
         }
       });
@@ -100,7 +100,6 @@
                   method: 'put',
                   waitMsg: '正在处理...',
                   success: function(result, response){
-                    Ext.MessageBox.alert('提示', '成功！');
                     Ext.getCmp('win').close();
                   },
                   failure: function(result, response){

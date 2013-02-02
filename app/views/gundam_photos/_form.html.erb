@@ -11,6 +11,8 @@
   <% end %>
   <%= fields_for @gundam_photo do |f| %>
     <%= f.file_field :image %>
+    or your want use img link:
+    <%= f.text_field :remote_image_url %>
   <% end %>
   <div class="actions">
     <%= gundam.submit %>

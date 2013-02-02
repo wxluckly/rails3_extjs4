@@ -28,7 +28,7 @@ class GundamsController < ApplicationController
   # GET /gundams/1.json
   def show
     @gundam = GundamMongo.find(params[:id])
-    @gundam_photos = GundamPhoto.verified.where(gundam_id: params[:id]).order("id desc")
+    @gundam_photos = GundamPhotoMongo.verified.where(gundam_id: params[:id]).desc("id")
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @gundam }

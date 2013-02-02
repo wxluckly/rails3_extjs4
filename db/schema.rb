@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20130131132407) do
-=======
-ActiveRecord::Schema.define(:version => 20130130172428) do
->>>>>>> wiki
+ActiveRecord::Schema.define(:version => 20130201055605) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
@@ -36,8 +32,6 @@ ActiveRecord::Schema.define(:version => 20130130172428) do
     t.text     "summary"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "name_chs"
-    t.string   "name_js"
   end
 
   create_table "force_gundams", :force => true do |t|
@@ -60,8 +54,6 @@ ActiveRecord::Schema.define(:version => 20130130172428) do
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.boolean  "is_verified", :default => false
-<<<<<<< HEAD
-=======
   end
 
   create_table "gundam_versions", :force => true do |t|
@@ -92,7 +84,6 @@ ActiveRecord::Schema.define(:version => 20130130172428) do
     t.string   "avatar"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
->>>>>>> wiki
   end
 
   create_table "gundams", :force => true do |t|
@@ -122,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20130130172428) do
     t.string   "avatar"
     t.integer  "usage_id"
     t.integer  "raw_gundam_id"
+    t.integer  "version"
   end
 
   create_table "manufactories", :force => true do |t|
@@ -140,23 +132,6 @@ ActiveRecord::Schema.define(:version => 20130130172428) do
     t.datetime "updated_at",   :null => false
     t.integer  "dimension_id"
   end
-
-  create_table "raw_data", :force => true do |t|
-    t.string   "data"
-    t.string   "data_type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "raw_data_gundams", :force => true do |t|
-    t.integer  "raw_data_id"
-    t.integer  "raw_gundam_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "raw_data_gundams", ["raw_data_id"], :name => "index_raw_data_gundams_on_raw_data_id"
-  add_index "raw_data_gundams", ["raw_gundam_id"], :name => "index_raw_data_gundams_on_raw_gundam_id"
 
   create_table "raw_gundams", :force => true do |t|
     t.string   "url"
@@ -185,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20130130172428) do
     t.text     "summary"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.boolean  "is_processed"
   end
 
   create_table "stories", :force => true do |t|
@@ -216,4 +192,5 @@ ActiveRecord::Schema.define(:version => 20130130172428) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
 end

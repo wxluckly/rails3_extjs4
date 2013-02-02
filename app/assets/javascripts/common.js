@@ -85,7 +85,7 @@ function getAttr(obj,attr){
   if(obj){
     return obj[attr]
   }else{
-    return '未设置'
+    return ''
   }
 }
 

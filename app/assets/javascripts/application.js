@@ -16,4 +16,5 @@
 //= require lib/jquery.masonry.min
 //= require lib/lightbox
 //= require lib/cloud-zoom.1.0.2.min
+//= require lib/jquery.Jcrop.min
 //= require twitter/bootstrap

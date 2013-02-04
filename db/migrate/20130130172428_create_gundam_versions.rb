@@ -30,6 +30,6 @@ class CreateGundamVersions < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_column :gundam, :version, :integer
+    add_column :gundams, :version, :integer
   end
 end

@@ -22,10 +22,6 @@ class Admin::GundamPhotosController < Admin::ApplicationController
     render :json=>{:success=>true}
   end
 
-  # GET /gundams/1/edit
-  def edit
-  end
-
   def edit_data
     render :json=>GundamPhoto.find(params[:id]), :layout=>false
   end
@@ -40,22 +36,16 @@ class Admin::GundamPhotosController < Admin::ApplicationController
     end
   end
 
-  # GET /gundams
-  def index
-  end
-
   # GET /index_data
   def index_data
-    gundams = GundamPhoto.limit(params[:limit]).offset(params[:start])  
-    render :text=>"{'totalProperty':#{GundamPhoto.count},'root':#{gundams.to_json()}}", :layout=>false
+    gundams = GundamPhoto.unverified.includes(:gundam).limit(params[:limit]).offset(params[:start])  
+    render :text=>"{'totalProperty':#{GundamPhoto.count},'root':#{gundams.to_json(:include=>:gundam)}}", :layout=>false
   end
 
   # GET /send_info
-  def send_info
-    emails = emails || ["wxl_test@126.com"]
-    emails.each do |email|
-      Resque.enqueue(InfoMailer, email, params[:gundam_id])
-    end
+  def set_verified
+    @obj = GundamPhoto.find(params[:id])
+    @obj.update_attribute("is_verified", true)
     render :json=>{:success=>true}
   end
 

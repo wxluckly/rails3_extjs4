@@ -1,24 +1,8 @@
-<%= will_paginate @gundams, :renderer => BootstrapPagination::Rails %>
-<table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>大头贴</th>
-      <th>时期</th>
-      <th>型号</th>
-      <th>英文名</th>
-      <th>中文名</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @gundams.each do |gundam| %>
-      <tr>
-        <td><%= link_to image_tag(gundam.avatar_url(:thumb)), gundam %></td>
-        <td><%= "#{gundam.period.year} #{gundam.period.name}" %></td>
-        <td><%= link_to gundam.model, gundam %></td>
-        <td><%= link_to gundam.name, gundam %></td>
-        <td><%= link_to gundam.name_chs, gundam %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= will_paginate @gundams, :renderer => BootstrapPagination::Rails %>
+<% content_for :header do%>
+  <%= javascript_include_tag  "gundams" %>
+<%end%>
+<%= collection_select :search, :dimension_id, DimensionMongo.asc(:name), :id, :name, prompt: true %>
+<%= grouped_collection_select :search, :period_id, DimensionMongo.asc(:name).includes(:periods), :periods, :name, :id, :year, prompt: true %>
+<div id="data-listArea">
+  <%= render :partial => 'list', :locals => {:gundams => @gundams} %>
+</div>

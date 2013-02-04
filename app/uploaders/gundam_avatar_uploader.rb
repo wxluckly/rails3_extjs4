@@ -29,19 +29,29 @@ class GundamAvatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  # process :scale => [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
+  process :manualcrop
 
   # Create different versions of your uploaded files:
   version :big do
-    process :resize_and_pad => [400, 400]
+    process :resize_and_pad => [400, 500]
+    process :convert => 'jpg' 
   end
 
   version :thumb do
-    process :resize_and_pad => [60, 60]
+    process :resize_and_pad => [45, 50]
+    process :convert => 'jpg' 
+  end
+
+  def manualcrop
+    return unless model.cropping?
+    manipulate! do |img| 
+      x = model.crop_x.to_i
+      y = model.crop_y.to_i
+      w = model.crop_w.to_i 
+      h = model.crop_h.to_i
+      img.crop("#{w}x#{h}+#{x}+#{y}") 
+      img
+    end 
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

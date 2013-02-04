@@ -1,7 +1,4 @@
 class Admin::GundamsController < Admin::ApplicationController
-  # GET /gundams/new
-  def new
-  end
 
   # POST /gundams
   def create
@@ -22,10 +19,6 @@ class Admin::GundamsController < Admin::ApplicationController
     render :json=>{:success=>true}
   end
 
-  # GET /gundams/1/edit
-  def edit
-  end
-
   def edit_data
     render :json=>Gundam.find(params[:id]), :layout=>false
   end
@@ -40,14 +33,10 @@ class Admin::GundamsController < Admin::ApplicationController
     end
   end
 
-  # GET /gundams
-  def index
-  end
-
   # GET /index_data
   def index_data
-    gundams = Gundam.includes(:period,:usage).limit(params[:limit]).offset(params[:start])  
-    render :text=>"{'totalProperty':#{Gundam.count},'root':#{gundams.to_json(:include=>[:period,:usage])}}", :layout=>false
+    gundams = Gundam.includes(:usage, :raw_gundam, [:period=>:dimension]).limit(params[:limit]).offset(params[:start])  
+    render :text=>"{'totalProperty':#{Gundam.count},'root':#{gundams.to_json(:include=>[:usage, :raw_gundam, :period => {:include=>:dimension}])}}", :layout=>false
   end
 
   # GET /send_info

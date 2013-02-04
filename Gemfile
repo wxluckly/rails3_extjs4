@@ -74,6 +74,7 @@ gem 'client_side_validations-simple_form', '2.0.1'
 
 # 开发环境
 group :development do
+  gem 'thin'
   gem 'rails3-generators'
   gem 'spork', '>= 0.9.0'
   gem 'capistrano'

@@ -12,7 +12,10 @@
           {name: 'model'},
           {name: 'created_at'},
           {name: 'year', mapping:'period', convert: function(value){return getAttr(value,'year')}},
-          {name: 'usage', mapping:'usage', convert: function(value){return getAttr(value,'name')}}
+          {name: 'dimension', mapping:'period', convert: function(value){return getAttr(getAttr(value,'dimension'),'name')}},
+          {name: 'raw_gundam_year', mapping:'raw_gundam', convert: function(value){return getAttr(value,'period')}},
+          {name: 'usage', mapping:'usage', convert: function(value){return getAttr(value,'name')}},
+          {name: 'raw_gundam_usage', mapping:'raw_gundam', convert: function(value){return getAttr(value,'usage')}}
         ],
         idProperty: 'threadid'
       });
@@ -45,12 +48,15 @@
         store: common.gundamslistDS,
         header : false,
         columns: [
-          {text: '',dataIndex: 'id',width:40,hidden:true},
+          {text: '',dataIndex:'id', hidden:true},
+          {text: '系列',dataIndex: 'dimension',width:35},
           {text: '年代',dataIndex: 'year',width:50},
+          {text: '年代(源数据)',dataIndex: 'raw_gundam_year',width:80},
           {text: '型号',dataIndex: 'model',width:180},
           {text: '名称',dataIndex: 'name',width:220},
           {text: '中文名',dataIndex: 'name_chs',width:180},
           {text: '类型',dataIndex: 'usage',width:90},
+          {text: '类型(源数据)',dataIndex: 'raw_gundam_usage',width:120},
           {text: '创建时间',dataIndex: 'created_at',width:110,renderer: Ext.util.Format.dateRenderer('Y-m-d H:i')}
         ],
         columnLines: true,

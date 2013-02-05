@@ -4,6 +4,7 @@ class PeriodMongo
 
   field :_id, type: Integer
 
+  belongs_to  :dimension
   has_many :gundams
 
 end

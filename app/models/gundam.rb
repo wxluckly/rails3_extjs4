@@ -19,6 +19,7 @@ class Gundam < ActiveRecord::Base
   has_many :versions, class_name: "GundamVersion"
   has_many :history_versions, class_name: "GundamVersion", conditions: proc{ "id <= #{self.version_id||0}" }
   has_many :unmerge_versions, class_name: "GundamVersion", conditions: proc{ "id > #{self.version_id||0}" }
+  has_many :raw_gundams
   belongs_to :period
   belongs_to :usage
   belongs_to :manufactory
@@ -29,7 +30,7 @@ class Gundam < ActiveRecord::Base
   mount_uploader :avatar, GundamAvatarUploader
 
   # validations ...............................................................
-  validates :model, :presence => true, :uniqueness => {:scope => :period_id, :message => "should have only one model per period", :on => :create}
+  validates :model, :presence => true, :uniqueness => {:message => "should have only one model per period", :on => :create}
 
   # callbacks .................................................................
   before_save :reprocess_avatar, :if => :cropping?
@@ -73,14 +74,12 @@ class Gundam < ActiveRecord::Base
 
   # class methods .............................................................
   def self.search_by_keywords(params = {})
-    tire.search(page: params[:page], per_page: params[:per_page]) do |search|
-         search.query do |q|
-         #q.match([:event, :message], params[:query]) if params[:query].present?
-         q.string params[:query] if params[:query].present?
-        end
-        #search.filter :term, category_id: params[:category_id] if params[:category_id].present?
-        search.sort { by :updated_at, "desc" } if params[:query].blank?
-      # raise to_curl
+    tire.search(page: params[:page], per_page: params[:per_page]) do
+      query do |q|
+        q.string params[:query], default_operator: "AND"
+      end if params[:query].present?
+      filter :range, created_at: {lte: Time.zone.now}
+      sort { by :updated_at, "desc" } if params[:query].blank?
     end
   end
 
@@ -93,6 +92,24 @@ class Gundam < ActiveRecord::Base
     self.avatar.recreate_versions!
   end
 
+<<<<<<< HEAD
+=======
+  def to_indexed_json
+    to_json(:methods => [:period_year, :period_name, :dimension_name])
+  end
+
+  def period_year
+    period.try(:year)
+  end
+
+  def period_name
+    period.try(:name)
+  end
+
+  def dimension_name
+    period.try(:dimension).try(:name)
+  end
+>>>>>>> 177c19b62248a35058ad33fc223829d082455f5e
 
   # protected instance methods ................................................
   # private instance methods ..................................................

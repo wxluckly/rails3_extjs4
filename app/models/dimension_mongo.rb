@@ -4,6 +4,6 @@ class DimensionMongo
 
   field :_id, type: Integer
 
-  has_many :periods, order: "year asc"
+  has_many :periods
 
 end

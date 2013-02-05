@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201055605) do
+ActiveRecord::Schema.define(:version => 20130204230000) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
@@ -111,9 +111,8 @@ ActiveRecord::Schema.define(:version => 20130201055605) do
     t.string   "ranged_weapon"
     t.text     "summary"
     t.string   "avatar"
-    t.integer  "usage_id"
-    t.integer  "raw_gundam_id"
     t.integer  "version"
+    t.integer  "usage_id"
   end
 
   create_table "manufactories", :force => true do |t|
@@ -161,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20130201055605) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.boolean  "is_processed"
+    t.integer  "gundam_id"
   end
 
   create_table "stories", :force => true do |t|

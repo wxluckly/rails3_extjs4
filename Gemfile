@@ -7,6 +7,7 @@ gem 'redis'
 
 # dependence && functions are dependent on
 gem 'will_paginate'
+gem 'kaminari'
 gem 'rails_config'
 gem 'acts_as_list'
 gem 'state_machine'

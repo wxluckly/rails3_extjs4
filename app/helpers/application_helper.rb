@@ -1,11 +1,12 @@
 module ApplicationHelper
+
   def gundam_title(gundam)
     "#{gundam.try(:model)} #{gundam.try(:name)}" 
   end
 
   def year_title(period)
     if period.present?
-      "#{period.try(:year)} #{period.try(:name)}"
+      "#{period.dimension.try(:name)} #{period.try(:year)}"
     else
       "尚未设置"
     end

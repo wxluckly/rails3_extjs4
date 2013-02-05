@@ -5,6 +5,12 @@ function filter_gundams(){
   },function(){}, "script");
 }
 
+function change_select_content(periods){
+  var dimension = $('#search_dimension_id :selected').text();
+  var options = $(periods).filter("optgroup[label='" + dimension + "']").html();
+  $('#search_period_id').html("<option value></option>"+options);
+}
+
 $(function() {
   if(action == "show"){
 
@@ -17,12 +23,12 @@ $(function() {
     });
 
   }else if(action == "index"){
-
+    
     var periods = $('#search_period_id').html();
+    change_select_content(periods);
+    
     $('#search_dimension_id').change(function(){
-      var dimension = $('#search_dimension_id :selected').text();
-      var options = $(periods).filter("optgroup[label='" + dimension + "']").html();
-      $('#search_period_id').html("<option value></option>"+options);
+      change_select_content(periods);
       filter_gundams();
     });
 

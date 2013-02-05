@@ -2,12 +2,16 @@ class GundamsController < ApplicationController
 
   # GET /gundams
   def index
-    # use mysql
+    ## use mysql
     # @gundams = Gundam.from_dimension(params[:period_id], params[:dimension_id]).from_period(params[:period_id]).includes(:period).order("periods.year").paginate(:page=>params[:page] || 1, :per_page => 20)
-    # use mongo
 
-    binding.pry
-    @gundams = GundamMongo.from_dimension(params[:period_id], params[:dimension_id]).from_period(params[:period_id]).includes(:period).paginate(:page=>params[:page] || 1, :per_page => 20)
+    ## use mongo
+    periods_array = PeriodMongo.asc(:year).map(&:id)
+    if params[:period_id].present? or params[:dimension_id].present?
+      @gundams = Kaminari.paginate_array(GundamMongo.from_dimension(params[:period_id], params[:dimension_id]).from_period(params[:period_id]).includes(:period).sort_by{|o| periods_array.index(o.period_id)}).page(params[:page]).per(20)
+    else
+      @gundams = Kaminari.paginate_array(GundamMongo.where(:period_id.in => periods_array).includes(:period).sort_by{|o| periods_array.index(o.period_id)}).page(params[:page]).per(20)
+    end
     @search = Search.new(params)
     respond_to do |format|
       format.html # show.html.erb

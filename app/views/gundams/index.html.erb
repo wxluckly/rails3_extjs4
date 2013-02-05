@@ -2,7 +2,7 @@
   <%= javascript_include_tag  "gundams" %>
 <%end%>
 <%= collection_select :search, :dimension_id, DimensionMongo.asc(:name), :id, :name, prompt: true %>
-<%= grouped_collection_select :search, :period_id, DimensionMongo.asc(:name).includes(:periods), :periods, :name, :id, :year, prompt: true %>
+<%= grouped_collection_select :search, :period_id, Dimension.order(:name).includes(:periods), :periods, :name, :id, :year, prompt: true %>
 <div id="data-listArea">
   <%= render :partial => 'list', :locals => {:gundams => @gundams} %>
 </div>

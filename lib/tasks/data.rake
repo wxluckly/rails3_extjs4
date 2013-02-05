@@ -3,10 +3,17 @@ namespace :data do
   task :process_raw_gundam => :environment do
     RawGundam.not_processed.each do |raw_gundam|
       gundam = Gundam.new(raw_gundam.attributes.slice("name", "name_chs", "model", "name_jp", "specifications", "internal_environment", "measurement", "weight", "armor", "output", "propulsion", "acceleration", "special_equipped", "default_weapon", "selected_weapon", "hand_weapon", "ranged_weapon", "summary"))
-      gundam.raw_gundam = raw_gundam
       if gundam.save
-        raw_gundam.update_attributes(is_processed: true)
-        p "raw_gundam.#{raw_gundam.id} processed"
+        raw_gundam.update_attributes(is_processed: true, gundam_id: gundam.id)
+        p "gundam.#{gundam.id} created"
+      else
+        gundam = Gundam.where(model: raw_gundam.model).first
+        if gundam.present?
+          gundam.raw_gundams << raw_gundam
+          gundam.save
+          raw_gundam.update_attributes(is_processed: true)
+          p "raw_gundam.#{raw_gundam.id} processed"
+        end
       end
     end
   end

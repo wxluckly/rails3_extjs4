@@ -35,8 +35,8 @@ class Admin::GundamsController < Admin::ApplicationController
 
   # GET /index_data
   def index_data
-    gundams = Gundam.includes(:usage, :raw_gundam, [:period=>:dimension]).limit(params[:limit]).offset(params[:start])  
-    render :text=>"{'totalProperty':#{Gundam.count},'root':#{gundams.to_json(:include=>[:usage, :raw_gundam, :period => {:include=>:dimension}])}}", :layout=>false
+    gundams = Gundam.includes(:usage, :raw_gundams, [:period=>:dimension]).limit(params[:limit]).offset(params[:start])  
+    render :text=>"{'totalProperty':#{Gundam.count},'root':#{gundams.to_json(:include=>[:usage, :raw_gundams, :period => {:include=>:dimension}])}}", :layout=>false
   end
 
   # GET /send_info

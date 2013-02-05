@@ -43,14 +43,6 @@ class Gundam < ActiveRecord::Base
   # additional config .........................................................
   mount_uploader :avatar, GundamAvatarUploader
 
-  # indexes 
-  mapping do
-    indexes :id,           index: :not_analyzed
-    indexes :name
-    indexes :name_chs
-    indexes :model
-    indexes :updated_at,   type: 'date', include_in_all: false
-  end
   # attr_accessor :story_name, :usage_name, :manufactory_name, :force_name, :period_name
   # def init_names
   #   %w{story usage manufactory force period}.each do |source|
@@ -63,13 +55,38 @@ class Gundam < ActiveRecord::Base
 
   # class methods .............................................................
   def self.search_by_keywords(params = {})
+    params[:query] ||= ""
     tire.search(page: params[:page], per_page: params[:per_page]) do
-      query do |q|
-        q.string params[:query], default_operator: "AND"
-      end if params[:query].present?
-      filter :range, created_at: {lte: Time.zone.now}
-      sort { by :updated_at, "desc" } if params[:query].blank?
+      query do
+        boolean do
+          should { match :model, params[:query] }
+          should { match :name, params[:query] }
+          should { match :name_chs, params[:query] }
+          must { term :period_id, params[:period_id] } if params[:period_id].present?
+        end
+      end 
+      # filter :range, created_at: {lte: Time.zone.now}
+      sort { by :dimension_id, "desc" }
+      sort { by :period_id, "asc" }
     end
+
+    # tire.search load: load_value, page: params[:page], per_page: params[:per_page] do
+    #   query do
+    #     boolean do
+    #       should { match :title, params[:q], boost: 10 } if params[:q].present?
+    #       should { match :content, params[:q] } if params[:q].present?
+    #       must { term :article_category_id, params[:cat] } if params[:cat].present?
+    #       must { term :recommend_category_id, params[:r] } if params[:r].present?
+    #       must { term :user_id, params[:user_id] } if params[:user_id].present?
+    #       must { terms :id, params[:id].split(' ') } if params[:id].present?
+    #       must { range :updated_at, gte: params[:start_at], lte: params[:end_at] } if params[:start_at].present? && params[:end_at].present?
+    #       must { range :updated_at, gte: params[:updated_at_from], lte: params[:updated_at_to] } if params[:updated_at_from].present? && params[:updated_at_to].present? 
+    #     end
+    #   end if params.slice(:q, :cat, :r, :user_id, :id, :start_at, :end_at).values.any?(&:present?)
+
+    #   sort { params[:sort].each { |k, v| by k, v } } if params[:sort].present? && params[:q].blank?
+    # end
+
   end
 
   # public instance methods ...................................................

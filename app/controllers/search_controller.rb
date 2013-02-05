@@ -1,9 +1,9 @@
 class SearchController < ApplicationController
 
   def index
-    params[:page] ||= 0
+    params[:page] ||= 1
     params[:per_page] ||= 20
-    params[:query] ||= "gundam"
+    # params[:query] ||= "gundam"
     @gundams = Gundam.search_by_keywords(params)
   end
 

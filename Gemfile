@@ -72,9 +72,13 @@ gem 'simple_form'
 gem "client_side_validations", '3.2.1'
 gem 'client_side_validations-simple_form', '2.0.1'
 
+# 自动部署
+gem 'capistrano'
+gem 'awesome'
+gem 'mina'
+
 # 开发环境
 group :development do
-  gem 'thin'
   gem 'rails3-generators'
   gem 'spork', '>= 0.9.0'
   gem 'capistrano'

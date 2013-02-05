@@ -1,4 +1,6 @@
 class Gundam < ActiveRecord::Base
+  WIKI   = Rails.root.join("db", "wiki.git")
+
   # extends ...................................................................
   # includes ..................................................................
   include Tire::Model::Search
@@ -31,7 +33,10 @@ class Gundam < ActiveRecord::Base
 
   # callbacks .................................................................
   before_save :reprocess_avatar, :if => :cropping?
-  
+  after_create  :create_page
+  after_update  :update_page
+  after_destroy :delete_page
+
   # 解决mongo数据无法被同步更新的问题
   after_save do 
     mongo.update_attribute(:avatar, self.attributes["avatar"])
@@ -86,9 +91,43 @@ class Gundam < ActiveRecord::Base
   
   def reprocess_avatar
     self.avatar.recreate_versions!
-  end  
+  end
+
 
   # protected instance methods ................................................
   # private instance methods ..................................................
+private
+  def commit
+    commit = { :message => 'commit message',
+           :name => 'Gollum',
+           :email => 'freebird0221@gmail.com' }
+  end
 
+  def wiki
+    @@golum ||= Gollum::Wiki.new(WIKI)
+  end
+
+  def page
+    wiki.page("gundam-#{id}")
+  end
+
+  def create_page
+    wiki.write_page("gundam-#{id}", :rdoc, to_yaml, commit)
+  end
+
+  def update_page
+    # fio = File.new("wiki/gundam-#{id}",'w+')
+    # fio.write(to_yaml)
+    # fio.close
+    if page
+      wiki.update_page(page, "gundam-#{id}", page.format, 'Page contents', commit)
+    else
+      create_page
+    end
+  end
+
+  def delete_page
+    # File.unlink("wiki/gundam-#{id}.wiki.yaml")
+    wiki.delete_page(page, commit)
+  end
 end

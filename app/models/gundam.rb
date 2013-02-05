@@ -92,8 +92,6 @@ class Gundam < ActiveRecord::Base
     self.avatar.recreate_versions!
   end
 
-<<<<<<< HEAD
-=======
   def to_indexed_json
     to_json(:methods => [:period_year, :period_name, :dimension_name])
   end
@@ -109,7 +107,6 @@ class Gundam < ActiveRecord::Base
   def dimension_name
     period.try(:dimension).try(:name)
   end
->>>>>>> 177c19b62248a35058ad33fc223829d082455f5e
 
   # protected instance methods ................................................
   # private instance methods ..................................................

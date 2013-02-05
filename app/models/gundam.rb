@@ -108,25 +108,29 @@ class Gundam < ActiveRecord::Base
     period.try(:dimension).try(:name)
   end
 
+  def page
+    wiki.page(page_name)
+  end
+
+  def page_name
+    "gundam-#{id}"
+  end
+
+  def wiki
+    @@golum ||= Gollum::Wiki.new(WIKI)
+  end
   # protected instance methods ................................................
   # private instance methods ..................................................
-private
+ private
+
   def commit
     commit = { :message => 'commit message',
            :name => 'Gollum',
            :email => 'freebird0221@gmail.com' }
   end
 
-  def wiki
-    @@golum ||= Gollum::Wiki.new(WIKI)
-  end
-
-  def page
-    wiki.page("gundam-#{id}")
-  end
-
   def create_page
-    wiki.write_page("gundam-#{id}", :rdoc, to_yaml, commit)
+    wiki.write_page(page_name, :rdoc, to_yaml, commit)
   end
 
   def update_page
@@ -134,7 +138,7 @@ private
     # fio.write(to_yaml)
     # fio.close
     if page
-      wiki.update_page(page, "gundam-#{id}", page.format, 'Page contents', commit)
+      wiki.update_page(page, page_name, page.format, 'Page contents', commit)
     else
       create_page
     end

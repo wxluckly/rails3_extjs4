@@ -4,6 +4,11 @@ Rails3Extjs4::Application.routes.draw do
   devise_for :users
 
   resources :gundams do
+    member do
+      match 'histroy', via: ['get','put']
+      match 'compare', via: ['get','put']
+      put 'revert'
+    end
     resources :gundam_photos, :only => [:new, :create, :show]
   end
 

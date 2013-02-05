@@ -1,16 +1,15 @@
 <h1><%= @gundam.name %></h1>
 <table class='table table-striped version_list'>
-  <% @gundam.unmerge_versions.each_with_index do |version,index| %>
+  <% @versions.each_with_index do |version,index| %>
+
     <tr data-version='<%= version.id %>'>
       <td>#<%= index+1 %></td>
-      <td><%= version.created_at %></td>
-      <td><%= version.version %></td>
+      <td><%= version.id %></td>
     </tr>
   <% end %>
 </table>
-<!--<%= @version.id %>-->
 <div id='diff_form'>
-  <%= render :partial => 'show_diff', :locals => { gundam: @gundam, version: @version } %>
+  <%#= render :partial => 'show_diff', :locals => { gundam: @gundam, version: @version } %>
 </div>
 
 <script type="text/javascript">
@@ -18,7 +17,7 @@
     $('.version_list tr').click(function(){
       $.ajax({
         type: 'get',
-        url: 'versions/'+$(this).attr('data-version'),
+        url: 'compare?histroy='+$(this).attr('data-version'),
         dataType: 'script'
       })
     })

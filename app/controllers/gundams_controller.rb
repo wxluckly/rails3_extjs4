@@ -49,4 +49,15 @@ class GundamsController < ApplicationController
     end
   end
 
+  def histroy
+    @gundam = Gundam.find(params[:id])
+    @versions = @gundam.page.versions
+  end
+
+  def compare
+    @gundam = Gundam.find(params[:id])
+    v_page = @gundam.wiki.page(@gundam.page_name,params[:version])
+    @version = Gundam.new(YAML::load(v_page.raw_data).attributes.keep_if{|a|Gundam.accessible_attributes.include?(a)})
+  end
+
 end

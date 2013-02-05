@@ -141,10 +141,10 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.1)
     mime-types (1.19)
+    mime-types (1.20.1)
     mina (0.2.1)
       open4
       rake
-    mime-types (1.20.1)
     mini_magick (3.4)
       subexec (~> 0.2.1)
     mongo (1.8.2)

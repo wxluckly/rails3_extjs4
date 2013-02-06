@@ -1,6 +1,17 @@
 <% content_for :header do%>
-  <title>rails3_extjs4</title>
+  <%= javascript_include_tag  "search" %>
 <% end %>
+<div class="alert alert-success">
+  <form class="form-search">
+    <labelclass="control-label">系列：</label>
+    <%= collection_select(:search, :dimension_id, DimensionMongo.asc(:name), :id, :name, {prompt: true, :include_blank => true }, { :name => 'dimension_id', :class => "input-medium" }) %>
+    <labelclass="control-label">&nbsp;&nbsp;&nbsp;年代：</label>
+    <%= grouped_collection_select :search, :period_id, Dimension.order(:name).includes(:periods), :periods, :name, :id, :year, { prompt: true }, { :name => 'period_id', :class => "input-medium" } %>
+    <labelclass="control-label">&nbsp;&nbsp;&nbsp;关键词：</label>
+    <%= text_field :search, :query, class: "span2", name: "query", placeholder: "Search" %>
+    <button type="submit" class="btn">Search</button>
+  </form>
+</div>
 <table class="table table-bordered table-hover">
   <thead>
     <tr>

@@ -12,7 +12,7 @@ Rails3Extjs4::Application.routes.draw do
     post 'crop', :on => :member
   end
 
-  get '/search(/:query)' => "search#index"
+  get '/search' => "search#index"
 
   resources :versions do
     member do

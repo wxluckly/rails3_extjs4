@@ -55,37 +55,27 @@ class Gundam < ActiveRecord::Base
 
   # class methods .............................................................
   def self.search_by_keywords(params = {})
-    params[:query] ||= ""
-    tire.search(page: params[:page], per_page: params[:per_page]) do
+
+    periods = PeriodMongo.where(dimension_id: params[:dimension_id].to_i).map(&:id) if params[:dimension_id].present?
+    periods = params[:period_id] if params[:period_id].present?
+
+    tire.search(page: params[:page] || 1, per_page: params[:per_page] || 20) do
       query do
         boolean do
-          should { match :model, params[:query] }
-          should { match :name, params[:query] }
-          should { match :name_chs, params[:query] }
-          must { term :period_id, params[:period_id] } if params[:period_id].present?
+          should { match :model, params[:query], boost: 10 }
+          should { match :name, params[:query], boost: 10 }
+          should { match :name_chs, params[:query], boost: 10 }
+          should { match :period_name, params[:query] }
+          should { match :period_year, params[:query] }
+          should { match :dimension_name, params[:query] }
         end
-      end 
-      # filter :range, created_at: {lte: Time.zone.now}
-      sort { by :dimension_id, "desc" }
-      sort { by :period_id, "asc" }
+      end if params[:query].present?
+      filter :terms, :period_id => periods.to_a if periods.present?
+      sort do
+        by :dimension_id, "desc" 
+        by :period_year_sort, "asc" 
+      end
     end
-
-    # tire.search load: load_value, page: params[:page], per_page: params[:per_page] do
-    #   query do
-    #     boolean do
-    #       should { match :title, params[:q], boost: 10 } if params[:q].present?
-    #       should { match :content, params[:q] } if params[:q].present?
-    #       must { term :article_category_id, params[:cat] } if params[:cat].present?
-    #       must { term :recommend_category_id, params[:r] } if params[:r].present?
-    #       must { term :user_id, params[:user_id] } if params[:user_id].present?
-    #       must { terms :id, params[:id].split(' ') } if params[:id].present?
-    #       must { range :updated_at, gte: params[:start_at], lte: params[:end_at] } if params[:start_at].present? && params[:end_at].present?
-    #       must { range :updated_at, gte: params[:updated_at_from], lte: params[:updated_at_to] } if params[:updated_at_from].present? && params[:updated_at_to].present? 
-    #     end
-    #   end if params.slice(:q, :cat, :r, :user_id, :id, :start_at, :end_at).values.any?(&:present?)
-
-    #   sort { params[:sort].each { |k, v| by k, v } } if params[:sort].present? && params[:q].blank?
-    # end
 
   end
 
@@ -99,15 +89,23 @@ class Gundam < ActiveRecord::Base
   end
 
   def to_indexed_json
-    to_json(:methods => [:period_year, :period_name, :dimension_name])
+    to_json(:methods => [:period_year, :period_year_sort, :period_name, :dimension_id, :dimension_name])
   end
 
   def period_year
     period.try(:year)
   end
 
+  def period_year_sort
+    period.try(:year).to_i
+  end
+
   def period_name
     period.try(:name)
+  end
+
+  def dimension_id
+    period.try(:dimension).try(:id)
   end
 
   def dimension_name

@@ -67,5 +67,8 @@ module Rails3Extjs4
 
     # 使用redis作为默认缓存
     config.cache_store = :redis_store, $conf[:redis][:server]
+
+    # middleware
+    config.middleware.insert_before 0, "SearchSuggestions"
   end
 end

@@ -72,9 +72,9 @@ class Gundam < ActiveRecord::Base
       end if params[:query].present?
       filter :terms, :period_id => periods.to_a if periods.present?
       sort do
-        by :dimension_id, "desc" 
-        by :period_year_sort, "asc" 
-      end
+        by :dimension_id, "desc"
+        by :period_year_sort, "asc"
+      end if params[:query].blank?
     end
 
   end

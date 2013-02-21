@@ -1,7 +1,3 @@
-function filter_gundams(){
-  
-}
-
 function change_select_content(periods){
   var dimension = $('#search_dimension_id :selected').text();
   var options = $(periods).filter("optgroup[label='" + dimension + "']").html();
@@ -16,10 +12,11 @@ $(function() {
     
     $('#search_dimension_id').change(function(){
       change_select_content(periods);
-      filter_gundams();
     });
 
-    $('#search_period_id').change(filter_gundams);
+    $('#search_query').autocomplete({
+      source: "/search_suggestions"
+    });
 
   }
 });

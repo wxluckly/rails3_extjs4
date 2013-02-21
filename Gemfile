@@ -80,6 +80,7 @@ group :development do
   gem 'capistrano'
   gem 'pry'
   gem 'pry-nav'
+  gem 'rack-mini-profiler'
 end
 
 # 开发测试环境共用

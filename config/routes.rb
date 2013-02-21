@@ -3,6 +3,8 @@ Rails3Extjs4::Application.routes.draw do
 
   devise_for :users
 
+  resources :search_suggestions
+
   resources :gundams do
     resources :gundam_photos, :only => [:new, :create, :show]
   end

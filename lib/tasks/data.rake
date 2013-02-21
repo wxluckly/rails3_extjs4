@@ -45,4 +45,11 @@ namespace :data do
     DriverGundam.all.each{ |i| i.mongo_save }
     p "all done!"
   end
+
+  desc "index all search suggestion"
+  task :index_search_suggestion => :environment do
+    p "work begining :"
+    SearchSuggestion.index_products
+    p "all done!"
+  end
 end

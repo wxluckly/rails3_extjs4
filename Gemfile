@@ -2,7 +2,7 @@
 source 'http://ruby.taobao.org'
 
 # basic
-gem 'rails', '4'
+gem 'rails', '~> 3.2.13'
 gem 'mysql2'
 gem 'redis'
 

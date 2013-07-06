@@ -70,8 +70,6 @@ gem 'htmldiff'
 
 #form
 gem 'simple_form'
-gem "client_side_validations", '3.2.1'
-gem 'client_side_validations-simple_form', '2.0.1'
 
 # 开发环境
 group :development do
@@ -89,4 +87,8 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'factory_girl_rails'#, require: false  # 修复对model的preload
+end
+
+group :production, :test do
+  gem 'rvm-capistrano'
 end

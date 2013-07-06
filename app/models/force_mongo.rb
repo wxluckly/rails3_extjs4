@@ -1,3 +1,4 @@
+# coding: utf-8
 class ForceMongo
   include Mongoid::Document
   include Mongoid::Timestamps

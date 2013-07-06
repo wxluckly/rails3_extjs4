@@ -1,3 +1,4 @@
+# coding: utf-8
 class GundamsController < ApplicationController
 
   # GET /gundams

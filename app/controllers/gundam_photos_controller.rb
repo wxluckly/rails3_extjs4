@@ -1,3 +1,4 @@
+# coding: utf-8
 class GundamPhotosController < ApplicationController
   # GET /gundam_photos
   # GET /gundam_photos.json

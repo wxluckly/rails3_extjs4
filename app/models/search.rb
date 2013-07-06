@@ -1,3 +1,4 @@
+# coding: utf-8
 class Search
 
   attr_reader :period_id, :dimension_id, :query

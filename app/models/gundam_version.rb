@@ -1,3 +1,4 @@
+# coding: utf-8
 class GundamVersion < ActiveRecord::Base
 
   attr_accessible :gundam_id, :user_id, :model, :name, :name_chs, :name_jp, :usage_id, :period_id, :story_id, :manufactory_id,

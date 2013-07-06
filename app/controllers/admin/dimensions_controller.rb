@@ -1,3 +1,4 @@
+# coding: utf-8
 class Admin::DimensionsController < Admin::ApplicationController
   # GET /dimensions/new
   def new

@@ -1,3 +1,4 @@
+# coding: utf-8
 class DriverMongo
   include Mongoid::Document
   include Mongoid::Timestamps

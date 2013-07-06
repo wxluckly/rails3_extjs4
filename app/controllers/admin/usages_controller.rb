@@ -1,3 +1,4 @@
+# coding: utf-8
 class Admin::UsagesController < Admin::ApplicationController
   # GET /types/new
   def new

@@ -1,7 +1,8 @@
-source 'https://rubygems.org'
+#source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 
 # basic
-gem 'rails'
+gem 'rails', '4'
 gem 'mysql2'
 gem 'redis'
 
@@ -25,9 +26,9 @@ gem "less-rails"
 # mongo
 gem 'mongo'
 gem 'mongoid'
-gem 'mongoid_location'
-gem 'will_paginate_mongoid'
-gem "carrierwave-mongoid", :git => "git://github.com/jnicklas/carrierwave-mongoid.git", :branch => "mongoid-3.0"
+# gem 'mongoid_location'
+# gem 'will_paginate_mongoid'
+# gem 'carrierwave-mongoid', require: 'carrierwave/mongoid' 
 
 # cache system
 gem 'redis-activesupport'
@@ -69,8 +70,8 @@ gem 'htmldiff'
 
 #form
 gem 'simple_form'
-gem "client_side_validations", '3.2.1'
-gem 'client_side_validations-simple_form', '2.0.1'
+# gem "client_side_validations", '3.2.1'
+# gem 'client_side_validations-simple_form', '2.0.1'
 
 # 开发环境
 group :development do

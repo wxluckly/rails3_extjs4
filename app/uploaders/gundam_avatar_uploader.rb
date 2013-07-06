@@ -1,5 +1,4 @@
-# encoding: utf-8
-
+# coding: utf-8
 class GundamAvatarUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:

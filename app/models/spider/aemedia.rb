@@ -1,3 +1,4 @@
+# coding: utf-8
 class Spider::Aemedia < Spider
   BASE_URL = 'http://www.aemedia.org/wiki'
   

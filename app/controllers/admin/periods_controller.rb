@@ -1,3 +1,4 @@
+# coding: utf-8
 class Admin::PeriodsController < Admin::ApplicationController
 
   # POST /periods

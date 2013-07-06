@@ -1,3 +1,4 @@
+# coding: utf-8
 class Admin::GundamPhotosController < Admin::ApplicationController
   # GET /gundams/new
   def new

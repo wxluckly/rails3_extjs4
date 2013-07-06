@@ -1,3 +1,4 @@
+# coding: utf-8
 class Admin::DriversController < Admin::ApplicationController
   # GET /drivers/new
   def new

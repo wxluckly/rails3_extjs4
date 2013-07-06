@@ -1,3 +1,4 @@
+# coding: utf-8
 class GundamPhotoMongo
   include Mongoid::Document
   include Mongoid::Timestamps

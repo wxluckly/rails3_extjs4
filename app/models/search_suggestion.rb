@@ -1,3 +1,4 @@
+# coding: utf-8
 class SearchSuggestion
   def self.terms_for(prefix)
     $redis.zrevrange "search-suggestions:#{prefix.downcase}", 0, 9

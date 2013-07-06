@@ -1,3 +1,4 @@
+# coding: utf-8
 module ApplicationHelper
 
   def gundam_title(gundam)

@@ -1,3 +1,4 @@
+# coding: utf-8
 class Admin::IndexController < Admin::ApplicationController
   before_filter :authenticate_user!
 

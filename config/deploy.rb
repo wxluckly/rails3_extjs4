@@ -34,6 +34,8 @@ before('deploy:finalize_update', 'deploy:links')
 # end
 
 namespace :deploy do
+  
+
   task :links, :roles => :app do
     # 建立配置文件链接
     run "ln -sf #{shared}/database.yml #{latest_release}/config/database.yml"

@@ -65,8 +65,13 @@ module Rails3Extjs4
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    config.assets.version = '1.0'
+    config.assets.precompile += [
+      'gundams.js', 'gundam_photos.js', 'search.js'
+    ]
+
     # 使用redis作为默认缓存
-    config.cache_store = :redis_store, $conf[:redis][:server]
+    # config.cache_store = :redis_store, $conf[:redis][:server]
 
     # middleware
     config.middleware.insert_before 0, "SearchSuggestions"

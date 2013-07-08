@@ -1,6 +1,8 @@
 # coding: utf-8
 class GundamAvatarUploader < CarrierWave::Uploader::Base
 
+  DEFAULT_URL = "/images/default_pic.png"
+
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -65,6 +67,9 @@ class GundamAvatarUploader < CarrierWave::Uploader::Base
      "#{secure_token(10)}.#{file.extension}" if original_filename.present?
   end
 
+  def default_url
+    DEFAULT_URL
+  end
 
   protected
   def secure_token(length=16)

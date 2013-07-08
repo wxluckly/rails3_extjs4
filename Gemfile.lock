@@ -30,7 +30,6 @@ GEM
       multi_json (~> 1.0)
     acts_as_list (0.2.0)
       activerecord (>= 3.0)
-    addressable (2.3.5)
     ansi (1.4.3)
     arel (3.0.2)
     bcrypt-ruby (3.1.0)
@@ -63,8 +62,6 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     commonjs (0.2.6)
-    crack (0.4.0)
-      safe_yaml (~> 0.9.0)
     daemons (1.1.9)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
@@ -83,32 +80,12 @@ GEM
       railties (>= 3.0.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
-    git (1.2.5)
-    github_api (0.10.1)
-      addressable
-      faraday (~> 0.8.1)
-      hashie (>= 1.2)
-      multi_json (~> 1.4)
-      nokogiri (~> 1.5.2)
-      oauth2
     hashie (2.0.5)
     hashr (0.0.22)
     highline (1.6.19)
     hike (1.2.3)
     htmldiff (0.0.1)
-    httparty (0.11.0)
-      multi_json (~> 1.0)
-      multi_xml (>= 0.5.2)
     i18n (0.6.1)
-    jeweler (1.8.6)
-      builder
-      bundler (~> 1.0)
-      git (>= 1.2.5)
-      github_api (= 0.10.1)
-      highline (>= 1.6.15)
-      nokogiri (= 1.5.10)
-      rake
-      rdoc
     journey (1.0.4)
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
@@ -147,7 +124,6 @@ GEM
     mono_logger (1.1.0)
     moped (1.5.0)
     multi_json (1.7.7)
-    multi_xml (0.5.4)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
     net-scp (1.1.1)
@@ -227,8 +203,6 @@ GEM
       redis-store (~> 1.1.0)
     redis-namespace (1.3.0)
       redis (~> 3.0.0)
-    redis-objects (0.7.0)
-      redis (>= 3.0.2)
     redis-store (1.1.3)
       redis (>= 2.2.0)
     ref (1.0.5)
@@ -258,9 +232,6 @@ GEM
       rspec-mocks (~> 2.13.0)
     rufus-scheduler (2.0.19)
       tzinfo (>= 0.3.23)
-    rvm-capistrano (1.3.4)
-      capistrano (>= 2.0.0)
-    safe_yaml (0.9.3)
     sass (3.2.9)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -320,15 +291,6 @@ GEM
       rack (>= 1.0.0)
     warden (1.2.1)
       rack (>= 1.0)
-    weibo (0.0.14)
-      crack
-      hashie
-      hashie
-      httparty
-      httparty (>= 0.5.2)
-      jeweler
-      oauth
-      oauth (~> 0.4.1)
     weibo2 (0.1.0)
       oauth2 (~> 0.5.1)
     weibo2_plugins (0.0.6)
@@ -377,12 +339,10 @@ DEPENDENCIES
   rails_config
   redis
   redis-activesupport
-  redis-objects
   resque
   resque-scheduler
   rest-client
   rspec-rails
-  rvm-capistrano
   sass-rails
   simple_form
   sitemap_generator
@@ -395,7 +355,6 @@ DEPENDENCIES
   twitter-bootstrap-rails
   typhoeus
   uglifier
-  weibo
   weibo2
   weibo2_plugins
   will_paginate

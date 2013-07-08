@@ -57,6 +57,10 @@ class GundamPhotoUploader < CarrierWave::Uploader::Base
      "#{secure_token(10)}.#{file.extension}" if original_filename.present?
   end
 
+  def default_url
+    "/images/default_pic.png"
+  end
+
 
   protected
   def secure_token(length=16)

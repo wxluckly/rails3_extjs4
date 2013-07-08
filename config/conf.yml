@@ -8,3 +8,8 @@ development: &non_production_settings
 
 test:
   <<: *non_production_settings
+
+production:
+  <<: *defaults
+  redis:
+    server: redis://localhost:6379

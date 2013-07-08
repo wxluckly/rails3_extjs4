@@ -1,6 +1,11 @@
 # coding: utf-8
 module ApplicationHelper
 
+  def link_to_gundam(gundam, opt={})
+    inner = opt.delete(:inner)
+    raw(link_to (inner || gundam.name), gundam)
+  end
+
   def gundam_title(gundam)
     "#{gundam.try(:model)} #{gundam.try(:name)}" 
   end
@@ -21,4 +26,5 @@ module ApplicationHelper
     erb = ['<div class=flash>',flash_div,'</div>'].flatten.join('')
     return raw erb
   end
+
 end

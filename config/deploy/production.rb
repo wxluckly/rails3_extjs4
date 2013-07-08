@@ -13,3 +13,6 @@ role :bg, '115.28.37.253'
 
 # 使用数据库服务器运行迁移，当前所用地址为HA的虚拟IP
 role :db,  '115.28.37.253', primary: true, no_release: true
+
+set :keep_releases, 3 #维护较少数量
+after("deploy", "deploy:cleanup") 

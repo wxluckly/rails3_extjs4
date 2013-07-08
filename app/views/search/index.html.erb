@@ -25,11 +25,11 @@
   <tbody>
     <% @gundams.each do |gundam| %>
       <tr>
-        <td><%= link_to image_tag(gundam.avatar.try(:thumb).try(:url)), gundam %></td>
+        <td><%= link_to_gundam gundam, inner: gundam_image(gundam, :thumb) %></td>
         <td><%= "#{gundam.dimension_name} #{gundam.period_year}" %></td>
-        <td><%= link_to gundam.model, gundam %></td>
-        <td><%= link_to gundam.name, gundam %></td>
-        <td><%= link_to gundam.name_chs, gundam %></td>
+        <td><%= link_to_gundam gundam, inner: gundam.model %></td>
+        <td><%= link_to_gundam gundam %></td>
+        <td><%= link_to_gundam gundam, inner: gundam.name_chs %></td>
       </tr>
     <% end %>
   </tbody>

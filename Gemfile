@@ -34,7 +34,6 @@ gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 
 # cache system
 gem 'redis-activesupport'
-gem 'redis-objects'
 
 # search
 gem 'tire'
@@ -53,7 +52,6 @@ gem 'devise'
 gem 'omniauth-twitter'
 gem 'omniauth'
 gem 'omniauth-weibo-oauth2'
-gem 'weibo'
 gem 'weibo2'
 gem 'weibo2_plugins'
 
@@ -89,8 +87,4 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'factory_girl_rails'#, require: false  # 修复对model的preload
-end
-
-group :production, :test do
-  gem 'rvm-capistrano'
 end

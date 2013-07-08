@@ -1,6 +1,3 @@
-# 预加载指定模块
-require 'redis/objects'
-
 # 自动加载文件
 auto_required_paths = %W(lib app/caches app/validators app/workers)
 

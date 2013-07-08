@@ -28,4 +28,5 @@ class GundamMongo
   }
 
   mount_uploader :avatar, GundamAvatarUploader
+
 end

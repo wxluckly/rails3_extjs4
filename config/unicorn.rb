@@ -25,12 +25,12 @@ APP_PATH = '/www/gundam'
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
-working_directory "#{APP_PATH}" # available in 0.94.0+
+working_directory "#{APP_PATH}/current" # available in 0.94.0+
 
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
-# listen "#{APP_PATH}/shared/sockets/unicorn.sock", :backlog => 1024
-listen 4002, tcp_nopush: true, tcp_nodelay: true
+listen "#{APP_PATH}/shared/sockets/unicorn.sock", :backlog => 1024
+listen 4002, tcp_nopush: false, tcp_nodelay: true
 
 # nuke workers after 30 seconds instead of 60 seconds (the default)
 timeout 30
@@ -46,7 +46,7 @@ stdout_path "#{APP_PATH}/shared/log/unicorn.stdout.log"
 
 # combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
-preload_app false
+preload_app true
 GC.respond_to?(:copy_on_write_friendly=) and
   GC.copy_on_write_friendly = true
 

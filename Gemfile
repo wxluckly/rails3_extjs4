@@ -88,3 +88,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'#, require: false  # 修复对model的preload
 end
+
+group :production do
+  gem 'unicorn'
+  gem 'bluepill'
+end

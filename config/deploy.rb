@@ -1,6 +1,10 @@
+require 'capistrano/ext/multistage'
 set :stages, %w(production staging)
 set :default_stage, "production"
-require 'capistrano/ext/multistage'
+
+# 扩展bundle管理
+require 'bundler/capistrano'
+set :bundle_flags, '--no-deployment --quiet'
 
 set :application, "gundam"
 set :repository,  "git@github.com:wxluckly/rails3_extjs4.git"

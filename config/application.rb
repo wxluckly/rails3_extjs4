@@ -67,7 +67,7 @@ module Rails3Extjs4
 
     config.assets.version = '1.0'
     config.assets.precompile += [
-      'gundams.js', 'gundam_photos.js', 'search.js'
+      'admin.js', 'gundams.js', 'gundam_photos.js', 'search.js'
     ]
 
     # 使用redis作为默认缓存

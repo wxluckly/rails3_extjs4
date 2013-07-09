@@ -24,15 +24,6 @@ before('deploy:finalize_update', 'deploy:links')
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
-
 namespace :bluepill do
   #确认问题：
   #  创建 /var/run/bluepill被创建并属于www用户？
@@ -55,7 +46,23 @@ end
 
 namespace :deploy do
 
-  # 重启服务
+  namespace :assets do
+    def not_first_deploy?
+      'true' ==  capture("if [ -e #{current_path}/REVISION ]; then echo 'true'; fi").strip
+    end
+    desc "Run the asset precompilation rake task only if there are changes."
+    task :precompile, :roles => :web, :except => { :no_release => true } do
+      if not_first_deploy?
+        from = source.next_revision(current_revision)
+        if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+          run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
+        else
+          logger.info "Skipping asset pre-compilation because there were no asset changes"
+        end
+      end
+    end
+  end
+
   task :start do
     run "cd #{current_path} && bundle exec bluepill --no-privileged start unicorn RAILS_ENV=#{rails_env}"
   end
@@ -65,11 +72,7 @@ namespace :deploy do
   end
   
   task :restart, :roles => :web do
-    if rails_env == "production"
-      run "cd #{current_path} && bundle exec bluepill --no-privileged restart unicorn RAILS_ENV=#{rails_env}"
-    else
-      deploy.restart_unicorn
-    end
+    run "cd #{current_path} && bundle exec bluepill --no-privileged restart unicorn RAILS_ENV=#{rails_env}"
   end
 
   task :links, :roles => :app do

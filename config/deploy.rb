@@ -25,8 +25,6 @@ before('deploy:finalize_update', 'deploy:links')
 # these http://github.com/rails/irs_process_scripts
 
 namespace :bluepill do
-  #确认问题：
-  #  创建 /var/run/bluepill被创建并属于www用户？
   task :prepare, :role=>:web do
     set :user, 'railsu'
     default_run_options[:pty] = true #for remote interaction
@@ -38,7 +36,8 @@ namespace :bluepill do
   task :start, :roles => :web do
     run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec bluepill --no-privileged load #{current_path}/config/bluepill.rb"
   end
-  
+
+  # when unicorn can't restart by bluepill, stop bluepill
   task :stop do
     run "cd #{current_path} && bundle exec bluepill --no-privileged quit"
   end
@@ -55,11 +54,16 @@ namespace :deploy do
       if not_first_deploy?
         from = source.next_revision(current_revision)
         if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
-          run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
+          deploy.assets.force_precompile
         else
           logger.info "Skipping asset pre-compilation because there were no asset changes"
         end
       end
+    end
+
+    desc "Run the asset precompilation rake task only if there are changes."
+    task :force_precompile, :roles => :web, :except => { :no_release => true } do
+      run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
     end
   end
 
@@ -78,5 +82,6 @@ namespace :deploy do
   task :links, :roles => :app do
     # 建立配置文件链接
     run "ln -sf #{shared}/database.yml #{latest_release}/config/database.yml"
+    run "ln -sf #{shared}/uploads #{latest_release}/public/uploads"
   end
 end

@@ -1,6 +1,6 @@
 set :rails_env, 'production'
 
-set :branch, 'master'
+set :branch, 'develop'
 
 # 代码发布服务器
 role :app, '115.28.37.253'
